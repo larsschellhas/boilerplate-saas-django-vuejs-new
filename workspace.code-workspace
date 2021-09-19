@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"eslint.packageManager": "yarn",
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"prettier.configPath": ".prettierrc",
+		"prettier.vueIndentScriptAndStyle": true,
+		"eslint.format.enable": true,
+		"vetur.format.defaultFormatter.js": "prettier-eslint",
+		"eslint.validate": [
+			"javascript",
+			"javascriptreact",
+			"vue"
+		],
+		"python.analysis.extraPaths": ["./backend"],
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.python"
+		},
+	},
+	"extensions": {
+		"recommendations": [
+			"batisteo.vscode-django",
+			"eamodio.gitlens",
+			"github.vscode-pull-request-github",
+			"mhutchie.git-graph",
+			"ms-python.python",
+			"mubaidr.vuejs-extension-pack"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "edge",
+				"request": "launch",
+				"name": "Frontend: Edge",
+				"url": "http://localhost:8080",
+				"webRoot": "${workspaceFolder}/frontend/",
+				"breakOnLoad": true,
+			},
+			{
+				"name": "Python: Django",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}/backend/manage.py",
+				"args": [
+					"runserver", 
+					"8000"
+				],
+				"django": true
+			}
+		]
+	}
+}
