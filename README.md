@@ -1,5 +1,5 @@
-# SimplyLCA-App
-This repository is for the development of our app.
+# Software-as-a-Service boilerplate using Django and Vue.JS
+This repository contains a boilerplate setup for a software-as-a-service app, using Django for the backend and Vue.JS for the frontend.
 
 ## Local Setup
 
@@ -17,14 +17,14 @@ You need to have the following prerequisites installed:
 
 
 ### Backend project
-1. Enter the backend project directory (e.g. SimplyLCA-App/backend)
+1. Enter the backend project directory (e.g. boilerplate-saas-django-vuejs/backend)
 2. Install all dependencies via poetry by running `poetry install`
 3. Activate the virtual Python environment created by poetry with `poetry shell`
 4. Setup/migrate the database server with `python manage.py migrate`
 5. Run the webserver with `python manage.py runserver`
 
 ### Frontend project
-1. Enter the frontend project directory (e.g. SimplyLCA/frontend)
+1. Enter the frontend project directory (e.g. boilerplate-saas-django-vuejs/frontend)
 2. Install all dependencies with `yarn install`
 3. Run the webserver with `yarn serve`
 
@@ -48,7 +48,7 @@ source $HOME/.poetry/env
 ```
 
 #### wrong local python3 version
-Instead of changing it you can run all rommands with `python3.8` instead of `python`
+Instead of changing it you can run all rommands with `python3.10` instead of `python`
 
 #### `yarn install` fails with `No such file or directory: 'install'`
 Solution: https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
