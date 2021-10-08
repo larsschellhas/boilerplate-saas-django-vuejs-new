@@ -5,22 +5,37 @@
 		}
 	],
 	"settings": {
-		"eslint.packageManager": "yarn",
-		"editor.formatOnSave": true,
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.python"
+		},
+		"css.validate": false,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+			"source.fixAll.stylelint": true
+		},
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
-		"prettier.configPath": ".prettierrc",
-		"prettier.vueIndentScriptAndStyle": true,
+		"editor.formatOnSave": false,
 		"eslint.format.enable": true,
-		"vetur.format.defaultFormatter.js": "prettier-eslint",
+		"eslint.packageManager": "yarn",
 		"eslint.validate": [
 			"javascript",
 			"javascriptreact",
 			"vue"
 		],
-		"python.analysis.extraPaths": ["./backend"],
-		"[python]": {
-			"editor.defaultFormatter": "ms-python.python"
-		},
+		"eslint.workingDirectories": [
+			{
+				"mode": "auto"
+			}
+		],
+		"less.validate": false,
+		"prettier.configPath": ".prettierrc",
+		"prettier.vueIndentScriptAndStyle": true,
+		"python.analysis.extraPaths": [
+			"./backend"
+		],
+		"scss.validate": false,
+		"vetur.format.defaultFormatter.js": "prettier-eslint",
+		"vetur.validation.template": false
 	},
 	"extensions": {
 		"recommendations": [
@@ -36,12 +51,15 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"type": "edge",
-				"request": "launch",
 				"name": "Frontend: Edge",
+				"request": "launch",
+				"type": "pwa-msedge",
 				"url": "http://localhost:8080",
-				"webRoot": "${workspaceFolder}/frontend/",
+				"webRoot": "${workspaceFolder}/frontend/src",
 				"breakOnLoad": true,
+				"sourceMapPathOverrides": {
+					"webpack:///src/*": "${webRoot}/*"
+				}
 			},
 			{
 				"name": "Python: Django",
@@ -49,10 +67,16 @@
 				"request": "launch",
 				"program": "${workspaceFolder}/backend/manage.py",
 				"args": [
-					"runserver", 
+					"runserver",
 					"8000"
 				],
 				"django": true
+			},
+			{
+				"name": "Launch Microsoft Edge and open the Edge DevTools",
+				"request": "launch",
+				"type": "vscode-edge-devtools.debug",
+				"url": ""
 			}
 		]
 	}

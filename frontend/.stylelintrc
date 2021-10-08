@@ -1,4 +1,13 @@
 {
  "processors": [],
- "extends": "stylelint-config-standard"
+ "extends": "stylelint-config-standard",
+ "rules": {
+   "color-hex-case": [
+     "lower",
+     {
+       "message": "Lowercase letters are easier to distinguish from numbers"
+     }
+   ],
+   "indentation": 2
+ }
 }
