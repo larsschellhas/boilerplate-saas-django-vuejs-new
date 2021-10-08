@@ -323,7 +323,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "06afffecd808330f0d4467df124a36f5e3ede7d663611388902cdf5e4c743293"
+content-hash = "60a446cd572575ca187029c5c16a30732b56cb37930e091d06cc91b7ab29dc52"
 
 [metadata.files]
 appdirs = [

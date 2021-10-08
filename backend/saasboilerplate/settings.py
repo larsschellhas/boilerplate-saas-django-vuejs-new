@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_extensions",
     'djmoney',
-    'drf-app-generators'
+    'drf_app_generators'
 ]
 
 MIDDLEWARE = [
