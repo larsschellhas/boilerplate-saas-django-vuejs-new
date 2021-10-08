@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "saasboilerplate"
 version = "0.1.0"
-description = "This is the backend for the SimplyLCA app"
+description = "This is the backend for the Software-as-a-Service boilerplate app"
 authors = ["Lars Schellhas <lars.schellhas@outlook.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 Django = "^3.1.5"
 django-filter = "^2.4.0"
 djangorestframework = "^3.12.2"
