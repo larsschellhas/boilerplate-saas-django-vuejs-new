@@ -23,13 +23,20 @@ export default {
 
 <style lang="scss">
 #nav {
-  width: 100%;
-  padding: 30px;
-}
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 12px;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #d2d2d2;
+    }
+  }
 }
 
 #nav a.router-link-exact-active {

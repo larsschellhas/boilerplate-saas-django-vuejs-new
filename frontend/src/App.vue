@@ -1,13 +1,16 @@
 <template>
-  <NavigationMain :routes="routes" />
+  <Header
+    :routes="routes"
+    :title="pagetitle"
+  />
   <router-view />
 </template>
 
 <script>
-import NavigationMain from '@/components/NavigationMain.vue'
+import Header from '@/components/Header/Header'
 
 export default {
-  components: { NavigationMain },
+  components: { Header },
   setup () {
     const routes = [
       {
@@ -19,12 +22,18 @@ export default {
         url: '/login'
       }
     ]
-    return { routes }
+    const pagetitle = 'SimplySaaS'
+    return { routes, pagetitle }
   }
 }
 </script>
 
 <style>
+body {
+  padding: 0;
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
