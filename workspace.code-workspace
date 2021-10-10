@@ -35,7 +35,8 @@
 		],
 		"scss.validate": false,
 		"vetur.format.defaultFormatter.js": "prettier-eslint",
-		"vetur.validation.template": false
+    "vetur.validation.template": false,
+		"editor.tabSize": 2
 	},
 	"extensions": {
 		"recommendations": [
