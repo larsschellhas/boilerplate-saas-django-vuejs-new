@@ -1,14 +1,20 @@
 <template>
-  <div id="header">
-    <router-link
-      id="pagetitle"
-      to="/"
-    >
-      {{ title }}
-    </router-link>
-    <div class="divider" />
-    <HeaderNavigation :routes="routes" />
-  </div>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark d-flex align-items-center">
+    <div class="container-fluid">
+      <router-link
+        id="pagetitle"
+        to="/"
+        class="navbar-brand mb-0 h1"
+      >
+        <img
+          src="@/assets/logo.png"
+          height="36"
+        >
+        {{ title }}
+      </router-link>
+      <HeaderNavigation :routes="routes" />
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -28,29 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-#header {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #e2e2e2;
-  height: 60px;
-  padding: 12px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
-
-  #pagetitle {
-    font-size: 24px;
-    font-weight: 600;
-    color: inherit;
-    text-decoration: none;
-  }
-}
-
-.divider {
-  display: flex;
-  flex-grow: 1;
-}
-</style>
