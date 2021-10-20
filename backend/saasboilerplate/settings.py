@@ -148,6 +148,8 @@ REST_FRAMEWORK = {
 
 # Cross Origin Handling
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
+                      'content-type', 'accept', 'origin', 'authentication')
 
 
 # Custom User Model
