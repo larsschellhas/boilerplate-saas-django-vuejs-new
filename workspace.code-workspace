@@ -36,7 +36,11 @@
 		"scss.validate": false,
 		"vetur.format.defaultFormatter.js": "prettier-eslint",
     "vetur.validation.template": false,
-		"editor.tabSize": 2
+		"editor.tabSize": 2,
+		"[html]": {
+			"editor.defaultFormatter": "vscode.html-language-features"
+		},
+		"editor.linkedEditing": true
 	},
 	"extensions": {
 		"recommendations": [
