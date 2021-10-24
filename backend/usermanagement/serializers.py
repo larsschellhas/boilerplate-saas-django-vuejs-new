@@ -20,7 +20,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(
         write_only=True, required=True, validators=[validate_password]
     )
-    password2 = serializers.CharField(write_only=True, required=True)
     referrer_email = serializers.EmailField(write_only=True, required=False)
     referrer = ReferrerSerializer(required=False)
 
@@ -29,7 +28,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             "url",
             "password",
-            "password2",
             "email",
             "first_name",
             "last_name",
@@ -39,8 +37,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "terms_and_conditions_accepted"
         )
         extra_kwargs = {
-            "first_name": {"required": True},
-            "last_name": {"required": True},
             "is_staff": {"read_only": True},
             "referrer": {"read_only": True},
         }
@@ -55,23 +51,23 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         attrs["is_active"] = True
         attrs["referrer"] = None
+        attrs["first_name"] = ""
+        attrs["last_name"] = ""
 
-        if attrs["password"] != attrs["password2"]:
+        if attrs["password"] == "":
             raise serializers.ValidationError(
-                {"password": "Password fields didn't match."}
+                {"password": "Password must not be empty."}
             )
-        elif attrs["password"] == "":
-            attrs["password"] = get_user_model(
-            ).objects.make_random_password(length=16)
 
         if "referrer_email" in attrs:
-            attrs["referrer"] = get_user_model().objects.get(
-                email=attrs["referrer_email"]
-            )
-            if attrs["referrer"].is_active == True:
-                attrs["is_active"] = True
+            if attrs["referrer_email"] != "":
+                attrs["referrer"] = get_user_model().objects.get(
+                    email=attrs["referrer_email"]
+                )
+                if attrs["referrer"].is_active == True:
+                    attrs["is_active"] = True
 
-        if not attrs["terms_and_conditions_accepted"]:
+        if attrs["terms_and_conditions_accepted"] == False:
             raise serializers.ValidationError(
                 {"terms_and_conditions_accepted": "Terms and conditions were not accepted."}
             )
