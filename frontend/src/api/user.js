@@ -1,12 +1,20 @@
 import { api } from './axiosConfig'
 
 export default {
-  login (username, password) {
+  async getTokens (username, password) {
     // TO-DO LOGIN
-    return api.post('login/', {
-      username: username,
+    const results = await api.post('api/token/', {
+      email: username,
       password: password
-    }).then(results => { return results.data })
+    })
+    return results.data
+  },
+
+  async refreshAccessToken (refreshToken) {
+    const results = await api.post('api/token/refresh/', {
+      refresh: refreshToken
+    })
+    return results.data.access
   },
 
   logout () {
@@ -14,21 +22,19 @@ export default {
     throw TypeError('This method is not implemented, yet.')
   },
 
-  register (username, password, password2, termsAndConditionsAccepted) {
+  async register (username, password, password2, termsAndConditionsAccepted) {
     // TO-DO Register
-    return api.post('users/', {
+    const results = await api.post('users/', {
       username: username,
       password: password,
       password2: password2,
       terms_and_conditions_accepted: termsAndConditionsAccepted
-    }).then(results => { return results.data })
+    })
+    return results.data
   },
 
-  getCurrentUser () {
-    return api.get('users/')
-      .then(results => {
-        debugger
-        return results.data.results[0]
-      })
+  async getCurrentUser () {
+    const results = await api.get('users/')
+    return results.data.results[0]
   }
 }

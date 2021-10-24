@@ -7,7 +7,8 @@ const state = () => ({
   lastName: '',
   isStaff: false,
   termsAndConditionsAccepted: false,
-  token: ''
+  accessToken: '',
+  refreshToken: ''
 })
 
 const getters = {
@@ -29,19 +30,23 @@ const getters = {
   getTermsAndConditionsAccepted: state => {
     return state.termsAndConditionsAccepted
   },
-  getToken: state => {
-    return state.token
+  getAccessToken: state => {
+    return state.accessToken
+  },
+  getRefreshToken: state => {
+    return state.refreshToken
   },
   isLoggedIn: state => {
-    return state.token !== ''
+    return state.refreshToken !== ''
   }
 }
 
 const actions = {
   login ({ commit }, { username, password, target }) {
-    user.login(username, password)
+    user.getTokens(username, password)
       .then(data => {
-        commit('setToken', data.token)
+        commit('setAccessToken', data.access)
+        commit('setRefreshToken', data.refresh)
       })
       .then(() => {
         return user.getCurrentUser()
@@ -61,6 +66,10 @@ const actions = {
   logout ({ commit }, { target }) {
     commit('resetUser')
     window.location.href = target
+  },
+  async refreshAccessToken ({ commit, state }) {
+    const accessToken = await user.refreshAccessToken(state.refreshToken)
+    commit('setAccessToken', accessToken)
   }
 }
 
@@ -83,12 +92,11 @@ const mutations = {
   setURL (state, status) {
     state.url = status
   },
-  setToken (state, status) {
-    if (status !== '') {
-      state.token = status
-    } else {
-      throw TypeError('Cannot set an empty token. Use "resetUser" to remove existing tokens.')
-    }
+  setAccessToken (state, status) {
+    state.accessToken = status
+  },
+  setRefreshToken (state, status) {
+    state.refreshToken = status
   },
   resetUser (state) {
     state.url = ''
@@ -97,7 +105,8 @@ const mutations = {
     state.lastName = ''
     state.isStaff = false
     state.termsAndConditionsAccepted = false
-    state.token = ''
+    state.accessToken = ''
+    state.refreshToken = ''
   }
 }
 
