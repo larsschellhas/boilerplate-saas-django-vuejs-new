@@ -13,7 +13,7 @@
             >Email address</label>
             <input
               id="email1"
-              v-model="logindata.username"
+              v-model="loginData.username"
               type="email"
               class="form-control"
               aria-describedby="emailHelp"
@@ -30,7 +30,7 @@
             >Password</label>
             <input
               id="password1"
-              v-model="logindata.password"
+              v-model="loginData.password"
               type="password"
               class="form-control"
             >
@@ -72,7 +72,7 @@ export default {
 
     // BEGIN - Login
     // Login - Data
-    const logindata = reactive({
+    const loginData = reactive({
       username: '',
       password: ''
     })
@@ -81,14 +81,14 @@ export default {
     function handleLogin () {
       store.dispatch({
         type: 'user/login',
-        username: logindata.username,
-        password: logindata.password,
+        username: loginData.username,
+        password: loginData.password,
         target: window.location.href
       })
     }
     // END - Login
 
-    return { logindata, handleLogin }
+    return { loginData, handleLogin }
   }
 }
 

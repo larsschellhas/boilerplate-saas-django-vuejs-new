@@ -5,7 +5,9 @@ console.log(store)
 
 export const api = axios.create({
   baseURL: 'http://localhost:8000/',
-  contentType: 'application/json'
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
 
 api.interceptors.response.use(
@@ -14,28 +16,24 @@ api.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config
-
     if (err.response) {
       // If access Token was expired
-      if (err.response.status === 401 && !originalConfig._retry) {
+      if (err.response.status === 401 && !originalConfig._retry && originalConfig.url !== 'login/refresh/') {
         originalConfig._retry = true
-
-        try {
-          await store.dispatch('user/refreshAccessToken')
-          originalConfig.headers.Authorization = 'Bearer ' + store.state.user.accessToken
-          return api(originalConfig)
-        } catch (_error) {
-          if (_error.response && _error.response.data) {
-            return Promise.reject(_error.response.data)
-          }
-          return Promise.reject(_error)
-        }
-      }
-      if (err.response.status === 403 && err.response.data) {
-        return Promise.reject(err.response.data)
+        await store.dispatch('user/refreshAccessToken')
+        originalConfig.headers.Authorization = 'Bearer ' + store.state.user.accessToken
+        return api(originalConfig)
       }
     }
-    return Promise.reject(err)
+    store.dispatch({
+      type: 'user/logout',
+      target: window.location.href
+    })
+    if (err.response.status === 403 && err.response.data) {
+      return Promise.reject(err.response.data)
+    } else {
+      return Promise.reject(err)
+    }
   }
 )
 

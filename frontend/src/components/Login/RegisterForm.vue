@@ -13,6 +13,7 @@
             >Email address</label>
             <input
               id="email1"
+              v-model="registerData.username"
               type="email"
               class="form-control"
               aria-describedby="emailHelp"
@@ -24,11 +25,12 @@
           </div>
           <div class="mb-3">
             <label
-              for="password1"
+              for="password"
               class="form-label"
             >Password</label>
             <input
-              id="password1"
+              id="password"
+              v-model="registerData.password"
               type="password"
               class="form-control"
             >
@@ -36,6 +38,7 @@
           <div class="mb-3 form-check">
             <input
               id="termsAndConditions"
+              v-model="registerData.termsAndConditionsAccepted"
               type="checkbox"
               class="form-check-input"
             >
@@ -47,6 +50,7 @@
           <button
             type="submit"
             class="btn btn-success w-100"
+            @click.prevent="handleRegistration"
           >
             Create account
           </button>
@@ -64,12 +68,46 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { reactive } from 'vue'
+
 export default {
   props: {
     pagetitle: {
       type: String,
       default: 'SimplySaaS'
     }
+  },
+  setup (props) {
+    // Enable access to vuex store
+    const store = useStore()
+
+    // BEGIN - Registration
+    // Registration - Data
+    const registerData = reactive({
+      username: '',
+      password: '',
+      firstName: '',
+      lastname: '',
+      termsAndConditionsAccepted: false
+    })
+
+    // Registration - Handle submit
+    function handleRegistration () {
+      store.dispatch({
+        type: 'user/register',
+        username: registerData.username,
+        password: registerData.password,
+        firstName: registerData.firstName,
+        lastName: registerData.lastName,
+        termsAndConditionsAccepted: registerData.termsAndConditionsAccepted,
+        referrerEmail: registerData.referrerEmail,
+        target: window.location.origin + '/login/'
+      })
+    }
+    // END - Registration
+
+    return { registerData, handleRegistration }
   }
 }
 

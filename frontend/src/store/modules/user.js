@@ -42,6 +42,21 @@ const getters = {
 }
 
 const actions = {
+  register ({ commit }, { username, password, firstName, lastName, termsAndConditionsAccepted, referrerEmail, target }) {
+    user.registerUser(username, password, termsAndConditionsAccepted, firstName, lastName, referrerEmail, target)
+      .then(user => {
+        commit('setURL', user.url)
+        commit('setEmail', user.email)
+        commit('setFirstName', user.first_name)
+        commit('setLastName', user.last_name)
+        commit('setIsStaff', user.is_staff)
+        commit('setTermsAndConditionsAccepted', user.terms_and_conditions_accepted)
+      })
+      .then(() => {
+        window.location.href = target
+      })
+  },
+
   login ({ commit }, { username, password, target }) {
     user.getTokens(username, password)
       .then(data => {
@@ -63,10 +78,12 @@ const actions = {
         window.location.href = target
       })
   },
+
   logout ({ commit }, { target }) {
     commit('resetUser')
     window.location.href = target
   },
+
   async refreshAccessToken ({ commit, state }) {
     const accessToken = await user.refreshAccessToken(state.refreshToken)
     commit('setAccessToken', accessToken)
