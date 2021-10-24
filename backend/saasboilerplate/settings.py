@@ -162,5 +162,6 @@ AUTH_USER_MODEL = "usermanagement.User"
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=0.2)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
