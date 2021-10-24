@@ -28,7 +28,22 @@
         </router-link>
       </li>
     </ul>
-    <div class="login-links d-flex flex-row justify-content-center align-items-center">
+    <div
+      v-if="isLoggedIn"
+      class="login-links d-flex flex-row justify-content-center align-items-center"
+    >
+      <a
+        class="nav-link link-light"
+        style="cursor: pointer;"
+        @click.prevent="handleLogout"
+      >
+        Sign out
+      </a>
+    </div>
+    <div
+      v-else
+      class="login-links d-flex flex-row justify-content-center align-items-center"
+    >
       <router-link
         to="/login"
         class="nav-link link-light"
@@ -48,12 +63,33 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   props: {
     routes: {
       type: Array,
       required: true
     }
+  },
+  setup (props) {
+    const store = useStore()
+
+    const isLoggedIn = computed({
+      get: () => {
+        return store.getters['user/isLoggedIn']
+      },
+      set: () => {}
+    })
+
+    const handleLogout = function () {
+      store.dispatch({
+        type: 'user/logout',
+        target: window.location.href
+      })
+    }
+    return { store, isLoggedIn, handleLogout }
   }
 }
 </script>
