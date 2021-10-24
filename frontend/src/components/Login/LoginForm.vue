@@ -79,11 +79,11 @@ export default {
 
     // Login - Handle submit
     function handleLogin () {
-      console.log('Clicked')
       store.dispatch({
         type: 'user/login',
         username: logindata.username,
-        password: logindata.password
+        password: logindata.password,
+        target: window.location.href
       })
     }
     // END - Login
