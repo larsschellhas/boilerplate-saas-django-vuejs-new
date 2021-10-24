@@ -42,6 +42,15 @@ class User(AbstractCUser):
         ),
     )
 
+    terms_and_conditions_accepted = models.BooleanField(
+        _("Terms and Conditions accepted"),
+        default=False,
+        help_text=_(
+            "Designates whether a user accepted the terms and conditions. "
+            "Acceptance is required to use any functionality of the app."
+        )
+    )
+
     referrer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name="Referrer",

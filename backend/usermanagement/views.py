@@ -6,7 +6,7 @@ from usermanagement.serializers import UserSerializer, GroupSerializer, Workspac
 # Create your views here.
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class CurrentUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """

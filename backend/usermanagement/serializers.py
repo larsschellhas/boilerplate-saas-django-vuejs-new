@@ -36,6 +36,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "is_staff",
             "referrer",
             "referrer_email",
+            "terms_and_conditions_accepted"
         )
         extra_kwargs = {
             "first_name": {"required": True},
@@ -70,6 +71,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             if attrs["referrer"].is_active == True:
                 attrs["is_active"] = True
 
+        if not attrs["terms_and_conditions_accepted"]:
+            raise serializers.ValidationError(
+                {"terms_and_conditions_accepted": "Terms and conditions were not accepted."}
+            )
+
         return attrs
 
     def create(self, validated_data):
@@ -80,7 +86,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
             referrer=validated_data["referrer"],
-            is_active=validated_data["is_active"]
+            is_active=validated_data["is_active"],
+            terms_and_conditions_accepted=validated_data["terms_and_conditions_accepted"]
         )
 
         return user

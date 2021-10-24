@@ -20,7 +20,7 @@ from rest_framework.authtoken import views
 from usermanagement import views as userviews
 
 router = routers.DefaultRouter()
-router.register(r"users", userviews.UserViewSet, basename="user")
+router.register(r"users", userviews.CurrentUserViewSet, basename="user")
 router.register(r"workspaces", userviews.WorkspaceViewSet,
                 basename="workspace")
 router.register(r"subscriptionplans", userviews.SubscriptionPlanViewSet,

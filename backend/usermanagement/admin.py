@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 class UserAdmin(CUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "terms_and_conditions_accepted")}),
         (_("Referrer"), {"fields": ("referrer",)}),
         (
             _("Permissions"),
