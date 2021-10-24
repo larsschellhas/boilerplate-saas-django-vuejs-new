@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     "usermanagement",
     "corsheaders",
     "django_extensions",
-    'djmoney',
-    'drf_app_generators'
+    "djmoney",
+    "drf_app_generators"
 ]
 
 MIDDLEWARE = [
