@@ -3,6 +3,21 @@
     <p class="fs-4 text fw-light">
       Sign in to {{ pagetitle }}
     </p>
+    <transition name="fade">
+      <div
+        v-if="errors"
+        class="alert alert-danger alert-dismissible fade show w-100"
+        role="alert"
+      >
+        Incorrect username or password!
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          @click="errors=false"
+        />
+      </div>
+    </transition>
     <div class="card bg-light shadow rounded mb-4 w-100">
       <div class="card-body">
         <form>
@@ -18,10 +33,6 @@
               class="form-control"
               aria-describedby="emailHelp"
             >
-            <div
-              id="emailHelp"
-              class="form-text"
-            />
           </div>
           <div class="mb-3">
             <label
@@ -40,7 +51,16 @@
             class="btn btn-success w-100"
             @click.prevent="handleLogin"
           >
-            Submit
+            <div
+              v-if="loading"
+              class="spinner-border spinner-border-sm text-light"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <span v-else>
+              Submit
+            </span>
           </button>
         </form>
       </div>
@@ -56,7 +76,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -72,32 +92,36 @@ export default {
 
     // BEGIN - Login
     // Login - Data
-    const loginData = reactive({
+    const loginData = ref({
       username: '',
       password: ''
     })
 
+    // Login - Validation
+    const errors = ref(false)
+
+    // Login - Loading spinner
+    const loading = ref(false)
+
     // Login - Handle submit
     function handleLogin () {
+      loading.value = true
       store.dispatch({
         type: 'user/login',
-        username: loginData.username,
-        password: loginData.password,
+        username: loginData.value.username,
+        password: loginData.value.password,
         target: window.location.href
+      }).then(results => {
+        if (!results.success) {
+          errors.value = true
+          loading.value = false
+        }
       })
     }
     // END - Login
 
-    return { loginData, handleLogin }
+    return { loginData, handleLogin, errors, loading }
   }
 }
 
 </script>
-
-<style>
-
-
-
-
-}
-</style>
