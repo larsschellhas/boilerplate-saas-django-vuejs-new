@@ -95,8 +95,9 @@ export default {
 </script>
 
 <style>
-.auth-form {
-  width: 350px;
-  margin: 0 auto;
+
+
+
+
 }
 </style>
