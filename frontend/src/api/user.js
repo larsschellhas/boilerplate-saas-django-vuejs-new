@@ -66,7 +66,11 @@ export default {
   },
 
   async getCurrentUser () {
-    const response = await api.get('users/')
-    return response.data.results[0]
+    try {
+      const response = await api.get('users/')
+      return { success: true, data: response.data.results[0] }
+    } catch (error) {
+      return { success: false, errors: error }
+    }
   }
 }
