@@ -1,8 +1,6 @@
 import axios from 'axios'
 import store from '@/store/index.js'
 
-console.log(store)
-
 export const api = axios.create({
   baseURL: 'http://localhost:8000/',
   headers: {
