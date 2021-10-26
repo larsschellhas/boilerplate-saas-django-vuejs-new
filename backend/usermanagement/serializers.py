@@ -41,6 +41,27 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "referrer": {"read_only": True},
         }
 
+    def validate_terms_and_conditions_accepted(self, value):
+        if value:
+            return value
+        else:
+            raise serializers.ValidationError("Terms and conditions must be accepted to create an account.")
+
+    def validate_referrer_email(self, value):
+        """
+        
+        """
+        if value != "":
+            try:
+                value = get_user_model().objects.get(
+                    email=value
+                )
+                return value
+            except Exception as error:
+                raise serializers.ValidationError({"referrer_email": error.message })
+        else:
+            return None
+
     def validate(self, attrs):
         """
         Method to check the entered data for user creation.
@@ -49,28 +70,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         If a referrer email is provided, the referrer is added to the user.
         """
 
-        attrs["is_active"] = True
-        attrs["referrer"] = None
-        attrs["first_name"] = ""
-        attrs["last_name"] = ""
-
-        if attrs["password"] == "":
-            raise serializers.ValidationError(
-                {"password": "Password must not be empty."}
-            )
-
-        if "referrer_email" in attrs:
-            if attrs["referrer_email"] != "":
-                attrs["referrer"] = get_user_model().objects.get(
-                    email=attrs["referrer_email"]
-                )
-                if attrs["referrer"].is_active == True:
-                    attrs["is_active"] = True
-
-        if attrs["terms_and_conditions_accepted"] == False:
-            raise serializers.ValidationError(
-                {"terms_and_conditions_accepted": "Terms and conditions were not accepted."}
-            )
+        # Default Values
+        if "first_name" not in attrs:
+            attrs["first_name"] = ""
+        if "last_name" not in attrs:
+            attrs["last_name"] = ""
+        if "referrer_email" not in attrs:
+            attrs["referrer_email"] = None
 
         return attrs
 
@@ -81,8 +87,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             password=validated_data["password"],
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
-            referrer=validated_data["referrer"],
-            is_active=validated_data["is_active"],
+            referrer=validated_data["referrer_email"],
             terms_and_conditions_accepted=validated_data["terms_and_conditions_accepted"]
         )
 
