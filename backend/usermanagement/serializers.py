@@ -42,6 +42,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         }
 
     def validate_terms_and_conditions_accepted(self, value):
+        """ Checks whether terms and conditions were accepted. """
         if value:
             return value
         else:
@@ -49,8 +50,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def validate_referrer_email(self, value):
         """
-        
+        Checks if a value has been provided as referrer_email and searches for an existing
+        user based on the provided email address and returns it.
         """
+
         if value != "":
             try:
                 value = get_user_model().objects.get(
