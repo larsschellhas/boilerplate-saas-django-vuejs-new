@@ -58,20 +58,29 @@ const actions = {
     }
   },
 
-  async login ({ commit }, { username, password, target }) {
+  async login ({ commit, dispatch }, { username, password, target }) {
     const result = await user.getTokens(username, password)
     if (result.success) {
       commit('setAccessToken', result.data.access)
       commit('setRefreshToken', result.data.refresh)
-      const currentUser = await user.getCurrentUser()
-      commit('setURL', currentUser.url)
-      commit('setEmail', currentUser.email)
-      commit('setFirstName', currentUser.first_name)
-      commit('setLastName', currentUser.last_name)
-      commit('setIsStaff', currentUser.is_staff)
-      commit('setTermsAndConditionsAccepted', currentUser.terms_and_conditions_accepted)
+      await dispatch('getCurrentUser')
       window.location.href = target
       return { sucess: true }
+    } else {
+      return result
+    }
+  },
+
+  async getCurrentUser ({ commit }) {
+    const result = await user.getCurrentUser()
+    if (result.success) {
+      commit('setURL', result.data.url)
+      commit('setEmail', result.data.email)
+      commit('setFirstName', result.data.first_name)
+      commit('setLastName', result.data.last_name)
+      commit('setIsStaff', result.data.is_staff)
+      commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
+      return { success: true }
     } else {
       return result
     }
