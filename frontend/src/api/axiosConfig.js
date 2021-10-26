@@ -16,22 +16,21 @@ api.interceptors.response.use(
     const originalConfig = err.config
     if (err.response) {
       // If access Token was expired
-      if (err.response.status === 401 && !originalConfig._retry && originalConfig.url !== 'login/refresh/') {
-        originalConfig._retry = true
-        await store.dispatch('user/refreshAccessToken')
-        originalConfig.headers.Authorization = 'Bearer ' + store.state.user.accessToken
-        return api(originalConfig)
+      if (err.response.status === 401 && originalConfig.url !== 'login/') {
+        if (!originalConfig._retry && originalConfig.url !== 'login/refresh/' && store.state.user.refreshToken !== '') {
+          originalConfig._retry = true
+          await store.dispatch('user/refreshAccessToken')
+          originalConfig.headers.Authorization = 'Bearer ' + store.state.user.accessToken
+          return api(originalConfig)
+        } else {
+          store.dispatch({
+            type: 'user/logout',
+            target: window.location.href
+          })
+        }
       }
     }
-    store.dispatch({
-      type: 'user/logout',
-      target: window.location.href
-    })
-    if (err.response.status === 403 && err.response.data) {
-      return Promise.reject(err.response.data)
-    } else {
-      return Promise.reject(err)
-    }
+    return Promise.reject(err)
   }
 )
 
