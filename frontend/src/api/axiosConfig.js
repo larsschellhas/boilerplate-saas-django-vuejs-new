@@ -35,14 +35,13 @@ api.interceptors.response.use(
 )
 
 export function storeApiPlugin (store) {
-  store.watch(
-    state => state.user.accessToken,
-    accessToken => {
-      if (accessToken) {
-        api.defaults.headers.common.Authorization = 'Bearer ' + accessToken
+  store.subscribe((mutation) => {
+    if (mutation.type === 'user/setAccessToken') {
+      if (mutation.payload) {
+        api.defaults.headers.common.Authorization = 'Bearer ' + mutation.payload
       } else {
         delete api.defaults.headers.common.Authorization
       }
     }
-  )
+  })
 }
