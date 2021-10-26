@@ -42,46 +42,45 @@ const getters = {
 }
 
 const actions = {
-  register ({ commit }, { username, password, firstName, lastName, termsAndConditionsAccepted, referrerEmail, target }) {
-    user.registerUser(username, password, termsAndConditionsAccepted, firstName, lastName, referrerEmail, target)
-      .then(user => {
-        commit('setURL', user.url)
-        commit('setEmail', user.email)
-        commit('setFirstName', user.first_name)
-        commit('setLastName', user.last_name)
-        commit('setIsStaff', user.is_staff)
-        commit('setTermsAndConditionsAccepted', user.terms_and_conditions_accepted)
-      })
-      .then(() => {
-        window.location.href = target
-      })
+  async register ({ commit }, { username, password, firstName, lastName, termsAndConditionsAccepted, referrerEmail, target }) {
+    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstName, lastName, referrerEmail, target)
+    if (result.success) {
+      commit('setURL', result.data.url)
+      commit('setEmail', result.data.email)
+      commit('setFirstName', result.data.first_name)
+      commit('setLastName', result.data.last_name)
+      commit('setIsStaff', result.data.is_staff)
+      commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
+      window.location.href = target
+      return { sucess: true }
+    } else {
+      return result
+    }
   },
 
-  login ({ commit }, { username, password, target }) {
-    user.getTokens(username, password)
-      .then(data => {
-        commit('setAccessToken', data.access)
-        commit('setRefreshToken', data.refresh)
-      })
-      .then(() => {
-        return user.getCurrentUser()
-      })
-      .then(user => {
-        commit('setURL', user.url)
-        commit('setEmail', user.email)
-        commit('setFirstName', user.first_name)
-        commit('setLastName', user.last_name)
-        commit('setIsStaff', user.is_staff)
-        commit('setTermsAndConditionsAccepted', user.terms_and_conditions_accepted)
-      })
-      .then(() => {
-        window.location.href = target
-      })
+  async login ({ commit }, { username, password, target }) {
+    const result = await user.getTokens(username, password)
+    if (result.success) {
+      commit('setAccessToken', result.data.access)
+      commit('setRefreshToken', result.data.refresh)
+      const currentUser = await user.getCurrentUser()
+      commit('setURL', currentUser.url)
+      commit('setEmail', currentUser.email)
+      commit('setFirstName', currentUser.first_name)
+      commit('setLastName', currentUser.last_name)
+      commit('setIsStaff', currentUser.is_staff)
+      commit('setTermsAndConditionsAccepted', currentUser.terms_and_conditions_accepted)
+      window.location.href = target
+      return { sucess: true }
+    } else {
+      return result
+    }
   },
 
   logout ({ commit }, { target }) {
     commit('resetUser')
     window.location.href = target
+    return true
   },
 
   async refreshAccessToken ({ commit, state }) {

@@ -3,18 +3,28 @@ import { api } from './axiosConfig'
 export default {
   async getTokens (username, password) {
     // TO-DO LOGIN
-    const results = await api.post('login/', {
-      email: username,
-      password: password
-    })
-    return results.data
+
+    try {
+      const response = await api.post('login/', {
+        email: username,
+        password: password
+      })
+      return { success: true, data: response.data }
+    } catch (error) {
+      if (error.response.data) {
+        const errors = {}
+        errors.username = error.response.data.email
+        errors.password = error.response.data.password
+        return { success: false, errors: errors }
+      }
+    }
   },
 
   async refreshAccessToken (refreshToken) {
-    const results = await api.post('login/refresh/', {
+    const response = await api.post('login/refresh/', {
       refresh: refreshToken
     })
-    return results.data.access
+    return response.data.access
   },
 
   async registerUser (username, password, termsAndConditionsAccepted, firstName = '', lastName = '', referrerEmail = '') {
@@ -32,8 +42,22 @@ export default {
         delete registerData[key]
       }
     }
-    const results = await api.post('users/', registerData)
-    return results.data
+    try {
+      const response = await api.post('users/', registerData)
+      const data = {}
+      data.username = response.data.email
+      data.termsAndConditionsAccepted = response.data.terms_and_conditions_accepted
+
+      return { success: true, data: data }
+    } catch (error) {
+      if (error.response.data) {
+        const errors = {}
+        errors.username = error.response.data.email
+        errors.password = error.response.data.password
+        errors.termsAndConditionsAccepted = error.response.data.terms_and_conditions_accepted
+        return { success: false, errors: errors }
+      }
+    }
   },
 
   async updateUser (url, email = '', password = '', termsAndConditionsAccepted = '', firstName = '', lastName = '', referrerEmail = '') {
@@ -42,7 +66,7 @@ export default {
   },
 
   async getCurrentUser () {
-    const results = await api.get('users/')
-    return results.data.results[0]
+    const response = await api.get('users/')
+    return response.data.results[0]
   }
 }
