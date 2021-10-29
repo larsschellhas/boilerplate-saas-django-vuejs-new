@@ -52,7 +52,7 @@ const actions = {
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
       window.location.href = target
-      return { sucess: true }
+      return { success: true }
     } else {
       return result
     }
@@ -65,7 +65,7 @@ const actions = {
       commit('setRefreshToken', result.data.refresh)
       await dispatch('getCurrentUser')
       window.location.href = target
-      return { sucess: true }
+      return { success: true }
     } else {
       return result
     }
