@@ -16,6 +16,8 @@ export default {
         errors.username = error.response.data.email
         errors.password = error.response.data.password
         return { success: false, errors: errors }
+      } else {
+        return { success: false, errors: error }
       }
     }
   },
@@ -27,7 +29,11 @@ export default {
       })
       return { success: true, data: response.data.access }
     } catch (error) {
-      return { success: false, errors: error }
+      if (error.response.data) {
+        return { success: false, errors: error.response.data }
+      } else {
+        return { success: false, errors: error }
+      }
     }
   },
 
@@ -60,6 +66,8 @@ export default {
         errors.password = error.response.data.password
         errors.termsAndConditionsAccepted = error.response.data.terms_and_conditions_accepted
         return { success: false, errors: errors }
+      } else {
+        return { success: false, errors: error }
       }
     }
   },
@@ -74,7 +82,11 @@ export default {
       const response = await api.get('users/')
       return { success: true, data: response.data.results[0] }
     } catch (error) {
-      return { success: false, errors: error }
+      if (error.response.data) {
+        return { success: false, errors: error.response.data }
+      } else {
+        return { success: false, errors: error }
+      }
     }
   },
 
@@ -83,7 +95,11 @@ export default {
       const response = await api.post('login/reset/', { email: email })
       return { success: true, data: response.data }
     } catch (error) {
-      return { success: false, errors: error }
+      if (error.response.data) {
+        return { success: false, errors: error.response.data }
+      } else {
+        return { success: false, errors: error }
+      }
     }
   },
 
@@ -92,7 +108,11 @@ export default {
       const response = await api.post('login/reset/validate_token/', { token: token })
       return { success: true, data: response.data }
     } catch (error) {
-      return { success: false, errors: error }
+      if (error.response.data) {
+        return { success: false, errors: error.response.data }
+      } else {
+        return { success: false, errors: error }
+      }
     }
   },
 
@@ -101,7 +121,11 @@ export default {
       const response = await api.post('login/reset/confirm/', { password: password, token: token })
       return { success: true, data: response.data }
     } catch (error) {
-      return { success: false, errors: error }
+      if (error.response.data) {
+        return { success: false, errors: error.response.data }
+      } else {
+        return { success: false, errors: error }
+      }
     }
   }
 }
