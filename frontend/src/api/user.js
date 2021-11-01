@@ -21,10 +21,14 @@ export default {
   },
 
   async refreshAccessToken (refreshToken) {
+    try {
     const response = await api.post('login/refresh/', {
       refresh: refreshToken
     })
-    return response.data.access
+      return { success: true, data: response.data.access }
+    } catch (error) {
+      return { success: false, errors: error }
+    }
   },
 
   async registerUser (username, password, termsAndConditionsAccepted, firstName = '', lastName = '', referrerEmail = '') {

@@ -86,10 +86,9 @@ const actions = {
     }
   },
 
-  logout ({ commit }, { target }) {
+  async logout ({ commit }, { target }) {
     commit('resetUser')
-    window.location.href = target
-    return true
+    return { success: true }
   },
 
   async refreshAccessToken ({ commit, state }) {
