@@ -115,16 +115,14 @@ const actions = {
   async resetPasswordValidate ({ commit }, { token }) {
     const result = await user.resetPasswordValidate(token)
     if (result.success) {
-      commit('setResetToken', token)
       return { success: true }
     } else {
       return result
     }
   },
 
-  async resetPasswordConfirm ({ commit, state }, { password }) {
-    const result = await user.resetPasswordConfirm(password, state.token)
-    commit('setResetToken', '')
+  async resetPasswordConfirm ({ commit }, { password, token }) {
+    const result = await user.resetPasswordConfirm(password, token)
     if (result.success) {
       return { success: true }
     } else {
