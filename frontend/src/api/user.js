@@ -22,9 +22,9 @@ export default {
 
   async refreshAccessToken (refreshToken) {
     try {
-    const response = await api.post('login/refresh/', {
-      refresh: refreshToken
-    })
+      const response = await api.post('login/refresh/', {
+        refresh: refreshToken
+      })
       return { success: true, data: response.data.access }
     } catch (error) {
       return { success: false, errors: error }
@@ -73,6 +73,33 @@ export default {
     try {
       const response = await api.get('users/')
       return { success: true, data: response.data.results[0] }
+    } catch (error) {
+      return { success: false, errors: error }
+    }
+  },
+
+  async resetPasswordInitiate (email) {
+    try {
+      const response = await api.post('login/reset/', { email: email })
+      return { success: true, data: response.data }
+    } catch (error) {
+      return { success: false, errors: error }
+    }
+  },
+
+  async resetPasswordValidate (token) {
+    try {
+      const response = await api.post('login/reset/validate_token/', { token: token })
+      return { success: true, data: response.data }
+    } catch (error) {
+      return { success: false, errors: error }
+    }
+  },
+
+  async resetPasswordConfirm (password, token) {
+    try {
+      const response = await api.post('login/reset/confirm/', { password: password, token: token })
+      return { success: true, data: response.data }
     } catch (error) {
       return { success: false, errors: error }
     }
