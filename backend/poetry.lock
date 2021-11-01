@@ -162,6 +162,14 @@ exchange = ["certifi"]
 test = ["pytest (>=3.1.0)", "pytest-django", "pytest-pythonpath", "pytest-cov", "mixer"]
 
 [[package]]
+name = "django-rest-passwordreset"
+version = "1.2.1"
+description = "An extension of django rest framework, providing a configurable password reset strategy"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "django-username-email"
 version = "2.4.2"
 description = "Custom Django User model that makes email the USERNAME_FIELD."
@@ -357,7 +365,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "30fe5c287dcb44b44177eed42519fba294e69224dbce713af764952ae6d24bf3"
+content-hash = "962eb01a194489bea87e3a4b70977694dfbce61fb0db5b6166d84bd15bd963d4"
 
 [metadata.files]
 appdirs = [
@@ -410,6 +418,10 @@ django-filter = [
 django-money = [
     {file = "django-money-2.1.tar.gz", hash = "sha256:10a292fe2d8411a10f89a9df894161d07cf58fd32805543114d1711b33196cca"},
     {file = "django_money-2.1-py3-none-any.whl", hash = "sha256:a48f385ea528aac62d90de8c149e3587b158543cf062a9db504b98e7e5c875ed"},
+]
+django-rest-passwordreset = [
+    {file = "django-rest-passwordreset-1.2.1.tar.gz", hash = "sha256:9762f337983b33f66b9ec95d4f19b3da8daba2b7d22ac005ba114ddda98aae38"},
+    {file = "django_rest_passwordreset-1.2.1-py3-none-any.whl", hash = "sha256:6be5d34b334cae4e381336fa32987e48276eec976aa454bb0ef428438eba3d44"},
 ]
 django-username-email = [
     {file = "django-username-email-2.4.2.tar.gz", hash = "sha256:b9018d8168f754a8b7fa8b9bbea952651e086f004d9816e262209a6e80267351"},

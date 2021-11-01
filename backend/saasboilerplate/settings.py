@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "djmoney",
     "drf_app_generators",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "django_rest_passwordreset"
 ]
 
 MIDDLEWARE = [
@@ -165,3 +166,10 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
+DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# URL to your frontend (with trailing slash '/' )
+FRONTEND_URL = 'https://localhost:8080/'
+FRONTEND_RESET_PASSWORD_PATH = 'login/reset/'
