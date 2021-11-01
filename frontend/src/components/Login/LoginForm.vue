@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-form px-3 mt-4 d-flex flex-column align-items-center">
+  <div class="mt-4 d-flex flex-column align-items-center">
     <p class="fs-4 text fw-light">
       Sign in to {{ pagetitle }}
     </p>
@@ -18,8 +18,13 @@
         />
       </div>
     </transition>
-    <div class="card bg-light shadow rounded mb-4 w-100">
-      <div class="card-body">
+    <LoginCard
+      :footer-text="'New to ' + pagetitle + '?'"
+      footer-link-text="Create an account."
+      :footer-link-route="{
+        name: 'Register'
+      }"
+    >
         <form>
           <div class="mb-3">
             <label
@@ -63,23 +68,19 @@
             </span>
           </button>
         </form>
-      </div>
-    </div>
-    <div class="card w-100">
-      <div class="card-body text-center">
-        New to {{ pagetitle }}? <router-link to="/register">
-          Create an account.
-        </router-link>
-      </div>
-    </div>
+    </LoginCard>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import LoginCard from './LoginCard'
 
 export default {
+  components: {
+    LoginCard
+  },
   props: {
     pagetitle: {
       type: String,

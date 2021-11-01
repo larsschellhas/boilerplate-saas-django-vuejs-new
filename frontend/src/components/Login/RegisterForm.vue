@@ -1,10 +1,15 @@
 <template>
-  <div class="auth-form px-3 mt-4 d-flex flex-column align-items-center">
+  <div class="mt-4 d-flex flex-column align-items-center">
     <p class="fs-4 text fw-light">
       Sign up for {{ pagetitle }}
     </p>
-    <div class="card bg-light shadow rounded mb-4 w-100">
-      <div class="card-body">
+    <LoginCard
+      footer-text="Already have an account?"
+      footer-link-text="Sign in."
+      :footer-link-route="{
+        name: 'Login'
+      }"
+    >
         <form class="">
           <div class="mb-3">
             <label
@@ -102,23 +107,19 @@
             </span>
           </button>
         </form>
-      </div>
-    </div>
-    <div class="card w-100">
-      <div class="card-body text-center">
-        Already have an account? <router-link to="/login">
-          Sign in.
-        </router-link>
-      </div>
-    </div>
+    </LoginCard>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import LoginCard from './LoginCard'
 
 export default {
+  components: {
+    LoginCard
+  },
   props: {
     pagetitle: {
       type: String,
