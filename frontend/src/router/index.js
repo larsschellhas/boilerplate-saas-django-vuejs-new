@@ -19,17 +19,17 @@ const routes = [
     }
   },
   {
-    path: '/login',
+    path: '/login/',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login/Login.vue'),
     meta: {
       allowAnonymous: true
     }
   },
   {
-    path: '/register',
+    path: '/register/',
     name: 'Register',
-    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
+    component: () => import(/* webpackChunkName: "register" */ '../views/Login/Register.vue'),
     meta: {
       allowAnonymous: true
     }
