@@ -6,10 +6,13 @@
     <transition name="fade">
       <div
         v-if="errors"
-        class="alert alert-danger alert-dismissible fade show w-100"
+        class="alert alert-danger alert-dismissible fade show"
         role="alert"
       >
         Incorrect username or password!
+        <router-link :to="{ name: 'ResetPassword' }">
+          Forgot your password?
+        </router-link>
         <button
           type="button"
           class="btn-close"
