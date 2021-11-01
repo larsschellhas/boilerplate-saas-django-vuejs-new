@@ -33,8 +33,21 @@
             v-model="resetPasswordData.username"
             type="email"
             class="form-control"
+            :class="{
+              'is-invalid': errors.username
+            }"
             aria-describedby="emailHelp"
           >
+          <div
+            v-if="errors.username"
+            class="invalid-feedback"
+          >
+            <span
+              v-for="(error, index) in errors.username"
+              :key="index"
+            >
+              {{ error }} </span>
+          </div>
         </div>
         <button
           type="submit"
@@ -146,6 +159,7 @@ export default {
 
     // Errors
     const errors = ref({
+      username: '',
       password: ''
     })
 
@@ -158,8 +172,10 @@ export default {
       }).then(results => {
         if (results.success) {
           resetSent.value = true
-          loading.value = false
+        } else {
+          errors.value.username = results.errors.username
         }
+        loading.value = false
       })
     }
 
@@ -191,9 +207,7 @@ export default {
           passwordReset.value = true
           setTimeout(() => { router.push({ name: 'Login' }) }, 5000)
         } else {
-          for (const key in results.errors) {
-            errors.value[key] = results.errors[key]
-          }
+          errors.value.password = results.errors.password
           passwordReset.value = false
         }
         loading.value = false

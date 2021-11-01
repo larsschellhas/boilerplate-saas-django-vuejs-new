@@ -96,7 +96,9 @@ export default {
       return { success: true, data: response.data }
     } catch (error) {
       if (error.response.data) {
-        return { success: false, errors: error.response.data }
+        const errors = {}
+        errors.username = error.response.data.email
+        return { success: false, errors: errors }
       } else {
         return { success: false, errors: error }
       }
