@@ -12,7 +12,16 @@
         If this email exists, a password reset link has been sent!
       </div>
     </transition>
-    <LoginCard v-if="!resetSent">
+    <transition name="fade">
+      <div
+        v-if="passwordReset"
+        class="alert alert-success fade show w-100 my-0"
+        role="alert"
+      >
+        Your password was successfully reset. You are being forwarded to the login.
+      </div>
+    </transition>
+    <LoginCard v-if="!resetSent && !passwordReset">
       <form v-if="token === ''">
         <div class="mb-3">
           <label
@@ -44,7 +53,7 @@
           </span>
         </button>
       </form>
-      <form v-else>
+      <div v-else>
         <div
           v-if="!tokenValid && loading"
           class="spinner-border spinner-border text-primary d-block mx-auto"
@@ -52,7 +61,50 @@
         >
           <span class="visually-hidden">Loading...</span>
         </div>
-      </form>
+        <form v-if="tokenValid">
+          <div class="mb-3">
+            <label
+              for="password1"
+              class="form-label"
+            >New password</label>
+            <input
+              id="password1"
+              v-model="resetPasswordData.password"
+              type="password"
+              class="form-control"
+              :class="{
+                'is-invalid': errors.password
+              }"
+            >
+            <div
+              v-if="errors.password"
+              class="invalid-feedback"
+            >
+              <span
+                v-for="(error, index) in errors.password"
+                :key="index"
+              >
+                {{ error }} </span>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success w-100"
+            @click.prevent="handlePasswordResetConfirm"
+          >
+            <div
+              v-if="loading"
+              class="spinner-border spinner-border-sm text-light"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <span v-else>
+              Submit
+            </span>
+          </button>
+        </form>
+      </div>
     </LoginCard>
   </div>
 </template>
@@ -87,10 +139,15 @@ export default {
     // Reset password - Validation
     const resetSent = ref(false)
     const tokenValid = ref(false)
-    const passwordReseted = ref(false)
+    const passwordReset = ref(false)
 
     // Reset password - Loading spinner
     const loading = ref(false)
+
+    // Errors
+    const errors = ref({
+      password: ''
+    })
 
     // Reset password - Handle password reset initiate
     function handlePasswordResetInitiate () {
@@ -99,7 +156,7 @@ export default {
         type: 'user/resetPasswordInitiate',
         username: resetPasswordData.value.username
       }).then(results => {
-        if (!results.success) {
+        if (results.success) {
           resetSent.value = true
           loading.value = false
         }
@@ -131,23 +188,26 @@ export default {
         token: props.token
       }).then(results => {
         if (results.success) {
-          passwordReseted.value = true
+          passwordReset.value = true
           setTimeout(() => { router.push({ name: 'Login' }) }, 5000)
         } else {
-          console.log(results)
-          debugger
-          passwordReseted.value = false
+          for (const key in results.errors) {
+            errors.value[key] = results.errors[key]
+          }
+          passwordReset.value = false
         }
         loading.value = false
       })
     }
 
     onMounted(() => {
-      handlePasswordResetValidate()
+      if (props.token !== '') {
+        handlePasswordResetValidate()
+      }
     })
     // END - Reset password
 
-    return { resetPasswordData, handlePasswordResetInitiate, handlePasswordResetValidate, handlePasswordResetConfirm, resetSent, tokenValid, loading, store }
+    return { resetPasswordData, handlePasswordResetInitiate, handlePasswordResetValidate, handlePasswordResetConfirm, resetSent, passwordReset, tokenValid, loading, store, errors }
   }
 }
 </script>
