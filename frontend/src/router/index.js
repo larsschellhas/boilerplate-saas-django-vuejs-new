@@ -33,6 +33,15 @@ const routes = [
     meta: {
       allowAnonymous: true
     }
+  },
+  {
+    path: '/login/reset/',
+    name: 'ResetPassword',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Login/ResetPassword.vue'),
+    props: route => ({ token: route.query.token }),
+    meta: {
+      allowAnonymous: true
+    }
   }
 ]
 
