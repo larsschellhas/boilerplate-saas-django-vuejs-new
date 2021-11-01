@@ -25,49 +25,49 @@
         name: 'Register'
       }"
     >
-        <form>
-          <div class="mb-3">
-            <label
-              for="email1"
-              class="form-label"
-            >Email address</label>
-            <input
-              id="email1"
-              v-model="loginData.username"
-              type="email"
-              class="form-control"
-              aria-describedby="emailHelp"
-            >
-          </div>
-          <div class="mb-3">
-            <label
-              for="password1"
-              class="form-label"
-            >Password</label>
-            <input
-              id="password1"
-              v-model="loginData.password"
-              type="password"
-              class="form-control"
-            >
-          </div>
-          <button
-            type="submit"
-            class="btn btn-success w-100"
-            @click.prevent="handleLogin"
+      <form>
+        <div class="mb-3">
+          <label
+            for="email1"
+            class="form-label"
+          >Email address</label>
+          <input
+            id="email1"
+            v-model="loginData.username"
+            type="email"
+            class="form-control"
+            aria-describedby="emailHelp"
           >
-            <div
-              v-if="loading"
-              class="spinner-border spinner-border-sm text-light"
-              role="status"
-            >
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            <span v-else>
-              Submit
-            </span>
-          </button>
-        </form>
+        </div>
+        <div class="mb-3">
+          <label
+            for="password1"
+            class="form-label"
+          >Password</label>
+          <input
+            id="password1"
+            v-model="loginData.password"
+            type="password"
+            class="form-control"
+          >
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success w-100"
+          @click.prevent="handleLogin"
+        >
+          <div
+            v-if="loading"
+            class="spinner-border spinner-border-sm text-light"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <span v-else>
+            Submit
+          </span>
+        </button>
+      </form>
     </LoginCard>
   </div>
 </template>
@@ -111,7 +111,7 @@ export default {
         type: 'user/login',
         username: loginData.value.username,
         password: loginData.value.password,
-        target: window.location.href
+        target: ''
       }).then(results => {
         if (!results.success) {
           errors.value = true

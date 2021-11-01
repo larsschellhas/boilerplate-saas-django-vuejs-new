@@ -45,12 +45,12 @@
       class="login-links d-flex flex-row justify-content-center align-items-center"
     >
       <router-link
-        to="/login"
+        :to="{ name: 'Login' }"
         class="nav-link link-light"
       >
         Sign in
       </router-link>
-      <router-link to="/register">
+      <router-link :to="{ name: 'Register' }">
         <button
           type="button"
           class="btn btn-outline-light"
@@ -86,7 +86,7 @@ export default {
     const handleLogout = function () {
       store.dispatch({
         type: 'user/logout',
-        target: window.location.href
+        target: { path: window.location.pathname }
       })
     }
     return { store, isLoggedIn, handleLogout }

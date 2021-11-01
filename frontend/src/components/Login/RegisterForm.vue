@@ -10,103 +10,103 @@
         name: 'Login'
       }"
     >
-        <form class="">
-          <div class="mb-3">
-            <label
-              for="email1"
-              class="form-label"
-            >Email address</label>
-            <input
-              id="email1"
-              v-model="registerData.username"
-              type="email"
-              class="form-control"
-              :class="{
-                'is-invalid': errors.username && validated,
-                'is-valid': !errors.username && validated,
-              }"
-              aria-describedby="emailHelp"
-            >
-            <div
-              v-if="errors.username"
-              class="invalid-feedback"
-            >
-              <span
-                v-for="(error, index) in errors.username"
-                :key="index"
-              >
-                {{ error }} </span>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label
-              for="password"
-              class="form-label"
-            >Password</label>
-            <input
-              id="password"
-              v-model="registerData.password"
-              type="password"
-              class="form-control"
-              :class="{
-                'is-invalid': errors.password && validated,
-                'is-valid': !errors.password && validated,
-              }"
-            >
-            <div
-              v-if="errors.password"
-              class="invalid-feedback"
-            >
-              <span
-                v-for="(error, index) in errors.password"
-                :key="index"
-              >
-                {{ error }} </span>
-            </div>
-          </div>
-          <div class="mb-3 form-check">
-            <input
-              id="termsAndConditions"
-              v-model="registerData.termsAndConditionsAccepted"
-              type="checkbox"
-              class="form-check-input"
-              :class="{
-                'is-invalid': errors.termsAndConditionsAccepted && validated,
-                'is-valid': !errors.termsAndConditionsAccepted && validated,
-              }"
-            >
-            <label
-              class="form-check-label"
-              for="termsAndConditions"
-            >I accept the terms and conditions</label>
-            <div
-              v-if="errors.termsAndConditionsAccepted"
-              class="invalid-feedback"
-            >
-              <span
-                v-for="(error, index) in errors.termsAndConditionsAccepted"
-                :key="index"
-              >
-                {{ error }} </span>
-            </div>
-          </div>
-          <button
-            type="submit"
-            class="btn btn-success w-100"
-            @click.prevent="handleRegistration"
+      <form class="">
+        <div class="mb-3">
+          <label
+            for="email1"
+            class="form-label"
+          >Email address</label>
+          <input
+            id="email1"
+            v-model="registerData.username"
+            type="email"
+            class="form-control"
+            :class="{
+              'is-invalid': errors.username && validated,
+              'is-valid': !errors.username && validated,
+            }"
+            aria-describedby="emailHelp"
           >
-            <div
-              v-if="loading"
-              class="spinner-border spinner-border-sm text-light"
-              role="status"
+          <div
+            v-if="errors.username"
+            class="invalid-feedback"
+          >
+            <span
+              v-for="(error, index) in errors.username"
+              :key="index"
             >
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            <span v-else>
-              Create account
-            </span>
-          </button>
-        </form>
+              {{ error }} </span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label
+            for="password"
+            class="form-label"
+          >Password</label>
+          <input
+            id="password"
+            v-model="registerData.password"
+            type="password"
+            class="form-control"
+            :class="{
+              'is-invalid': errors.password && validated,
+              'is-valid': !errors.password && validated,
+            }"
+          >
+          <div
+            v-if="errors.password"
+            class="invalid-feedback"
+          >
+            <span
+              v-for="(error, index) in errors.password"
+              :key="index"
+            >
+              {{ error }} </span>
+          </div>
+        </div>
+        <div class="mb-3 form-check">
+          <input
+            id="termsAndConditions"
+            v-model="registerData.termsAndConditionsAccepted"
+            type="checkbox"
+            class="form-check-input"
+            :class="{
+              'is-invalid': errors.termsAndConditionsAccepted && validated,
+              'is-valid': !errors.termsAndConditionsAccepted && validated,
+            }"
+          >
+          <label
+            class="form-check-label"
+            for="termsAndConditions"
+          >I accept the terms and conditions</label>
+          <div
+            v-if="errors.termsAndConditionsAccepted"
+            class="invalid-feedback"
+          >
+            <span
+              v-for="(error, index) in errors.termsAndConditionsAccepted"
+              :key="index"
+            >
+              {{ error }} </span>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success w-100"
+          @click.prevent="handleRegistration"
+        >
+          <div
+            v-if="loading"
+            class="spinner-border spinner-border-sm text-light"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <span v-else>
+            Create account
+          </span>
+        </button>
+      </form>
     </LoginCard>
   </div>
 </template>
@@ -162,7 +162,7 @@ export default {
         lastName: registerData.value.lastName,
         termsAndConditionsAccepted: registerData.value.termsAndConditionsAccepted,
         referrerEmail: registerData.value.referrerEmail,
-        target: window.location.origin + '/login/'
+        target: { name: 'Login' }
       }).then(results => {
         if (!results.success) {
           for (const key in results.errors) {

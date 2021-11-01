@@ -57,3 +57,11 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+
+export function pushOrReload (route) {
+  if (route !== '' && route.name !== router.currentRoute.value.name) {
+    router.push(route)
+  } else {
+    router.go(0)
+  }
+}

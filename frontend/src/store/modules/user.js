@@ -1,4 +1,5 @@
 import user from '@/api/user'
+import { pushOrReload } from '../../router'
 
 const state = () => ({
   url: '',
@@ -51,7 +52,7 @@ const actions = {
       commit('setLastName', result.data.last_name)
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
-      window.location.href = target
+      pushOrReload(target)
       return { success: true }
     } else {
       return result
@@ -64,7 +65,7 @@ const actions = {
       commit('setAccessToken', result.data.access)
       commit('setRefreshToken', result.data.refresh)
       await dispatch('getCurrentUser')
-      window.location.href = target
+      pushOrReload(target)
       return { success: true }
     } else {
       return result
@@ -88,12 +89,18 @@ const actions = {
 
   async logout ({ commit }, { target }) {
     commit('resetUser')
+    pushOrReload(target)
     return { success: true }
   },
 
   async refreshAccessToken ({ commit, state }) {
-    const accessToken = await user.refreshAccessToken(state.refreshToken)
-    commit('setAccessToken', accessToken)
+    const result = await user.refreshAccessToken(state.refreshToken)
+    if (result.success) {
+      commit('setAccessToken', result.data)
+      return { success: true }
+    } else {
+      return result
+  }
   }
 }
 

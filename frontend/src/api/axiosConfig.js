@@ -25,7 +25,7 @@ api.interceptors.response.use(
         } else {
           store.dispatch({
             type: 'user/logout',
-            target: window.location.href
+            target: { path: window.location.pathname }
           })
         }
       }
