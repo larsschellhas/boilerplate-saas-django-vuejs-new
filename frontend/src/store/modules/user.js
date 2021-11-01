@@ -100,7 +100,36 @@ const actions = {
       return { success: true }
     } else {
       return result
-  }
+    }
+  },
+
+  async resetPasswordInitiate ({ state }, { username }) {
+    const result = await user.resetPasswordInitiate(username)
+    if (result.success) {
+      return { success: true }
+    } else {
+      return result
+    }
+  },
+
+  async resetPasswordValidate ({ commit }, { token }) {
+    const result = await user.resetPasswordValidate(token)
+    if (result.success) {
+      commit('setResetToken', token)
+      return { success: true }
+    } else {
+      return result
+    }
+  },
+
+  async resetPasswordConfirm ({ commit, state }, { password }) {
+    const result = await user.resetPasswordConfirm(password, state.token)
+    commit('setResetToken', '')
+    if (result.success) {
+      return { success: true }
+    } else {
+      return result
+    }
   }
 }
 
