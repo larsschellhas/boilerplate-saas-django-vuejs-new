@@ -76,12 +76,7 @@ export default {
   setup (props) {
     const store = useStore()
 
-    const isLoggedIn = computed({
-      get: () => {
-        return store.getters['user/isLoggedIn']
-      },
-      set: () => {}
-    })
+    const isLoggedIn = computed(() => store.getters['user/isLoggedIn'])
 
     const handleLogout = function () {
       store.dispatch({
