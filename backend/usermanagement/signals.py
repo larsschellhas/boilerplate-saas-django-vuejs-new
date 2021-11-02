@@ -21,7 +21,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     """
     # send an e-mail to the user
     context = {
-        'sitetitle': 'SimplySaaS',
+        'sitetitle': getattr(settings, 'SITE_NAME', 'SimplySaaS'),
         'current_user': reset_password_token.user,
         'email': reset_password_token.user.email,
         'resetlink': "{}{}?token={}".format(

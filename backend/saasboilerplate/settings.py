@@ -170,6 +170,11 @@ DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# URL to your frontend (with trailing slash '/' )
+
+### Settings for customization
+# Enter the name of your site. It will be used, e.g., in emails
+SITE_NAME = 'SimplySaaS'
+# URLs to your frontend (with trailing slash '/' )
 FRONTEND_URL = 'https://localhost:8080/'
+# URL to your frontend page where users can reset their password
 FRONTEND_RESET_PASSWORD_PATH = 'login/reset/'
