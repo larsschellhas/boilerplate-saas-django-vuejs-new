@@ -12,7 +12,7 @@ import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 
 export default {
-  name: 'Dashboard',
+  name: 'DashboardView',
   setup () {
     // Enable access to localizations
     const { t } = useI18n()

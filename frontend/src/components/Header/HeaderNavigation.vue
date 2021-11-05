@@ -46,12 +46,12 @@
       class="login-links d-flex flex-row justify-content-center align-items-center"
     >
       <router-link
-        :to="{ name: 'Login' }"
+        :to="{ name: 'LoginView' }"
         class="nav-link link-light"
       >
         {{ t("components.headerNavigation.signIn") }}
       </router-link>
-      <router-link :to="{ name: 'Register' }">
+      <router-link :to="{ name: 'RegisterView' }">
         <button
           type="button"
           class="btn btn-outline-light"

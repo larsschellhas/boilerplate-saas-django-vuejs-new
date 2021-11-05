@@ -31,7 +31,7 @@ export default {
     },
     footerLinkRoute: {
       type: Object,
-      default: () => { return { name: 'Register' } }
+      default: () => { return { name: 'RegisterView' } }
     }
   }
 }

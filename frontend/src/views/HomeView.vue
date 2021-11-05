@@ -8,7 +8,7 @@
 import { useI18n } from 'vue-i18n'
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   setup (props) {
     // Enable access to localizations
     const { t } = useI18n()

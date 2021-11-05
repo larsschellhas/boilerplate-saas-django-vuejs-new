@@ -189,7 +189,7 @@ export default {
         if (results.success) {
           tokenValid.value = true
         } else {
-          router.push({ name: 'ResetPassword' })
+          router.push({ name: 'ResetPasswordView' })
         }
         loading.value = false
       })
@@ -205,7 +205,7 @@ export default {
       }).then(results => {
         if (results.success) {
           passwordReset.value = true
-          setTimeout(() => { router.push({ name: 'Login' }) }, 5000)
+          setTimeout(() => { router.push({ name: 'LoginView' }) }, 5000)
         } else {
           errors.value.password = results.errors.password
           passwordReset.value = false

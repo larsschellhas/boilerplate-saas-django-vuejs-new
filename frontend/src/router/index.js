@@ -4,40 +4,40 @@ import store from '@/store'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue'),
+    name: 'HomeView',
+    component: () => import(/* webpackChunkName: "Home" */ '../views/HomeView.vue'),
     meta: {
       allowAnonymous: true
     }
   },
   {
     path: '/',
-    name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard.vue'),
+    name: 'DashboardView',
+    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/DashboardView.vue'),
     meta: {
       allowAnonymous: false
     }
   },
   {
     path: '/login/',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login/Login.vue'),
+    name: 'LoginView',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login/LoginView.vue'),
     meta: {
       allowAnonymous: true
     }
   },
   {
     path: '/register/',
-    name: 'Register',
-    component: () => import(/* webpackChunkName: "register" */ '../views/Login/Register.vue'),
+    name: 'RegisterView',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Login/RegisterView.vue'),
     meta: {
       allowAnonymous: true
     }
   },
   {
     path: '/login/reset/',
-    name: 'ResetPassword',
-    component: () => import(/* webpackChunkName: "register" */ '../views/Login/ResetPassword.vue'),
+    name: 'ResetPasswordView',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Login/ResetPasswordView.vue'),
     props: route => ({ token: route.query.token }),
     meta: {
       allowAnonymous: true
@@ -53,12 +53,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (!to.meta.allowAnonymous && !store.getters['user/isLoggedIn']) {
     next({
-      path: '/login',
+      name: 'LoginView',
       query: { redirect: to.fullPath }
     })
   } else if (to.meta.allowAnonymous && store.getters['user/isLoggedIn']) {
     next({
-      name: 'Dashboard'
+      name: 'DashboardView'
     })
   } else {
     next()

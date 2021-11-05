@@ -10,7 +10,7 @@
         role="alert"
       >
         {{ t("components.loginForm.incorrectUsernameOrPassword") }}
-        <router-link :to="{ name: 'ResetPassword' }">
+        <router-link :to="{ name: 'ResetPasswordView' }">
           {{ t("components.loginForm.passwordForgotten") }}
         </router-link>
         <button
@@ -25,7 +25,7 @@
       :footer-text="t('components.loginForm.footerText',{pagetitle: pagetitle})"
       :footer-link-text="t('components.loginForm.footerLinkText')"
       :footer-link-route="{
-        name: 'Register'
+        name: 'RegisterView'
       }"
     >
       <form>

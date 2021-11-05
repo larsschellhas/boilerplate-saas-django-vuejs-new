@@ -15,6 +15,7 @@
 import ResetPasswordForm from '@/components/Login/ResetPasswordForm'
 
 export default {
+  name: 'ResetPasswordView',
   components: {
     ResetPasswordForm
   },

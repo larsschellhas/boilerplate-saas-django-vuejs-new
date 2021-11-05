@@ -12,6 +12,7 @@
 import RegisterForm from '@/components/Login/RegisterForm.vue'
 
 export default {
+  name: 'RegisterView',
   components: {
     RegisterForm
   }

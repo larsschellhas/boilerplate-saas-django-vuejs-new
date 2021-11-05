@@ -8,7 +8,13 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import LoginForm from '@/components/Login/LoginForm'
 
+export default {
+  name: 'LoginView',
+  components: {
+    LoginForm
+  }
+}
 </script>

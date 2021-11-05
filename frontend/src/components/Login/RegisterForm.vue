@@ -7,7 +7,7 @@
       :footer-text="t('components.registerForm.alreadyHaveAnAccount')"
       :footer-link-text="t('components.registerForm.signIn')"
       :footer-link-route="{
-        name: 'Login'
+        name: 'LoginView'
       }"
     >
       <form class="">
@@ -165,7 +165,7 @@ export default {
         lastName: registerData.value.lastName,
         termsAndConditionsAccepted: registerData.value.termsAndConditionsAccepted,
         referrerEmail: registerData.value.referrerEmail,
-        target: { name: 'Login' }
+        target: { name: 'LoginView' }
       }).then(results => {
         if (!results.success) {
           for (const key in results.errors) {
