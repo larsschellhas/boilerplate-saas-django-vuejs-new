@@ -2,8 +2,6 @@ import { api } from './axiosConfig'
 
 export default {
   async getTokens (username, password) {
-    // TO-DO LOGIN
-
     try {
       const response = await api.post('login/', {
         email: username,
