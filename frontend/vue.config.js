@@ -8,7 +8,7 @@ module.exports = {
       fallbackLocale: 'en',
       localeDir: 'localization',
       enableLegacy: false,
-      runtimeOnly: false,
+      runtimeOnly: true,
       compositionOnly: true,
       fullInstall: true
     }
