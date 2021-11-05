@@ -8,10 +8,14 @@
 
 <script>
 import Header from '@/components/Header/Header'
+import { useStore } from 'vuex'
 
 export default {
   components: { Header },
   setup () {
+    const store = useStore()
+    document.documentElement.setAttribute('lang', store.getters['localization/getLocale'])
+
     const routes = [
       {
         name: 'Home',
