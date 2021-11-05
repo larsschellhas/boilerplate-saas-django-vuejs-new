@@ -9,14 +9,18 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 
 export default {
   name: 'Dashboard',
   setup () {
+    // Enable access to localizations
+    const { t } = useI18n()
+    // Enable access to vuex store
     const store = useStore()
 
     const title = computed(() => {
-      return `Hello ${store.getters['user/getFirstName']} ${store.getters['user/getLastName']}! Great day for fishin', ain't it?`
+      return t('views.dashboard.title', { firstname: store.getters['user/getFirstName'], lastname: store.getters['user/getLastName'] })
     })
 
     return { title }

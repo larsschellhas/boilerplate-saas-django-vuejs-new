@@ -13,16 +13,19 @@ import { useStore } from 'vuex'
 export default {
   components: { Header },
   setup () {
+    // Enable access to vuex store
     const store = useStore()
     document.documentElement.setAttribute('lang', store.getters['localization/getLocale'])
 
+    const pagetitle = 'SimplySaaS'
+
     const routes = [
       {
-        name: 'Home',
+        name: 'app.headerNavigation.links.home',
         url: '/'
       }
     ]
-    const pagetitle = 'SimplySaaS'
+
     return { routes, pagetitle }
   }
 }

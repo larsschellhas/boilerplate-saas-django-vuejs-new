@@ -1,11 +1,11 @@
 <template>
   <div class="mt-4 d-flex flex-column align-items-center">
     <p class="fs-4 text fw-light">
-      Sign up for {{ pagetitle }}
+      {{ t("components.registerForm.title", {pagetitle: pagetitle}) }}
     </p>
     <LoginCard
-      footer-text="Already have an account?"
-      footer-link-text="Sign in."
+      :footer-text="t('components.registerForm.alreadyHaveAnAccount')"
+      :footer-link-text="t('components.registerForm.signIn')"
       :footer-link-route="{
         name: 'Login'
       }"
@@ -15,7 +15,7 @@
           <label
             for="email1"
             class="form-label"
-          >Email address</label>
+          >{{ t("forms.email") }}</label>
           <input
             id="email1"
             v-model="registerData.username"
@@ -42,7 +42,7 @@
           <label
             for="password"
             class="form-label"
-          >Password</label>
+          >{{ t("forms.password") }}</label>
           <input
             id="password"
             v-model="registerData.password"
@@ -78,7 +78,7 @@
           <label
             class="form-check-label"
             for="termsAndConditions"
-          >I accept the terms and conditions</label>
+          >{{ t("components.registerForm.acceptTermsAndConditions") }}</label>
           <div
             v-if="errors.termsAndConditionsAccepted"
             class="invalid-feedback"
@@ -100,10 +100,10 @@
             class="spinner-border spinner-border-sm text-light"
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">{{ t("forms.loading") }}</span>
           </div>
           <span v-else>
-            Create account
+            {{ t("components.registerForm.createAccount") }}
           </span>
         </button>
       </form>
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 import LoginCard from './LoginCard'
@@ -127,6 +128,8 @@ export default {
     }
   },
   setup (props) {
+    // Enable access to localizations
+    const { t } = useI18n()
     // Enable access to vuex store
     const store = useStore()
 
@@ -175,7 +178,7 @@ export default {
     }
     // END - Registration
 
-    return { registerData, handleRegistration, errors, validated, loading }
+    return { t, registerData, handleRegistration, errors, validated, loading }
   }
 }
 

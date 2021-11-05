@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4 d-flex flex-column align-items-center">
     <p class="fs-4 text fw-light">
-      Sign in to {{ pagetitle }}
+      {{ t("components.loginForm.title", {pagetitle: pagetitle}) }}
     </p>
     <transition name="fade">
       <div
@@ -9,9 +9,9 @@
         class="alert alert-danger alert-dismissible fade show"
         role="alert"
       >
-        Incorrect username or password!
+        {{ t("components.loginForm.incorrectUsernameOrPassword") }}
         <router-link :to="{ name: 'ResetPassword' }">
-          Forgot your password?
+          {{ t("components.loginForm.passwordForgotten") }}
         </router-link>
         <button
           type="button"
@@ -22,8 +22,8 @@
       </div>
     </transition>
     <LoginCard
-      :footer-text="'New to ' + pagetitle + '?'"
-      footer-link-text="Create an account."
+      :footer-text="t('components.loginForm.footerText',{pagetitle: pagetitle})"
+      :footer-link-text="t('components.loginForm.footerLinkText')"
       :footer-link-route="{
         name: 'Register'
       }"
@@ -33,7 +33,7 @@
           <label
             for="email1"
             class="form-label"
-          >Email address</label>
+          >{{ t("forms.email") }}</label>
           <input
             id="email1"
             v-model="loginData.username"
@@ -46,7 +46,7 @@
           <label
             for="password1"
             class="form-label"
-          >Password</label>
+          >{{ t("forms.password") }}</label>
           <input
             id="password1"
             v-model="loginData.password"
@@ -64,10 +64,10 @@
             class="spinner-border spinner-border-sm text-light"
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">{{ t("forms.loading") }}</span>
           </div>
           <span v-else>
-            Submit
+            {{ t("forms.submit") }}
           </span>
         </button>
       </form>
@@ -78,6 +78,7 @@
 <script>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import LoginCard from './LoginCard'
 
 export default {
@@ -91,6 +92,8 @@ export default {
     }
   },
   setup (props) {
+    // Enable access to localizations
+    const { t } = useI18n()
     // Enable access to vuex store
     const store = useStore()
 
@@ -124,7 +127,7 @@ export default {
     }
     // END - Login
 
-    return { loginData, handleLogin, errors, loading }
+    return { t, loginData, handleLogin, errors, loading }
   }
 }
 
