@@ -1,6 +1,44 @@
 {
-  "app": {},
-  "components": {},
-  "forms": {},
-  "views": {}
+  "app": {
+    "headerNavigation": {
+      "links": {
+        "home": "Home"
+      }
+    }
+  },
+  "components": {
+    "headerNavigation": {
+      "signIn": "Connecter",
+      "signOut": "Déconnecter",
+      "signUp": "Enregistrer"
+    },
+    "loginForm": {
+      "footerLinkText": "Créer un compte.",
+      "footerText": "Nouveau sur {pagetitle} ?",
+      "incorrectUsernameOrPassword": "Nom d'utilisateur ou mot de passe incorrect !",
+      "passwordForgotten": "Vous avez oublié votre mot de passe ?",
+      "title": "Connectez-vous à {pagetitle}"
+    },
+    "registerForm": {
+      "acceptTermsAndConditions": "J'accepte les termes et conditions",
+      "alreadyHaveAnAccount": "Vous avez déjà un compte ?",
+      "createAccount": "Enregistrer",
+      "signIn": "Connecter",
+      "title": "S'inscrire à {pagetitle}"
+    }
+  },
+  "forms": {
+    "email": "Adresse e-mail",
+    "loading": "Charger...",
+    "password": "Mot de passe",
+    "submit": "Soumettre"
+  },
+  "views": {
+    "home": {
+      "title": "SaaS-Boilerplate pour Vue.JS et Django"
+    },
+    "dashboard": {
+      "title": "Bonjour {firstname} {lastname} ! Belle journée pour pêcher, n'est-ce pas ?"
+    }
+  }
 }
