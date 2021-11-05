@@ -24,10 +24,11 @@
           :to="route.url"
           class="nav-link"
         >
-          {{ route.name }}
+          {{ t(route.name) }}
         </router-link>
       </li>
     </ul>
+    <LocaleSwitch />
     <div
       v-if="isLoggedIn"
       class="login-links d-flex flex-row justify-content-center align-items-center"
@@ -37,7 +38,7 @@
         style="cursor: pointer;"
         @click.prevent="handleLogout"
       >
-        Sign out
+        {{ t("components.headerNavigation.signOut") }}
       </a>
     </div>
     <div
@@ -48,14 +49,14 @@
         :to="{ name: 'Login' }"
         class="nav-link link-light"
       >
-        Sign in
+        {{ t("components.headerNavigation.signIn") }}
       </router-link>
       <router-link :to="{ name: 'Register' }">
         <button
           type="button"
           class="btn btn-outline-light"
         >
-          Sign up
+          {{ t("components.headerNavigation.signUp") }}
         </button>
       </router-link>
     </div>
@@ -65,8 +66,13 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+import LocaleSwitch from '../LocaleSwitch.vue'
 
 export default {
+  components: {
+    LocaleSwitch
+  },
   props: {
     routes: {
       type: Array,
@@ -74,17 +80,20 @@ export default {
     }
   },
   setup (props) {
+    // Enable access to localizations
+    const { t } = useI18n()
+    // Enable access to vuex store
     const store = useStore()
 
     const isLoggedIn = computed(() => store.getters['user/isLoggedIn'])
 
     const handleLogout = function () {
       store.dispatch({
-        type: 'user/logout',
+        type: 'logout',
         target: { path: window.location.pathname }
       })
     }
-    return { store, isLoggedIn, handleLogout }
+    return { t, store, isLoggedIn, handleLogout }
   }
 }
 </script>

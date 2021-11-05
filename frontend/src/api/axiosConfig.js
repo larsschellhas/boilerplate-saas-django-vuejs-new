@@ -24,7 +24,7 @@ api.interceptors.response.use(
           return api(originalConfig)
         } else {
           store.dispatch({
-            type: 'user/logout',
+            type: 'logout',
             target: { path: window.location.pathname }
           })
         }

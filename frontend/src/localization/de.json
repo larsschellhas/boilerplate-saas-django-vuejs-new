@@ -1,0 +1,44 @@
+{
+  "app": {
+    "headerNavigation": {
+      "links": {
+        "home": "Start"
+      }
+    }
+  },
+  "components": {
+    "headerNavigation": {
+      "signIn": "Anmelden",
+      "signOut": "Abmelden",
+      "signUp": "Registrieren"
+    },
+    "loginForm": {
+      "footerLinkText": "Erstelle ein Konto.",
+      "footerText": "Neu bei {pagetitle}?",
+      "incorrectUsernameOrPassword": "Dein Benutzername oder Passwort ist falsch!",
+      "passwordForgotten": "Passwort vergessen?",
+      "title": "Melde dich bei {pagetitle} an"
+    },
+    "registerForm": {
+      "acceptTermsAndConditions": "Ich akzeptiere die AGB und die Datenschutzerklärung",
+      "alreadyHaveAnAccount": "Hast du schon ein Konto?",
+      "createAccount": "Konto erstellen",
+      "signIn": "Anmelden.",
+      "title": "Registriere dich für {pagetitle}"
+    }
+  },
+  "forms": {
+    "email": "E-Mail Adresse",
+    "loading": "Lade...",
+    "password": "Passwort",
+    "submit": "Senden"
+  },
+  "views": {
+    "home": {
+      "title": "SaaS-Boilerplate für Vue.JS und Django"
+    },
+    "dashboard": {
+      "title": "Moin {firstname} {lastname}! Großartiger Tag zum Fischen, ne?"
+    }
+  }
+}
