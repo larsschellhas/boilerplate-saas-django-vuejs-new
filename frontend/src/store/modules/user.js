@@ -1,16 +1,20 @@
 import user from '@/api/user'
 import { pushOrReload } from '../../router'
 
-const state = () => ({
-  url: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  isStaff: false,
-  termsAndConditionsAccepted: false,
-  accessToken: '',
-  refreshToken: ''
-})
+const getDefaultState = () => {
+  return {
+    url: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    isStaff: false,
+    termsAndConditionsAccepted: false,
+    accessToken: '',
+    refreshToken: ''
+  }
+}
+
+const state = getDefaultState()
 
 const getters = {
   getUserURL: state => {
@@ -88,7 +92,7 @@ const actions = {
   },
 
   async logout ({ commit }, { target }) {
-    commit('resetUser')
+    commit('resetState')
     pushOrReload(target)
     return { success: true }
   },
@@ -156,15 +160,8 @@ const mutations = {
   setRefreshToken (state, status) {
     state.refreshToken = status
   },
-  resetUser (state) {
-    state.url = ''
-    state.email = ''
-    state.firstName = ''
-    state.lastName = ''
-    state.isStaff = false
-    state.termsAndConditionsAccepted = false
-    state.accessToken = ''
-    state.refreshToken = ''
+  resetState (state) {
+    Object.assign(state, getDefaultState())
   }
 }
 

@@ -5,6 +5,11 @@ import user from './modules/user'
 
 export default createStore({
   strict: process.env.NODE_ENV !== 'production',
+  actions: {
+    async logout ({ commit, dispatch }, { target }) {
+      dispatch('user/logout', { target })
+    }
+  },
   modules: {
     user
   },

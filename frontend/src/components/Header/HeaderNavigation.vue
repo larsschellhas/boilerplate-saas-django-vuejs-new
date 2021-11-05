@@ -80,7 +80,7 @@ export default {
 
     const handleLogout = function () {
       store.dispatch({
-        type: 'user/logout',
+        type: 'logout',
         target: { path: window.location.pathname }
       })
     }
