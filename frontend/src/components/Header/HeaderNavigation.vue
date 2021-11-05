@@ -28,6 +28,7 @@
         </router-link>
       </li>
     </ul>
+    <LocaleSwitch />
     <div
       v-if="isLoggedIn"
       class="login-links d-flex flex-row justify-content-center align-items-center"
@@ -65,8 +66,12 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import LocaleSwitch from '../LocaleSwitch.vue'
 
 export default {
+  components: {
+    LocaleSwitch
+  },
   props: {
     routes: {
       type: Array,
