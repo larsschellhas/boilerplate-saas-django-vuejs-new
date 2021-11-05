@@ -1,6 +1,25 @@
 # Software-as-a-Service boilerplate using Django and Vue.JS
 This repository contains a boilerplate setup for a software-as-a-service app, using Django for the backend and Vue.JS for the frontend.
 
+## Features
+### Backend
+- REST API
+- User management
+    - Register
+    - JWT Authentication
+    - Self-reset of password
+
+
+### Frontend
+- Vue.JS 3 with fully Composition API based Components
+- Abstract API service layer fully configured for backend
+- Persisted central state with Vuex
+- Localization with vue-i18n
+    - browser language is detected on first visit
+    - language selected by user is persisted in vuex store
+- Register, Login, Password Reset pages ready to go
+
+
 ## Local Setup
 
 You need to have the following prerequisites installed:
