@@ -9,7 +9,7 @@ module.exports = {
       localeDir: 'localization',
       enableLegacy: false,
       runtimeOnly: false,
-      compositionOnly: false,
+      compositionOnly: true,
       fullInstall: true
     }
   }

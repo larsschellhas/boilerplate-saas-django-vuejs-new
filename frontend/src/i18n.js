@@ -1,4 +1,6 @@
 import { createI18n } from 'vue-i18n'
+import supportedLocales from '@/localization/supported-locales'
+import store from '@/store/index.js'
 
 /**
  * Load locale messages
@@ -19,9 +21,35 @@ function loadLocaleMessages () {
   return messages
 }
 
-export default createI18n({
+const i18n = createI18n({
   legacy: false,
-  locale: process.env.VUE_APP_I18N_LOCALE || 'en',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+  locale: store.getters['localization/getLocale'],
+  fallbackLocale: store.getters['localization/getFallbackLocale'],
   messages: loadLocaleMessages()
 })
+
+export default i18n
+
+// Export a list of supported locales from 'localization/supported-locales.js'
+export function getSupportedLocales () {
+  const annotatedLocales = []
+  for (const code of Object.keys(supportedLocales)) {
+    annotatedLocales.push({
+      code,
+      name: supportedLocales[code]
+    })
+  }
+  return annotatedLocales
+}
+
+// Export a vuex store plugin to update the global locale when its value is changed in the store
+export function storeLocalizationPlugin (store) {
+  store.subscribe((mutation) => {
+    if (mutation.type === 'localization/setLocale') {
+      // Set global locale to new value from store
+      i18n.global.locale.value = mutation.payload
+      // Update lang-property of html document with new languade code
+      document.documentElement.setAttribute('lang', mutation.payload)
+    }
+  })
+}
