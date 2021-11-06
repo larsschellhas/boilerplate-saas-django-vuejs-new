@@ -14,10 +14,6 @@ export default {
     HeaderBar
   },
   setup () {
-    // Enable access to vuex store
-    const store = useStore()
-    document.documentElement.setAttribute('lang', store.getters['localization/getLocale'])
-
     const pagetitle = 'SimplySaaS'
 
     const routes = [

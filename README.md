@@ -17,6 +17,7 @@ This repository contains a boilerplate setup for a software-as-a-service app, us
 - Localization with vue-i18n
     - browser language is detected on first visit
     - language selected by user is persisted in vuex store
+    - locale messages are lazyloaded
 - Register, Login, Password Reset pages ready to go
 
 
