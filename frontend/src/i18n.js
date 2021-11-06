@@ -10,11 +10,15 @@ const i18n = createI18n({
 
 export default i18n
 
-export async function loadLocaleMessages (locale) {
+export async function setLocale (locale) {
   // Lazy load locale messages asynchronously based on the currently seleted locale
   const messages = await import(/* webpackChunkName: "locale-[request]" */ '@/localization/' + locale + '.json')
   // set locale and locale message
   i18n.global.setLocaleMessage(locale, messages.default)
+  // Set global locale to new value from store
+  i18n.global.locale.value = locale
+  // Update lang-property of html document with new languade code
+  document.documentElement.setAttribute('lang', i18n.global.locale.value)
   return Promise.resolve()
 }
 
@@ -32,13 +36,9 @@ export function getSupportedLocales () {
 
 // Export a vuex store plugin to update the global locale when its value is changed in the store
 export function storeLocalizationPlugin (store) {
-  store.subscribe(async function (mutation) {
+  store.subscribe(function (mutation) {
     if (mutation.type === 'localization/setLocale') {
-      // Set global locale to new value from store
-      await loadLocaleMessages(mutation.payload)
-      i18n.global.locale.value = mutation.payload
-      // Update lang-property of html document with new languade code
-      document.documentElement.setAttribute('lang', i18n.global.locale.value)
+      setLocale(mutation.payload)
     }
   })
 }
