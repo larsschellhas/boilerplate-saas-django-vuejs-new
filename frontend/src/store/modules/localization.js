@@ -20,6 +20,12 @@ const getters = {
           return navigator.languages[key]
         }
       }
+      for (const key in navigator.languages) {
+        const splitLocale = navigator.languages[key].split('-')
+        if (supportedLocales.includes(splitLocale[0])) {
+          return splitLocale[0]
+        }
+      }
       return getters.getFallbackLocale
     }
   },
