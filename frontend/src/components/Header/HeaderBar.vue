@@ -4,11 +4,12 @@
       <router-link
         id="pagetitle"
         to="/"
-        class="navbar-brand mb-0 h1"
+        class="navbar-brand mb-0 h1 d-flex flex-row align-items-center"
       >
         <img
           src="@/assets/logo.png"
           height="36"
+          class="me-2"
         >
         {{ title }}
       </router-link>
