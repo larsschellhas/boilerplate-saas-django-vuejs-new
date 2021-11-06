@@ -1,5 +1,5 @@
 <template>
-  <Header
+  <HeaderBar
     :routes="routes"
     :title="pagetitle"
   />
@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import Header from '@/components/Header/Header'
-import { useStore } from 'vuex'
+import HeaderBar from '@/components/Header/HeaderBar'
 
 export default {
-  components: { Header },
+  components: {
+    HeaderBar
+  },
   setup () {
     // Enable access to vuex store
     const store = useStore()

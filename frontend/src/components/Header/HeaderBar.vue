@@ -21,6 +21,7 @@
 import HeaderNavigation from '@/components/Header/HeaderNavigation.vue'
 
 export default {
+  name: 'HeaderBar',
   components: { HeaderNavigation },
   props: {
     routes: {
