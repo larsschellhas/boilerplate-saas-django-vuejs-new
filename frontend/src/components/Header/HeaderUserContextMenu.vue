@@ -22,77 +22,77 @@
         </button>
       </router-link>
     </div>
-  <div
-    class="nav-item dropdown dropdown-align-right"
-  >
-    <a
-      v-if="user.isLoggedIn"
-      id="headerUserContextMenuDrowpdownLink"
-      class="nav-link link-light dropdown-toggle d-flex align-items-center"
-      href="#"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
+    <div
+      class="nav-item dropdown dropdown-align-right"
     >
-      <UserImage />
-    </a>
-    <ul
-      v-if="user.isLoggedIn"
-      class="dropdown-menu dropdown-menu-dark"
-      aria-labelledby="headerUserContextMenuDrowpdownLink"
-    >
-      <li>
-        <span class="dropdown-item-text">
-          {{ t("components.headerUserContextMenu.signedInAs") }}<br>
-          <b>{{ user.fullName }}</b>
-        </span>
-      </li>
-      <li><hr class="dropdown-divider"></li>
-      <li>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer;"
-        >
-          {{ t("components.headerUserContextMenu.yourWorkspaces") }}
-        </a>
-      </li>
-      <li><hr class="dropdown-divider"></li>
-      <li>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer;"
-        >
-          <i class="fas fa-arrow-up" /> {{ t("components.headerUserContextMenu.upgrade") }}
-        </a>
-      </li>
-      <li>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer;"
-        >
-          <i class="fas fa-question" /> {{ t("components.headerUserContextMenu.help") }}
-        </a>
-      </li>
-      <li>
-        <router-link
-          class="dropdown-item"
-          style="cursor: pointer;"
-          :to="{ name: 'SettingsView' }"
-        >
-          <i class="fas fa-cog" /> {{ t("components.headerUserContextMenu.settings") }}
-        </router-link>
-      </li>
-      <li><hr class="dropdown-divider"></li>
-      <li>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer;"
-          @click.prevent="handleLogout"
-        >
-          <i class="fas fa-sign-out-alt" /> {{ t("components.headerUserContextMenu.signOut") }}
-        </a>
-      </li>
-    </ul>
+      <a
+        v-if="user.isLoggedIn"
+        id="headerUserContextMenuDrowpdownLink"
+        class="nav-link link-light dropdown-toggle d-flex align-items-center"
+        href="#"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <UserImage />
+      </a>
+      <ul
+        v-if="user.isLoggedIn"
+        class="dropdown-menu dropdown-menu-dark"
+        aria-labelledby="headerUserContextMenuDrowpdownLink"
+      >
+        <li>
+          <span class="dropdown-item-text">
+            {{ t("components.headerUserContextMenu.signedInAs") }}<br>
+            <b>{{ user.fullName }}</b>
+          </span>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer;"
+          >
+            {{ t("components.headerUserContextMenu.yourWorkspaces") }}
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer;"
+          >
+            <i class="fas fa-arrow-up" /> {{ t("components.headerUserContextMenu.upgrade") }}
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer;"
+          >
+            <i class="fas fa-question" /> {{ t("components.headerUserContextMenu.help") }}
+          </a>
+        </li>
+        <li>
+          <router-link
+            class="dropdown-item"
+            style="cursor: pointer;"
+            :to="{ name: 'SettingsView' }"
+          >
+            <i class="fas fa-cog" /> {{ t("components.headerUserContextMenu.settings") }}
+          </router-link>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer;"
+            @click.prevent="handleLogout"
+          >
+            <i class="fas fa-sign-out-alt" /> {{ t("components.headerUserContextMenu.signOut") }}
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -122,7 +122,7 @@ export default {
     const handleLogout = function () {
       store.dispatch({
         type: 'logout',
-        target: { path: window.location.pathname }
+        target: { name: 'HomeView' }
       })
     }
 
