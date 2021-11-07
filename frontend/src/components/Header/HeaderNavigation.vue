@@ -3,7 +3,9 @@
     id="navbarNavigation"
     class="collapse navbar-collapse"
   >
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul
+      class="navbar-nav me-auto mb-2 mb-lg-0"
+    >
       <li
         v-for="route in routes"
         :key="route"
@@ -12,6 +14,7 @@
         <router-link
           :to="route.url"
           class="nav-link"
+          @click="closeMenu('navbarNavigation')"
         >
           {{ t(route.name) }}
         </router-link>
@@ -45,7 +48,15 @@ export default {
 
     const isLoggedIn = computed(() => store.getters['user/isLoggedIn'])
 
-    return { t, store, isLoggedIn }
+    const closeMenu = (id) => {
+      const menuShown = document.getElementById(id).classList.contains('show')
+      if (menuShown) {
+        const menuToggle = document.getElementsByClassName('navbar-toggler')[0]
+        menuToggle.click()
+      }
+    }
+
+    return { t, store, isLoggedIn, closeMenu }
   }
 }
 </script>
