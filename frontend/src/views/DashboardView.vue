@@ -20,7 +20,7 @@ export default {
     const store = useStore()
 
     const title = computed(() => {
-      return t('views.dashboard.title', { firstname: store.getters['user/getFirstName'], lastname: store.getters['user/getLastName'] })
+      return t('views.dashboard.title', { firstname: store.getters['user/getFirstname'], lastname: store.getters['user/getLastname'] })
     })
 
     return { title }
