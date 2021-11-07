@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
 export default router
 
 export function pushOrReload (route) {
-  if (route !== '' && route.name !== router.currentRoute.value.name) {
+  if (route !== '' && route.name !== router.currentRoute.value.name && route.path !== router.currentRoute.value.path) {
     router.push(route)
   } else {
     router.go(0)
