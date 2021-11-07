@@ -35,14 +35,14 @@ export default {
     }
   },
 
-  async registerUser (username, password, termsAndConditionsAccepted, firstName = '', lastName = '', referrerEmail = '') {
+  async registerUser (username, password, termsAndConditionsAccepted, firstname = '', lastname = '', referrerEmail = '') {
     // TO-DO Register
     const registerData = {
       email: username,
       password: password,
       terms_and_conditions_accepted: termsAndConditionsAccepted,
-      first_name: firstName,
-      last_name: lastName,
+      first_name: firstname,
+      last_name: lastname,
       referrer_email: referrerEmail
     }
     for (const key in registerData) {
@@ -70,7 +70,7 @@ export default {
     }
   },
 
-  async updateUser (url, email = '', password = '', termsAndConditionsAccepted = '', firstName = '', lastName = '', referrerEmail = '') {
+  async updateUser (url, email = '', password = '', termsAndConditionsAccepted = '', firstname = '', lastname = '', referrerEmail = '') {
     // TO-DO Implement method in front- and backend to update a user easily
     throw TypeError('This method is not implemented, yet.')
   },

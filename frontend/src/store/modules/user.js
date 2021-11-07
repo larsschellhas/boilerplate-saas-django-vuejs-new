@@ -5,8 +5,8 @@ const getDefaultState = () => {
   return {
     url: '',
     email: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     isStaff: false,
     termsAndConditionsAccepted: false,
     accessToken: '',
@@ -23,11 +23,14 @@ const getters = {
   getEmail: state => {
     return state.email
   },
-  getFirstName: state => {
-    return state.firstName
+  getFirstname: state => {
+    return state.firstname
   },
-  getLastName: state => {
-    return state.lastName
+  getLastname: state => {
+    return state.lastname
+  },
+  getFullName: state => {
+    return state.firstname + ' ' + state.lastname
   },
   isStaff: state => {
     return state.isStaff
@@ -47,13 +50,13 @@ const getters = {
 }
 
 const actions = {
-  async register ({ commit }, { username, password, firstName, lastName, termsAndConditionsAccepted, referrerEmail, target }) {
-    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstName, lastName, referrerEmail, target)
+  async register ({ commit }, { username, password, firstname, lastname, termsAndConditionsAccepted, referrerEmail, target }) {
+    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstname, lastname, referrerEmail, target)
     if (result.success) {
       commit('setURL', result.data.url)
       commit('setEmail', result.data.email)
-      commit('setFirstName', result.data.first_name)
-      commit('setLastName', result.data.last_name)
+      commit('setFirstname', result.data.first_name)
+      commit('setLastname', result.data.last_name)
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
       pushOrReload(target)
@@ -81,8 +84,8 @@ const actions = {
     if (result.success) {
       commit('setURL', result.data.url)
       commit('setEmail', result.data.email)
-      commit('setFirstName', result.data.first_name)
-      commit('setLastName', result.data.last_name)
+      commit('setFirstname', result.data.first_name)
+      commit('setLastname', result.data.last_name)
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
       return { success: true }
@@ -139,11 +142,11 @@ const mutations = {
   setEmail (state, status) {
     state.email = status
   },
-  setFirstName (state, status) {
-    state.firstName = status
+  setFirstname (state, status) {
+    state.firstname = status
   },
-  setLastName (state, status) {
-    state.lastName = status
+  setLastname (state, status) {
+    state.lastname = status
   },
   setIsStaff (state, status) {
     state.isStaff = status
