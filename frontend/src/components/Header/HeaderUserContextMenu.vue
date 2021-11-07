@@ -14,6 +14,7 @@
       <UserImage />
     </a>
     <ul
+      v-if="user.isLoggedIn"
       class="dropdown-menu dropdown-menu-dark"
       aria-labelledby="headerUserContextMenuDrowpdownLink"
     >
@@ -50,12 +51,13 @@
         </a>
       </li>
       <li>
-        <a
+        <router-link
           class="dropdown-item"
           style="cursor: pointer;"
+          :to="{ name: 'SettingsView' }"
         >
           <i class="fas fa-cog" /> {{ t("components.headerUserContextMenu.settings") }}
-        </a>
+        </router-link>
       </li>
       <li><hr class="dropdown-divider"></li>
       <li>

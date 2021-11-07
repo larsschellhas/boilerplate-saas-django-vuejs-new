@@ -46,6 +46,9 @@
     },
     "dashboard": {
       "title": "Bonjour {firstname} {lastname} ! Belle journée pour pêcher, n'est-ce pas ?"
+    },
+    "settings": {
+      "title": "Paramètres"
     }
   }
 }

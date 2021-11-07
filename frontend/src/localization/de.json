@@ -46,6 +46,9 @@
     },
     "dashboard": {
       "title": "Moin {firstname} {lastname}! Großartiger Tag zum Fischen, ne?"
+    },
+    "settings": {
+      "title": "Einstellungen"
     }
   }
 }

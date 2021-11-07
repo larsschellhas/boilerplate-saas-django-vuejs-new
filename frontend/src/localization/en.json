@@ -46,6 +46,9 @@
     },
     "dashboard": {
       "title": "Mornin' {firstname} {lastname}! Great day for fishin', ain't it?"
+    },
+    "settings": {
+      "title": "Settings"
     }
   }
 }

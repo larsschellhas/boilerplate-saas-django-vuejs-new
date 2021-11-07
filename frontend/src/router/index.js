@@ -19,6 +19,14 @@ const routes = [
     }
   },
   {
+    path: '/settings/',
+    name: 'SettingsView',
+    component: () => import(/* webpackChunkName: "Settings" */ '../views/SettingsView.vue'),
+    meta: {
+      allowAnonymous: false
+    }
+  },
+  {
     path: '/login/',
     name: 'LoginView',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login/LoginView.vue'),
