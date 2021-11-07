@@ -13,12 +13,22 @@ export default i18n
 export async function setLocale (locale) {
   // Lazy load locale messages asynchronously based on the currently seleted locale
   const messages = await import(/* webpackChunkName: "locale-[request]" */ '@/localization/' + locale + '.json')
-  // set locale and locale message
+  // Set locale message
   i18n.global.setLocaleMessage(locale, messages.default)
   // Set global locale to new value from store
   i18n.global.locale.value = locale
   // Update lang-property of html document with new languade code
   document.documentElement.setAttribute('lang', i18n.global.locale.value)
+  return Promise.resolve()
+}
+
+export async function loadFallbackLocale () {
+  if (i18n.global.fallbackLocale.value !== '') {
+    // Lazy load locale messages asynchronously based on the currently seleted locale
+    const messages = await import(/* webpackChunkName: "locale-[request]" */ '@/localization/' + i18n.global.fallbackLocale.value + '.json')
+    // set locale and locale message
+    i18n.global.setLocaleMessage(i18n.global.fallbackLocale.value, messages.default)
+  }
   return Promise.resolve()
 }
 
