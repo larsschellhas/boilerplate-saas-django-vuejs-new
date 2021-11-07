@@ -9,8 +9,15 @@
   "components": {
     "headerNavigation": {
       "signIn": "Connecter",
-      "signOut": "Déconnecter",
       "signUp": "Enregistrer"
+    },
+    "headerUserContextMenu": {
+      "signedInAs": "Connecté en tant que",
+      "signOut": "Déconnecter",
+      "yourWorkspaces": "Vos espaces de travail",
+      "upgrade": "Mise à niveau",
+      "help": "Aide",
+      "settings": "Paramètres"
     },
     "loginForm": {
       "footerLinkText": "Créer un compte.",

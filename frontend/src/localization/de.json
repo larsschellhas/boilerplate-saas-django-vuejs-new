@@ -9,8 +9,15 @@
   "components": {
     "headerNavigation": {
       "signIn": "Anmelden",
-      "signOut": "Abmelden",
       "signUp": "Registrieren"
+    },
+    "headerUserContextMenu": {
+      "signedInAs": "Angemeldet als",
+      "signOut": "Abmelden",
+      "yourWorkspaces": "Deine Arbeitsbereiche",
+      "upgrade": "Upgrade",
+      "help": "Hilfe",
+      "settings": "Einstellungen"
     },
     "loginForm": {
       "footerLinkText": "Erstelle ein Konto.",

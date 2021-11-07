@@ -9,8 +9,15 @@
   "components": {
     "headerNavigation": {
       "signIn": "Sign in",
-      "signOut": "Sign out",
       "signUp": "Sign up"
+    },
+    "headerUserContextMenu": {
+      "signedInAs": "Signed in as",
+      "signOut": "Sign out",
+      "yourWorkspaces": "Your workspace",
+      "upgrade": "Upgrade",
+      "help": "Help",
+      "settings": "Settings"
     },
     "loginForm": {
       "footerLinkText": "Create an account.",

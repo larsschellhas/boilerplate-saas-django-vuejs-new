@@ -138,7 +138,7 @@ export default {
     const registerData = ref({
       username: '',
       password: '',
-      firstName: '',
+      firstname: '',
       lastname: '',
       termsAndConditionsAccepted: false
     })
@@ -161,8 +161,8 @@ export default {
         type: 'user/register',
         username: registerData.value.username,
         password: registerData.value.password,
-        firstName: registerData.value.firstName,
-        lastName: registerData.value.lastName,
+        firstname: registerData.value.firstname,
+        lastname: registerData.value.lastname,
         termsAndConditionsAccepted: registerData.value.termsAndConditionsAccepted,
         referrerEmail: registerData.value.referrerEmail,
         target: { name: 'LoginView' }

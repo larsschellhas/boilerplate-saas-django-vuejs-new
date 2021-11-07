@@ -1,15 +1,4 @@
 <template>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNavigation"
-    aria-controls="navbarNavigation"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon" />
-  </button>
   <div
     id="navbarNavigation"
     class="collapse navbar-collapse"
@@ -29,20 +18,9 @@
       </li>
     </ul>
     <LocaleSwitch />
+    <!-- <HeaderUserContextMenu v-if="isLoggedIn" /> -->
     <div
-      v-if="isLoggedIn"
-      class="login-links d-flex flex-row justify-content-center align-items-center"
-    >
-      <a
-        class="nav-link link-light"
-        style="cursor: pointer;"
-        @click.prevent="handleLogout"
-      >
-        {{ t("components.headerNavigation.signOut") }}
-      </a>
-    </div>
-    <div
-      v-else
+      v-if="!isLoggedIn"
       class="login-links d-flex flex-row justify-content-center align-items-center"
     >
       <router-link
@@ -87,13 +65,16 @@ export default {
 
     const isLoggedIn = computed(() => store.getters['user/isLoggedIn'])
 
-    const handleLogout = function () {
-      store.dispatch({
-        type: 'logout',
-        target: { path: window.location.pathname }
-      })
-    }
-    return { t, store, isLoggedIn, handleLogout }
+    return { t, store, isLoggedIn }
   }
 }
 </script>
+
+<style>
+#navbarNavigation .nav-link {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
