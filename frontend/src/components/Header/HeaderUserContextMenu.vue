@@ -1,4 +1,27 @@
 <template>
+  <div>
+    <div
+      v-if="!user.isLoggedIn"
+      class="login-links d-flex flex-row justify-content-center align-items-center"
+    >
+      <router-link
+        :to="{ name: 'LoginView' }"
+        class="nav-link link-light"
+      >
+        {{ t("components.headerNavigation.signIn") }}
+      </router-link>
+      <router-link
+        :to="{ name: 'RegisterView' }"
+        class="d-none d-lg-block"
+      >
+        <button
+          type="button"
+          class="btn btn-outline-light"
+        >
+          {{ t("components.headerNavigation.signUp") }}
+        </button>
+      </router-link>
+    </div>
   <div
     class="nav-item dropdown dropdown-align-right"
   >
@@ -70,6 +93,7 @@
         </a>
       </li>
     </ul>
+    </div>
   </div>
 </template>
 
@@ -93,8 +117,7 @@ export default {
         fullName: store.getters['user/getFullName'],
         isLoggedIn: store.getters['user/isLoggedIn']
       }
-    }
-    )
+    })
 
     const handleLogout = function () {
       store.dispatch({

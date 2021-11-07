@@ -18,26 +18,6 @@
       </li>
     </ul>
     <LocaleSwitch />
-    <!-- <HeaderUserContextMenu v-if="isLoggedIn" /> -->
-    <div
-      v-if="!isLoggedIn"
-      class="login-links d-flex flex-row justify-content-center align-items-center"
-    >
-      <router-link
-        :to="{ name: 'LoginView' }"
-        class="nav-link link-light"
-      >
-        {{ t("components.headerNavigation.signIn") }}
-      </router-link>
-      <router-link :to="{ name: 'RegisterView' }">
-        <button
-          type="button"
-          class="btn btn-outline-light"
-        >
-          {{ t("components.headerNavigation.signUp") }}
-        </button>
-      </router-link>
-    </div>
   </div>
 </template>
 

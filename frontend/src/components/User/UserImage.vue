@@ -9,7 +9,7 @@
   <i
     v-else
     class="fas fa-user-circle"
-    style="font-size: 32px;"
+    style="font-size: 32px; width: 32px;"
   />
 </template>
 
