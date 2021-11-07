@@ -1,5 +1,8 @@
 <template>
-  <div class="d-flex align-items-center flex-column mt-4">
+  <div
+    id="reset-password-view"
+    class="d-flex align-items-center flex-column mt-4"
+  >
     <img
       src="@/assets/logo.png"
       height="60"

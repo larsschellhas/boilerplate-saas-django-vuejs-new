@@ -1,5 +1,8 @@
 <template>
-  <div class="home dashboard d-flex justify-content-center m-4">
+  <div
+    id="home-view"
+    class="d-flex justify-content-center m-4"
+  >
     <h2>{{ t("views.home.title") }}</h2>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <div
-    class="dashboard d-flex justify-content-center m-4"
+    id="dashboard-view"
+    class="d-flex justify-content-center m-4"
   >
     <h2>{{ title }}</h2>
   </div>
