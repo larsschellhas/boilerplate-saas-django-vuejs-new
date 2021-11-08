@@ -57,6 +57,15 @@ export default {
     }
 
     return { t, store, isLoggedIn, closeMenu }
+  },
+  watch: {
+    $route (to, from) {
+      const menuShown = document.getElementById('navbarNavigation').classList.contains('show')
+      if (menuShown) {
+        const menuToggle = document.getElementsByClassName('navbar-toggler')[0]
+        menuToggle.click()
+      }
+    }
   }
 }
 </script>
