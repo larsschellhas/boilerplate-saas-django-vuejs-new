@@ -44,12 +44,12 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"batisteo.vscode-django",
-			"eamodio.gitlens",
-			"github.vscode-pull-request-github",
-			"mhutchie.git-graph",
 			"ms-python.python",
-			"mubaidr.vuejs-extension-pack"
+			"batisteo.vscode-django",
+			"mubaidr.vuejs-extension-pack",
+			"github.vscode-pull-request-github",
+			"eamodio.gitlens",
+			"mhutchie.git-graph",
 		]
 	},
 	"launch": {
