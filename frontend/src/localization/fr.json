@@ -7,6 +7,9 @@
     }
   },
   "components": {
+    "header": {
+      
+    },
     "headerNavigation": {
       "signIn": "Connecter",
       "signUp": "Enregistrer"
@@ -48,7 +51,16 @@
       "title": "Bonjour {firstname} {lastname} ! Belle journée pour pêcher, n'est-ce pas ?"
     },
     "settings": {
-      "title": "Paramètres"
+      "title": "Paramètres",
+      "search": "Recherche d'un paramètre...",
+      "categories": {
+        "profile": "Profil",
+        "notifications": "Notifications",
+        "appearance": "Apparition",
+        "privacy-security": "Confidentialité et sécurité",
+        "help-support": "Aide & support",
+        "about": "À propos de l'application"
+      }
     }
   }
 }

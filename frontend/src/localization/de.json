@@ -48,7 +48,16 @@
       "title": "Moin {firstname} {lastname}! Großartiger Tag zum Fischen, ne?"
     },
     "settings": {
-      "title": "Einstellungen"
+      "title": "Einstellungen",
+      "search": "Einstellung suchen...",
+      "categories": {
+        "profile": "Profil",
+        "notifications": "Benachrichtigungen",
+        "appearance": "Darstellung",
+        "privacy-security": "Datenschutz & Sicherheit",
+        "help-support": "Hilfe & Support",
+        "about": "Über die Anwendung"
+      }
     }
   }
 }

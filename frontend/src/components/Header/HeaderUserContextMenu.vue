@@ -66,18 +66,19 @@
           </a>
         </li>
         <li>
-          <a
+          <router-link
             class="dropdown-item"
             style="cursor: pointer;"
+            :to="{ name: 'SettingsView', params: { category: 'help-support' } }"
           >
             <i class="fas fa-question" /> {{ t("components.headerUserContextMenu.help") }}
-          </a>
+          </router-link>
         </li>
         <li>
           <router-link
             class="dropdown-item"
             style="cursor: pointer;"
-            :to="{ name: 'SettingsView' }"
+            :to="{ name: 'SettingsView', params: { category: 'profile' } }"
           >
             <i class="fas fa-cog" /> {{ t("components.headerUserContextMenu.settings") }}
           </router-link>

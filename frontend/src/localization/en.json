@@ -48,7 +48,16 @@
       "title": "Mornin' {firstname} {lastname}! Great day for fishin', ain't it?"
     },
     "settings": {
-      "title": "Settings"
+      "title": "Settings",
+      "search": "Search for a setting...",
+      "categories": {
+        "profile": "Profile",
+        "notifications": "Notifications",
+        "appearance": "Appearance",
+        "privacy-security": "Privacy & Security",
+        "help-support": "Help & Support",
+        "about": "About the app"
+      }
     }
   }
 }
