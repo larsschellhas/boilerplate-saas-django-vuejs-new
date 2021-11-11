@@ -26,7 +26,7 @@ This repository contains a boilerplate setup for a software-as-a-service app, us
 You need to have the following prerequisites installed:
 - Python 3.10
 - Poetry [(Installation Guide)](https://python-poetry.org/docs/master/#installation)
-- Node.js
+- Node.js 16[(Installation Guide)](https://nodejs.dev/learn/how-to-install-nodejs)
 - Yarn [(Installation Guide)](https://yarnpkg.com/getting-started/install#about-global-installs)
 - Visual Studio Code [(Download)](https://code.visualstudio.com/Download)
 - Workspace Recommended Visual Studio Code Extensions
