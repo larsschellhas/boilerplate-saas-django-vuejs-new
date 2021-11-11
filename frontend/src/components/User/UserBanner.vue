@@ -55,8 +55,9 @@ export default {
     .user-name {
       font-weight: bold;
     }
+
     .user-email {
-      font-size: 0.8em
+      font-size: 0.8em;
     }
   }
 }

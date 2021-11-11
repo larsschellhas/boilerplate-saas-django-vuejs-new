@@ -41,7 +41,8 @@ export default {
 <style lang="scss">
 .locale-changer {
   display: grid;
-  select{
+
+  select {
     background-color: transparent;
     border: none;
     color: #fff;
@@ -51,7 +52,7 @@ export default {
     line-height: inherit;
     outline: none;
 
-    option{
+    option {
       text-align: right;
     }
   }

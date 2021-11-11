@@ -7,12 +7,12 @@
       <div class="row">
         <div class="col flex-grow-0">
           <router-link
-            class="rounded userBannerLink"
+            class="rounded user-banner-link"
             :to="{ name: 'SettingsView', params: { category: 'profile' }}"
           >
             <UserBanner />
           </router-link>
-          <div class="search-settings inner-addon right-addon mb-2">
+          <div class="search-bar inner-addon right-addon mb-2">
             <i class="fas fa-search" />
             <input
               id="searchfield"
@@ -29,7 +29,7 @@
           >
             {{ searchResults }}
           </div> -->
-          <ul class="settings-nav nav nav-fill sidebar-nav flex-column">
+          <ul class="search-results nav nav-fill sidebar-nav flex-column">
             <li
               v-for="setting in searchResults"
               :key="setting"
@@ -140,30 +140,47 @@ export default {
 
 <style lang="scss">
   #settings-view {
+    .user-banner-link {
+      text-decoration: none;
+      color: var(--bs-body-color);
+      display: block;
 
-    .search-settings {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .search-bar {
       &.inner-addon {
         position: relative;
 
-        .fas, .far, .svg-inline--fa {
+        .fas,
+        .far,
+        svg {
           position: absolute;
           margin: 8px;
           pointer-events: none;
         }
 
         &.left-addon {
-          .fas, .far, .svg-inline--fa {
-            left: 0px;
+          .fas,
+          .far,
+          svg {
+            left: 0;
           }
+
           input {
             padding-left: 30px;
           }
         }
 
         &.right-addon {
-          .fas, .far, .svg-inline--fa {
-            right: 0px;
+          .fas,
+          .far,
+          svg {
+            right: 0;
           }
+
           input {
             padding-right: 30px;
           }
@@ -171,39 +188,34 @@ export default {
       }
     }
 
-    .userBannerLink{
-      text-decoration: none;
-      color: var(--bs-body-color);
-      display: block;
-      &:hover {
-        background-color: rgba(0,0,0,0.1);
-      }
-    }
-
-    li.nav-item {
+    .search-results li.nav-item {
       padding: 2px 0;
 
       .nav-link {
         padding: 0.25em 0.5em;
         text-align: start;
+
         &:hover {
-          background-color: rgba(0,0,0,0.1);
+          background-color: rgba(0, 0, 0, 0.1);
         }
+
         &.router-link-exact-active {
-          background-color: rgba(0,0,0,0.1);
-          &:before{
-            content: '';
+          background-color: rgba(0, 0, 0, 0.1);
+
+          &::before {
+            content: "";
             display: block;
             position: absolute;
-            transform: translatex(-0.5em);
+            transform: translateX(-0.5em);
             height: 1.2em;
             width: 3px;
             border-radius: 2px;
-            background-color: var(--bs-primary)
+            background-color: var(--bs-primary);
           }
         }
 
-        i, svg {
+        i,
+        svg {
           width: 20px;
           margin-right: 8px;
         }

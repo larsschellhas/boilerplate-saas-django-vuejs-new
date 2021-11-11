@@ -1,6 +1,6 @@
 <template>
   <div
-    id="navbarNavigation"
+    id="navbar-navigation"
     class="collapse navbar-collapse"
   >
     <ul
@@ -14,7 +14,7 @@
         <router-link
           :to="route.url"
           class="nav-link"
-          @click="closeMenu('navbarNavigation')"
+          @click="closeMenu('navbar-navigation')"
         >
           {{ t(route.name) }}
         </router-link>
@@ -60,7 +60,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      const menuShown = document.getElementById('navbarNavigation').classList.contains('show')
+      const menuShown = document.getElementById('navbar-navigation').classList.contains('show')
       if (menuShown) {
         const menuToggle = document.getElementsByClassName('navbar-toggler')[0]
         menuToggle.click()
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style>
-#navbarNavigation .nav-link {
+#navbar-navigation .nav-link {
   height: 48px;
   display: flex;
   align-items: center;
