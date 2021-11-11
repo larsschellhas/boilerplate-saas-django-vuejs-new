@@ -2,10 +2,10 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/js/all'
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import i18n, { loadFallbackLocale, setLocale } from './i18n'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
+import i18n, { loadFallbackLocale, setLocale } from '@/i18n'
 
 Promise.all([
   setLocale(store.getters['localization/getLocale']),
