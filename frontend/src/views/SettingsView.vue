@@ -12,42 +12,7 @@
           >
             <UserBanner />
           </router-link>
-          <div class="search-bar inner-addon right-addon mb-2">
-            <i class="fas fa-search" />
-            <input
-              id="searchfield"
-              v-model="searchQuery"
-              type="text"
-              class="form-control form-control-sm"
-              aria-describedby="emailHelp"
-              :placeholder="t('views.settings.search')"
-            >
-          </div>
-          <!-- <div
-            v-if="searchResults"
-            class="search-settings-results"
-          >
-            {{ searchResults }}
-          </div> -->
-          <ul class="search-results nav nav-fill sidebar-nav flex-column">
-            <li
-              v-for="setting in searchResults"
-              :key="setting"
-              class="nav-item d-flex align-items-center"
-            >
-              <router-link
-                class="nav-link rounded text-body text-opacity-75 d-flex align-items-center"
-                :to="setting.route"
-              >
-                <i
-                  :class="setting.icon"
-                />
-                <span class="">
-                  {{ setting.name }}
-                </span>
-              </router-link>
-            </li>
-          </ul>
+          <SearchableSidenavigation :items="settings" />
         </div>
         <div class="col card shadow rounded d-flex justify-content-center align-items-center">
           <component :is="currentSettingsComponent" />
@@ -60,11 +25,13 @@
 <script>
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SearchableSidenavigation from '@/components/Utilities/SearchableSidenavigation'
 import UserBanner from '@/components/User/UserBanner'
 
 export default {
   name: 'SettingsView',
   components: {
+    SearchableSidenavigation,
     UserBanner
   },
   props: {
@@ -122,18 +89,11 @@ export default {
       if (currentSettings.component) {
         return require('@/components/Settings/' + currentSettings.component + '.vue').default
       } else {
-        return require('@/components/PageNotFound.vue').default
+        return require('@/components/Utilities/PageNotFound.vue').default
       }
     })
 
-    const searchQuery = ref('')
-    const searchResults = computed(() => {
-      return settings.value.filter((setting) => {
-        return setting.name.includes(searchQuery.value)
-      })
-    })
-
-    return { t, settings, currentSettingsComponent, searchQuery, searchResults }
+    return { t, settings, currentSettingsComponent }
   }
 }
 </script>
@@ -147,78 +107,6 @@ export default {
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    .search-bar {
-      &.inner-addon {
-        position: relative;
-
-        .fas,
-        .far,
-        svg {
-          position: absolute;
-          margin: 8px;
-          pointer-events: none;
-        }
-
-        &.left-addon {
-          .fas,
-          .far,
-          svg {
-            left: 0;
-          }
-
-          input {
-            padding-left: 30px;
-          }
-        }
-
-        &.right-addon {
-          .fas,
-          .far,
-          svg {
-            right: 0;
-          }
-
-          input {
-            padding-right: 30px;
-          }
-        }
-      }
-    }
-
-    .search-results li.nav-item {
-      padding: 2px 0;
-
-      .nav-link {
-        padding: 0.25em 0.5em;
-        text-align: start;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        &.router-link-exact-active {
-          background-color: rgba(0, 0, 0, 0.1);
-
-          &::before {
-            content: "";
-            display: block;
-            position: absolute;
-            transform: translateX(-0.5em);
-            height: 1.2em;
-            width: 3px;
-            border-radius: 2px;
-            background-color: var(--bs-primary);
-          }
-        }
-
-        i,
-        svg {
-          width: 20px;
-          margin-right: 8px;
-        }
       }
     }
   }
