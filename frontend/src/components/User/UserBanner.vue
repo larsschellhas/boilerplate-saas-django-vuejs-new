@@ -2,7 +2,7 @@
   <div class="user-banner d-flex p-2 my-2">
     <UserImage
       :size="imageSize"
-      class="me-2 text-primary text-opacity-50"
+      class="me-2 text-primary"
     />
     <div class="user-details d-flex flex-column justify-center">
       <div class="user-name">
