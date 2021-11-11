@@ -5,8 +5,8 @@
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarNavigation"
-        aria-controls="navbarNavigation"
+        data-bs-target="#navbar-navigation"
+        aria-controls="navbar-navigation"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
