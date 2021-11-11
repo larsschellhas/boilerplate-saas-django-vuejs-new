@@ -92,12 +92,12 @@
         </div>
         <button
           type="submit"
-          class="btn btn-success w-100"
+          class="btn btn-success w-100 text-light fw-bold"
           @click.prevent="handleRegistration"
         >
           <div
             v-if="loading"
-            class="spinner-border spinner-border-sm text-light"
+            class="spinner-border spinner-border-sm"
             role="status"
           >
             <span class="visually-hidden">{{ t("forms.loading") }}</span>
