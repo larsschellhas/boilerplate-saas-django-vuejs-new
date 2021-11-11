@@ -16,6 +16,7 @@
      }
    ],
    "color-function-notation": "legacy",
+   "alpha-value-notation": "number",
    "indentation": 2
  }
 }
