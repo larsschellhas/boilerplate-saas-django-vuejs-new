@@ -28,7 +28,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
-import LocaleSwitch from '../LocaleSwitch.vue'
+import LocaleSwitch from '../Utilities/LocaleSwitch.vue'
 
 export default {
   components: {
