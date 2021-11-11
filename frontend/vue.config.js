@@ -1,6 +1,13 @@
+const StyleLintPlugin = require('stylelint-webpack-plugin')
+
 module.exports = {
   configureWebpack: {
-    devtool: 'source-map'
+    devtool: 'source-map',
+    plugins: [
+      new StyleLintPlugin({
+        files: ['src/**/*.{vue,scss}']
+      })
+    ]
   },
   pluginOptions: {
     i18n: {

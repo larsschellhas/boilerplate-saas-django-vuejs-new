@@ -27,26 +27,35 @@
 				"mode": "auto"
 			}
 		],
-		"less.validate": false,
 		"prettier.configPath": ".prettierrc",
 		"prettier.vueIndentScriptAndStyle": true,
 		"python.analysis.extraPaths": [
 			"./backend"
 		],
+		"less.validate": false,
 		"scss.validate": false,
+		"stylelint.enable": true,
+		"stylelint.packageManager": "yarn",
+		"stylelint.validate": [
+			"css",
+			"scss",
+			"vue"
+		],
 		"vetur.format.defaultFormatter.js": "prettier-eslint",
     "vetur.validation.template": false,
 		"editor.tabSize": 2,
 		"[html]": {
 			"editor.defaultFormatter": "vscode.html-language-features"
 		},
-		"editor.linkedEditing": true
+		"editor.linkedEditing": true,
+		"stylelint.configFile": "${workspaceFolder}/frontend/.stylelintrc"
 	},
 	"extensions": {
 		"recommendations": [
 			"ms-python.python",
 			"batisteo.vscode-django",
 			"mubaidr.vuejs-extension-pack",
+			"stylelint.vscode-stylelint",
 			"github.vscode-pull-request-github",
 			"eamodio.gitlens",
 			"mhutchie.git-graph",
