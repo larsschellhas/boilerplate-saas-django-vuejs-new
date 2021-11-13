@@ -7,6 +7,10 @@
     }
   },
   "components": {
+    "aboutSettings": {
+      "title": "Über die Anwendung",
+      "appVersion": "App-Version"
+    },
     "headerNavigation": {
       "signIn": "Anmelden",
       "signUp": "Registrieren"
@@ -25,6 +29,21 @@
       "incorrectUsernameOrPassword": "Dein Benutzername oder Passwort ist falsch!",
       "passwordForgotten": "Passwort vergessen?",
       "title": "Melde dich bei {pagetitle} an"
+    },
+    "profileSettings": {
+      "title": "Profil",
+      "profilePicture": {
+        "title": "Profilbild"
+      },
+      "name": {
+        "title": "Name"
+      },
+      "email": {
+        "title": "E-Mail"
+      },
+      "password": {
+        "title": "Passwort"
+      }
     },
     "registerForm": {
       "acceptTermsAndConditions": "Ich akzeptiere die AGB und die Datenschutzerklärung",
@@ -57,6 +76,11 @@
         "privacy-security": "Datenschutz & Sicherheit",
         "help-support": "Hilfe & Support",
         "about": "Über die Anwendung"
+      },
+      "subsettings": {
+        "changePicture": "Profilbild ändern",
+        "changeName": "Namen ändern",
+        "changeEmail": "E-Mail-Adresse ändern"
       }
     }
   }

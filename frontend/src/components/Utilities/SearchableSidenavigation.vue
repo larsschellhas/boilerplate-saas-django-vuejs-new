@@ -11,7 +11,10 @@
         :placeholder="t('views.settings.search')"
       >
     </div>
-    <ul class="search-results nav nav-fill sidebar-nav flex-column">
+    <ul
+      class="nav nav-fill sidebar-nav flex-column"
+      :class="{ 'search-results': searchQuery}"
+    >
       <li
         v-for="item in searchResults"
         :key="item"
@@ -19,13 +22,14 @@
       >
         <router-link
           class="nav-link rounded text-body text-opacity-75 d-flex align-items-center"
+          :class="{ 'search-result': searchQuery}"
           :to="item.route"
         >
           <i
             :class="item.icon"
           />
           <span class="">
-            {{ item.name }}
+            {{ t(item.name) }}
           </span>
         </router-link>
       </li>
@@ -42,10 +46,8 @@ export default {
     items: {
       type: Array,
       default: () => {
-        // Enable access to localizations
-        const { t } = useI18n()
         return [{
-          name: t('views.settings.categories.profile'),
+          name: 'views.settings.categories.profile',
           route: { name: 'SettingsView', params: { category: 'profile' } },
           component: 'ProfileSettings',
           icon: 'fas fa-user'
@@ -58,10 +60,26 @@ export default {
     const { t } = useI18n()
 
     const searchQuery = ref('')
+    const lowerCaseSearchQUery = computed(() => searchQuery.value.toLowerCase())
     const searchResults = computed(() => {
-      return props.items.filter((setting) => {
-        return setting.name.includes(searchQuery.value)
-      })
+      if (lowerCaseSearchQUery.value !== '') {
+        const results = []
+        for (const setting of props.items) {
+          if (setting.subsettings) {
+            const subsettingsResults = setting.subsettings.filter((subsetting) => t(subsetting.name).toLowerCase().includes(lowerCaseSearchQUery.value))
+            if (subsettingsResults.length) {
+              results.push(setting)
+              subsettingsResults.forEach(subsetting => results.push(subsetting))
+            }
+          } else {
+            if (t(setting.name).toLowerCase().includes(lowerCaseSearchQUery.value)) {
+              results.push(setting)
+            }
+          }
+        }
+        return results
+      }
+      return props.items
     })
 
     return { t, searchQuery, searchResults }
@@ -109,7 +127,7 @@ export default {
       }
     }
 
-    .search-results li.nav-item {
+    .sidebar-nav li.nav-item {
       padding: 2px 0;
 
       .nav-link {
@@ -120,7 +138,7 @@ export default {
           background-color: rgba(0, 0, 0, 0.1);
         }
 
-        &.router-link-exact-active {
+        &:not(.search-result).router-link-exact-active {
           background-color: rgba(0, 0, 0, 0.1);
 
           &::before {

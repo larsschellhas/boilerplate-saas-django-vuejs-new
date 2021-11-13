@@ -7,8 +7,9 @@
     }
   },
   "components": {
-    "header": {
-      
+    "aboutSettings": {
+      "title": "À propos de l'application",
+      "appVersion": "Version de l'application"
     },
     "headerNavigation": {
       "signIn": "Connecter",
@@ -28,6 +29,21 @@
       "incorrectUsernameOrPassword": "Nom d'utilisateur ou mot de passe incorrect !",
       "passwordForgotten": "Vous avez oublié votre mot de passe ?",
       "title": "Connectez-vous à {pagetitle}"
+    },
+    "profileSettings": {
+      "title": "Profil",
+      "profilePicture": {
+        "title": "Photo de profil"
+      },
+      "name": {
+        "title": "Nom"
+      },
+      "email": {
+        "title": "E-mail"
+      },
+      "password": {
+        "title": "Mot de passe"
+      }
     },
     "registerForm": {
       "acceptTermsAndConditions": "J'accepte les termes et conditions",
@@ -60,6 +76,11 @@
         "privacy-security": "Confidentialité et sécurité",
         "help-support": "Aide & support",
         "about": "À propos de l'application"
+      },
+      "subsettings": {
+        "changePicture": "Modifier la photo de profil",
+        "changeName": "Changer de nom",
+        "changeEmail": "Changer d'addresse e-mail"
       }
     }
   }
