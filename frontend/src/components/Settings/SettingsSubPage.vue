@@ -1,6 +1,6 @@
 <template>
   <div class="subpage w-100">
-    <div class="subpage-header p-4 d-flex justify-content-between border-bottom">
+    <div class="subpage-header p-4 d-flex justify-content-between align-items-center border-bottom">
       <h3 class="subpage-title">
         {{ t(title) }}
       </h3>
