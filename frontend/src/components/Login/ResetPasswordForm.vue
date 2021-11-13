@@ -51,7 +51,7 @@
         </div>
         <button
           type="submit"
-          class="btn btn-success w-100"
+          class="btn btn-success w-100 text-light fw-bold"
           @click.prevent="handlePasswordResetInitiate"
         >
           <div
@@ -102,7 +102,7 @@
           </div>
           <button
             type="submit"
-            class="btn btn-success w-100"
+            class="btn btn-success w-100 text-light fw-bold"
             @click.prevent="handlePasswordResetConfirm"
           >
             <div
