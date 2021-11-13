@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark d-flex align-items-center">
+  <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark d-flex align-items-center">
     <div class="container-fluid">
       <button
         class="navbar-toggler"
@@ -16,7 +16,6 @@
         id="pagetitle"
         to="/"
         class="navbar-brand mb-0 h1 d-flex flex-row align-items-center"
-        :class="{ compact: pagetitleCompact }"
         :style="pagetitleStyle"
       >
         <img
@@ -26,9 +25,9 @@
         >
         <span>{{ title }}</span>
       </router-link>
-      <HeaderUserContextMenu class="d-lg-none" />
+      <HeaderUserContextMenu class="d-md-none" />
       <HeaderNavigation :routes="routes" />
-      <HeaderUserContextMenu class="d-none d-lg-block" />
+      <HeaderUserContextMenu class="d-none d-md-block" />
     </div>
   </nav>
 </template>
@@ -53,21 +52,14 @@ export default {
   },
   setup (props) {
     const pagetitleStyle = ref('')
-    const pagetitleCompact = ref(false)
 
     const centerPagetitle = function () {
       const logo = document.getElementById('pagetitle')
-      if (window.innerWidth < 992) {
-        if (window.innerWidth < 576) {
-          pagetitleCompact.value = true
-        } else {
-          pagetitleCompact.value = false
-        }
+      if (window.innerWidth < 768) {
         const translation = (window.innerWidth - logo.clientWidth) / 2 - logo.offsetLeft
         pagetitleStyle.value = `transform: translatex(${translation}px)`
       } else {
         pagetitleStyle.value = ''
-        pagetitleCompact.value = false
       }
     }
 
@@ -76,13 +68,19 @@ export default {
       centerPagetitle()
     })
 
-    return { pagetitleCompact, pagetitleStyle, centerPagetitle }
+    return { pagetitleStyle, centerPagetitle }
   }
 }
 </script>
 
-<style>
-#pagetitle.compact span {
+<style lang="scss">
+@import "@/styles/global";
+
+#pagetitle span {
   display: none;
+
+  @include media-breakpoint-up(sm) {
+    display: block;
+  }
 }
 </style>
