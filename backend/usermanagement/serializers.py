@@ -48,23 +48,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         else:
             raise serializers.ValidationError("Terms and conditions must be accepted to create an account.")
 
-    def validate_referrer_email(self, value):
-        """
-        Checks if a value has been provided as referrer_email and searches for an existing
-        user based on the provided email address and returns it.
-        """
-
-        if value != "":
-            try:
-                value = get_user_model().objects.get(
-                    email=value
-                )
-                return value
-            except Exception as error:
-                raise serializers.ValidationError({"referrer_email": error.message })
-        else:
-            return None
-
     def validate(self, attrs):
         """
         Method to check the entered data for user creation.
@@ -74,25 +57,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         """
 
         # Default Values
-        if "first_name" not in attrs:
-            attrs["first_name"] = ""
-        if "last_name" not in attrs:
-            attrs["last_name"] = ""
-        if "referrer_email" not in attrs:
-            attrs["referrer_email"] = None
+        if "referrer_email" in attrs:
+            try:
+                attrs["referrer"] = get_user_model().objects.get(email=attrs["referrer_email"])
+            except Exception as error:
+                raise serializers.ValidationError(
+                    {"referrer_email": error.message})
 
         return attrs
 
     def create(self, validated_data):
         """ Method to create a valid user. """
-        user = get_user_model().objects.create_user(
-            email=validated_data["email"],
-            password=validated_data["password"],
-            first_name=validated_data["first_name"],
-            last_name=validated_data["last_name"],
-            referrer=validated_data["referrer_email"],
-            terms_and_conditions_accepted=validated_data["terms_and_conditions_accepted"]
-        )
+        user = get_user_model().objects.create_user(**validated_data)
 
         return user
 
