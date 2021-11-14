@@ -63,6 +63,11 @@ export default {
             name: 'views.settings.subsettings.changeEmail',
             route: { name: 'SettingsView', hash: '#profile-email', params: { category: 'profile' } },
             icon: 'fas fa-chevron-right'
+          },
+          {
+            name: 'views.settings.subsettings.changePassword',
+            route: { name: 'SettingsView', hash: '#profile-password', params: { category: 'profile' } },
+            icon: 'fas fa-chevron-right'
           }
         ]
       },

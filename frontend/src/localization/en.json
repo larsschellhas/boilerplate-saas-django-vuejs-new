@@ -33,7 +33,8 @@
     "profileSettings": {
       "title": "Profile",
       "profilePicture": {
-        "title": "Profile picture"
+        "title": "Profile picture",
+        "new-profile-picture": "Change profile picture"
       },
       "name": {
         "title": "Name"
@@ -57,7 +58,10 @@
     "email": "Email address",
     "loading": "Loading...",
     "password": "Password",
-    "submit": "Submit"
+    "submit": "Submit",
+    "save": "Save",
+    "firstname": "Firstname",
+    "lastname": "Lastname"
   },
   "views": {
     "home": {
@@ -80,7 +84,8 @@
       "subsettings": {
         "changePicture": "Change profile picture",
         "changeName": "Change name",
-        "changeEmail": "Change email"
+        "changeEmail": "Change email",
+        "changePassword": "Change password"
       }
     }
   }
