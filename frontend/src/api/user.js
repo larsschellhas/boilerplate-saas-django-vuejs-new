@@ -1,5 +1,14 @@
 import { api } from './axiosConfig'
 
+function removeEmptyKeys (dict) {
+  for (const key in dict) {
+    if (dict[key] === '') {
+      delete dict[key]
+    }
+  }
+  return dict
+}
+
 export default {
   async getTokens (username, password) {
     try {
@@ -45,15 +54,13 @@ export default {
       last_name: lastname,
       referrer_email: referrerEmail
     }
-    for (const key in registerData) {
-      if (registerData[key] === '') {
-        delete registerData[key]
-      }
-    }
+    removeEmptyKeys(registerData)
     try {
       const response = await api.post('users/', registerData)
       const data = {}
       data.username = response.data.email
+      data.firstname = response.data.first_name
+      data.lastname = response.data.last_name
       data.termsAndConditionsAccepted = response.data.terms_and_conditions_accepted
 
       return { success: true, data: data }
@@ -70,9 +77,31 @@ export default {
     }
   },
 
-  async updateUser (url, email = '', password = '', termsAndConditionsAccepted = '', firstname = '', lastname = '', referrerEmail = '') {
-    // TO-DO Implement method in front- and backend to update a user easily
-    throw TypeError('This method is not implemented, yet.')
+  async updateUser (url, username = '', password = '', firstname = '', lastname = '') {
+    const updateData = {
+      email: username,
+      password: password,
+      first_name: firstname,
+      last_name: lastname
+    }
+    removeEmptyKeys(updateData)
+    try {
+      const response = await api.patch(url, updateData)
+      return { success: true, data: response.data }
+    } catch (error) {
+      if (error.response.data) {
+        const errors = {}
+        errors.username = error.response.data.email
+        errors.password = error.response.data.password
+        errors.firstname = error.response.data.first_name
+        errors.lastname = error.response.data.last_name
+        errors.referrer = error.response.data.referrer_email
+        errors.termsAndConditionsAccepted = error.response.data.terms_and_conditions_accepted
+        return { success: false, errors: errors }
+      } else {
+        return { success: false, errors: error }
+      }
+    }
   },
 
   async getCurrentUser () {
