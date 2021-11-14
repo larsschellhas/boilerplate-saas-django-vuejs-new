@@ -35,7 +35,7 @@
               v-for="(error, index) in errors.username"
               :key="index"
             >
-              {{ error }} </span>
+              {{ error }}&nbsp;</span>
           </div>
         </div>
         <div class="mb-3">
@@ -61,7 +61,7 @@
               v-for="(error, index) in errors.password"
               :key="index"
             >
-              {{ error }} </span>
+              {{ error }}&nbsp;</span>
           </div>
         </div>
         <div class="mb-3 form-check">
@@ -87,7 +87,7 @@
               v-for="(error, index) in errors.termsAndConditionsAccepted"
               :key="index"
             >
-              {{ error }} </span>
+              {{ error }}&nbsp;</span>
           </div>
         </div>
         <button
