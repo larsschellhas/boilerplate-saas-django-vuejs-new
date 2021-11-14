@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { storeApiPlugin } from '@/api/axiosConfig'
 import createPersistedState from 'vuex-persistedstate'
 import user from './modules/user'
 import localization from './modules/localization'
@@ -18,7 +17,6 @@ export default createStore({
     localization
   },
   plugins: [
-    storeApiPlugin,
     storeLocalizationPlugin,
     createPersistedState()
   ]

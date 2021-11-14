@@ -8,6 +8,15 @@ export const api = axios.create({
   }
 })
 
+api.interceptors.request.use(
+  (config) => {
+    if (store.getters['user/getAccessToken']) {
+      config.headers.common.Authorization = 'Bearer ' + store.getters['user/getAccessToken']
+    }
+    return config
+  }
+)
+
 api.interceptors.response.use(
   (res) => {
     return res
@@ -33,15 +42,3 @@ api.interceptors.response.use(
     return Promise.reject(err)
   }
 )
-
-export function storeApiPlugin (store) {
-  store.subscribe((mutation) => {
-    if (mutation.type === 'user/setAccessToken') {
-      if (mutation.payload) {
-        api.defaults.headers.common.Authorization = 'Bearer ' + mutation.payload
-      } else {
-        delete api.defaults.headers.common.Authorization
-      }
-    }
-  })
-}
