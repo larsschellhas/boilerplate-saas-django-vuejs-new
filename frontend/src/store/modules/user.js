@@ -51,7 +51,7 @@ const getters = {
 
 const actions = {
   async register ({ commit }, { username, password, firstname, lastname, termsAndConditionsAccepted, referrerEmail, target }) {
-    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstname, lastname, referrerEmail, target)
+    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstname, lastname, referrerEmail)
     if (result.success) {
       commit('setURL', result.data.url)
       commit('setEmail', result.data.email)
@@ -60,6 +60,18 @@ const actions = {
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
       pushOrReload(target)
+      return { success: true }
+    } else {
+      return result
+    }
+  },
+
+  async update ({ commit, getters }, { username, password, firstname, lastname }) {
+    const result = await user.updateUser(getters.getUserURL, username, password, firstname, lastname)
+    if (result.success) {
+      commit('setEmail', result.data.email)
+      commit('setFirstname', result.data.first_name)
+      commit('setLastname', result.data.last_name)
       return { success: true }
     } else {
       return result
