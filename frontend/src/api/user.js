@@ -95,8 +95,6 @@ export default {
         errors.password = error.response.data.password
         errors.firstname = error.response.data.first_name
         errors.lastname = error.response.data.last_name
-        errors.referrer = error.response.data.referrer_email
-        errors.termsAndConditionsAccepted = error.response.data.terms_and_conditions_accepted
         return { success: false, errors: errors }
       } else {
         return { success: false, errors: error }
