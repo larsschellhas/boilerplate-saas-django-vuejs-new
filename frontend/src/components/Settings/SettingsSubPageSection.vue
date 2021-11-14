@@ -1,5 +1,5 @@
 <template>
-  <div class="subpage-section">
+  <div class="subpage-section py-4 border-bottom">
     <div
       :id="anchor"
       class="subpage-anchor"
@@ -33,8 +33,10 @@ export default {
 </script>
 
 <style lang="scss">
-  .subpage-anchor {
-    position: relative;
-    top: -82px;
+  .subpage-section {
+    .subpage-anchor {
+      position: relative;
+      top: calc(-82px - 1.5rem);
+    }
   }
 </style>
