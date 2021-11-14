@@ -1,5 +1,5 @@
 <template>
-  <div class="subpage-section py-4 border-bottom">
+  <div class="subpage-section pb-4 mb-4 border-bottom">
     <div
       :id="anchor"
       class="subpage-anchor"
