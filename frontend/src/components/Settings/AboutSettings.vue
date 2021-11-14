@@ -1,7 +1,7 @@
 <template>
   <SettingsSubPage
     id="about-settings"
-    :title="t('components.aboutSettings.title')"
+    title="components.aboutSettings.title"
   >
     <p>{{ t('components.aboutSettings.appVersion') }}: {{ packageVersion }}</p>
   </SettingsSubPage>
