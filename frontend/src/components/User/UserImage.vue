@@ -1,19 +1,25 @@
 <template>
-  <img
-    v-if="imgUrl"
+  <div
+    v-if="profilePictureUrl !== ''"
     class="rounded-circle user-image"
-    :src="imgUrl"
-    :height="size"
-    :width="size"
-  >
-  <i
-    v-else
-    class="fas fa-user-circle user-image"
-    :style="`font-size: ${size}px; width: ${size}px;`"
+    :style="`height: ${size}px; width: ${size}px; background-image: url( ${profilePictureUrl} ); background-size: cover; background-position: center;`"
   />
+  <div
+    v-else
+    class="rounded-circle user-image"
+    :style="`height: ${size}px; width: ${size}px;`"
+  >
+    <i
+      class="fas fa-user-circle"
+      :style="`font-size: ${size}px; width: ${size}px;`"
+    />
+  </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   name: 'UserImage',
   props: {
@@ -27,7 +33,17 @@ export default {
     }
   },
   setup (props) {
-    return {}
+    // Enable access to vuex store
+    const store = useStore()
+
+    const profilePictureUrl = computed(() => {
+      if (props.imgUrl !== '') {
+        return props.imgUrl
+      } else {
+        return store.getters['user/getProfilePicture']
+      }
+    })
+    return { profilePictureUrl }
   }
 }
 </script>

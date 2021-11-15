@@ -9,6 +9,7 @@ const getDefaultState = () => {
     lastname: '',
     isStaff: false,
     termsAndConditionsAccepted: false,
+    profilePicture: '',
     accessToken: '',
     refreshToken: ''
   }
@@ -38,6 +39,9 @@ const getters = {
   getTermsAndConditionsAccepted: state => {
     return state.termsAndConditionsAccepted
   },
+  getProfilePicture: state => {
+    return state.profilePicture
+  },
   getAccessToken: state => {
     return state.accessToken
   },
@@ -66,12 +70,36 @@ const actions = {
     }
   },
 
-  async update ({ commit, getters }, { username, password, firstname, lastname }) {
-    const result = await user.updateUser(getters.getUserURL, username, password, firstname, lastname)
+  async updateProfileData ({ commit, getters }, { username, password, firstname, lastname }) {
+    const result = await user.updateProfileData(getters.getUserURL, username, password, firstname, lastname)
     if (result.success) {
       commit('setEmail', result.data.email)
       commit('setFirstname', result.data.first_name)
       commit('setLastname', result.data.last_name)
+      return { success: true }
+    } else {
+      return result
+    }
+  },
+
+  async updateProfilePicture ({ commit, getters }, { profilePicture }) {
+    if (profilePicture !== '') {
+      const result = await user.updateProfilePicture(profilePicture, getters.getUserURL)
+      if (result.success) {
+        commit('setProfilePicture', result.data.profilePicture)
+        return { success: true }
+      } else {
+        return result
+      }
+    } else {
+      return { success: true }
+    }
+  },
+
+  async deleteProfilePicture ({ commit, getters }) {
+    const result = await user.deleteProfilePicture(getters.getUserURL)
+    if (result.success) {
+      commit('setProfilePicture', '')
       return { success: true }
     } else {
       return result
@@ -151,6 +179,9 @@ const actions = {
 }
 
 const mutations = {
+  setURL (state, status) {
+    state.url = status
+  },
   setEmail (state, status) {
     state.email = status
   },
@@ -166,8 +197,8 @@ const mutations = {
   setTermsAndConditionsAccepted (state, status) {
     state.termsAndConditionsAccepted = status
   },
-  setURL (state, status) {
-    state.url = status
+  setProfilePicture (state, status) {
+    state.profilePicture = status
   },
   setAccessToken (state, status) {
     state.accessToken = status

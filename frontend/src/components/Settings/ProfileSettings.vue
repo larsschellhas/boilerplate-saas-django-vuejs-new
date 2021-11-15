@@ -32,15 +32,18 @@
           </div>
           <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
             <label
-              for="profile-picture"
-              class="form-label"
+              for="profile-picture-input"
+              class="form-label mt-2"
             >
               {{ t("components.profileSettings.profilePicture.new-profile-picture") }}
             </label>
             <input
-              id="profile-picture"
+              id="profile-picture-input"
+              ref="profilePictureInput"
               class="form-control"
               type="file"
+              accept="image/*"
+              @change="handleFileSelection( $event )"
             >
           </div>
         </div>
@@ -53,7 +56,7 @@
           <div class="col-12 col-md-6">
             <label
               for="firstname"
-              class="form-label"
+              class="form-label mt-2"
             >
               {{ t("forms.firstname") }}
             </label>
@@ -80,7 +83,7 @@
           <div class="col-12 col-md-6">
             <label
               for="lastname"
-              class="form-label"
+              class="form-label mt-2"
             >
               {{ t("forms.lastname") }}
             </label>
@@ -112,7 +115,7 @@
       >
         <label
           for="username"
-          class="form-label"
+          class="form-label mt-2"
         >
           {{ t("forms.email") }}
         </label>
@@ -142,7 +145,7 @@
       >
         <label
           for="password"
-          class="form-label"
+          class="form-label mt-2"
         >
           {{ t("forms.password") }}
         </label>
@@ -197,7 +200,8 @@ export default {
       username: '',
       password: '',
       firstname: '',
-      lastname: ''
+      lastname: '',
+      profilePicture: ''
     })
 
     const validated = ref(false)
@@ -207,15 +211,36 @@ export default {
         username: store.getters['user/getEmail'],
         password: '',
         firstname: store.getters['user/getFirstname'],
-        lastname: store.getters['user/getLastname']
+        lastname: store.getters['user/getLastname'],
+        profilePicture: ''
       }
     }
     const profileData = ref(getDefaultProfileData())
+    const profilePictureInput = ref(null)
+
+    function handleFileSelection (event) {
+      profileData.value.profilePicture = event.target.files[0]
+    }
 
     async function handleSave () {
       loading.value = true
+      if (profileData.value.profilePicture !== '') {
+        store.dispatch({
+          type: 'user/updateProfilePicture',
+          profilePicture: profileData.value.profilePicture
+        })
+          .then((results) => {
+            if (!results.success) {
+              for (const key in results.errors) {
+                errors.value[key] = results.errors[key]
+              }
+            } else {
+              profilePictureInput.value.value = null
+            }
+          })
+      }
       store.dispatch({
-        type: 'user/update',
+        type: 'user/updateProfileData',
         username: profileData.value.username,
         password: profileData.value.password,
         firstname: profileData.value.firstname,
@@ -228,13 +253,14 @@ export default {
             }
           } else {
             profileData.value = getDefaultProfileData()
+            profilePictureInput.value.value = null
           }
           validated.value = true
           loading.value = false
         })
     }
 
-    return { t, errors, validated, profileData, loading, handleSave, store }
+    return { t, errors, validated, profileData, profilePictureInput, loading, handleFileSelection, handleSave, store }
   }
 }
 </script>
