@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group as StockGroup
+from django_drf_filepond.models import StoredUpload, TemporaryUpload, TemporaryUploadChunked
 from cuser.admin import UserAdmin as CUserAdmin
 from .models import SubscriptionPlan, User, Group, Workspace
 from django.utils.translation import gettext_lazy as _
@@ -11,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 class UserAdmin(CUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "terms_and_conditions_accepted")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "terms_and_conditions_accepted", "profile_picture")}),
         (_("Referrer"), {"fields": ("referrer",)}),
         (
             _("Permissions"),
@@ -50,3 +51,18 @@ class WorkspaceAdmin(ModelAdmin):
 class SubscriptionPlanAdmin(ModelAdmin):
     list_display = ("name", "price_monthly", "price_yearly",
                     "description", "features")
+
+
+@admin.register(StoredUpload)
+class StoredUploadAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(TemporaryUpload)
+class TemporaryUploadAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(TemporaryUploadChunked)
+class TemporaryUploadChunkedAdmin(ModelAdmin):
+    pass

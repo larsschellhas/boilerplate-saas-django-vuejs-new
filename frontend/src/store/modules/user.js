@@ -70,29 +70,24 @@ const actions = {
     }
   },
 
-  async updateProfileData ({ commit, getters }, { username, password, firstname, lastname }) {
-    const result = await user.updateProfileData(getters.getUserURL, username, password, firstname, lastname)
+  async updateProfileData ({ commit, getters }, { username, password, firstname, lastname, profilePicture }) {
+    const result = await user.updateProfileData(getters.getUserURL, username, password, firstname, lastname, profilePicture)
     if (result.success) {
-      commit('setEmail', result.data.email)
-      commit('setFirstname', result.data.first_name)
-      commit('setLastname', result.data.last_name)
+      if (result.data.email) {
+        commit('setEmail', result.data.email)
+      }
+      if (result.data.first_name) {
+        commit('setFirstname', result.data.first_name)
+      }
+      if (result.data.last_name) {
+        commit('setLastname', result.data.last_name)
+      }
+      if (result.data.profile_picture) {
+        commit('setProfilePicture', result.data.profile_picture)
+      }
       return { success: true }
     } else {
       return result
-    }
-  },
-
-  async updateProfilePicture ({ commit, getters }, { profilePicture }) {
-    if (profilePicture !== '') {
-      const result = await user.updateProfilePicture(profilePicture, getters.getUserURL)
-      if (result.success) {
-        commit('setProfilePicture', result.data.profilePicture)
-        return { success: true }
-      } else {
-        return result
-      }
-    } else {
-      return { success: true }
     }
   },
 

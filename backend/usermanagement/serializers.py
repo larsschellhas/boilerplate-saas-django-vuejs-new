@@ -1,6 +1,8 @@
 from usermanagement.models import Group, Workspace, SubscriptionPlan
 from django.contrib.auth import get_user, get_user_model
 from django.db.models import fields
+from django_drf_filepond.api import store_upload, delete_stored_upload
+from django_drf_filepond.models import StoredUpload, TemporaryUpload
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
@@ -10,6 +12,12 @@ class ReferrerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ("url", "first_name", "last_name")
+
+
+class FilepondSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoredUpload
+        fields = ["upload_id"]
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,6 +30,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
     referrer_email = serializers.EmailField(write_only=True, required=False)
     referrer = ReferrerSerializer(required=False)
+    profile_picture_uid = serializers.CharField(
+        write_only=True, required=False, max_length=22, min_length=22
+    )
+    profile_picture = FilepondSerializer(required=False)
 
     class Meta:
         model = get_user_model()
@@ -34,11 +46,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "is_staff",
             "referrer",
             "referrer_email",
-            "terms_and_conditions_accepted"
+            "terms_and_conditions_accepted",
+            "profile_picture",
+            "profile_picture_uid"
         )
         extra_kwargs = {
             "is_staff": {"read_only": True},
             "referrer": {"read_only": True},
+            "profile_picture": {"read_only": True}
         }
 
     def validate_terms_and_conditions_accepted(self, value):
@@ -64,6 +79,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                 raise serializers.ValidationError(
                     {"referrer_email": error.message})
 
+        if "profile_picture_uid" in attrs:
+            try:
+                attrs['profile_picture_temp'] = TemporaryUpload.objects.get(
+                    upload_id=attrs["profile_picture_uid"])
+            except Exception as error:
+                raise serializers.ValidationError(
+                    {"profile_picture_uid": "Profile picture upload not found."})
+
         return attrs
 
     def create(self, validated_data):
@@ -75,6 +98,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         if "password" in validated_data:
             instance.set_password(validated_data.pop("password"))
+
+        if 'profile_picture_temp' in validated_data:
+            stored_upload = store_upload(
+                validated_data["profile_picture_uid"], "profilePictures/{0}.{1}".format(validated_data["profile_picture_uid"], validated_data['profile_picture_temp'].upload_name.split('.')[-1]))
+            validated_data["profile_picture"] = StoredUpload.objects.get(
+                upload_id=validated_data["profile_picture_uid"])
+            if instance.profile_picture is not None:
+                delete_stored_upload(
+                    instance.profile_picture.upload_id, delete_file=True)
+
         return super().update(instance, validated_data)
 
 

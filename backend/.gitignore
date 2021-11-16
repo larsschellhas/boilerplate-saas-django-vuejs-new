@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# filepond
+filepond-stored-uploads/
+filepond-temp-uploads

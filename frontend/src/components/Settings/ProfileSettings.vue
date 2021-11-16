@@ -7,6 +7,7 @@
       <button
         type="submit"
         class="btn btn-success text-light"
+        :disabled="!imageReady || !profileDataChanged"
         @click.prevent="handleSave"
       >
         <div
@@ -37,14 +38,19 @@
             >
               {{ t("components.profileSettings.profilePicture.new-profile-picture") }}
             </label>
-            <input
-              id="profile-picture-input"
-              ref="profilePictureInput"
-              class="form-control"
-              type="file"
-              accept="image/*"
-              @change="handleFileSelection( $event )"
-            >
+            <file-pond
+              ref="userImagePond"
+              name="filepond"
+              label-idle="Drop files here..."
+              :allow-multiple="false"
+              accepted-file-types="image/jpeg, image/png"
+              :server="serverConfig"
+              @initfile="handleImageUploading()"
+              @processfiles="handleImageUploaded()"
+              @processfileabort="handleImageUploadReset()"
+              @processfilerevert="handleImageUploadReset()"
+              @removefile="handleImageUploadReset()"
+            />
           </div>
         </div>
       </SettingsSubPageSection>
@@ -174,19 +180,24 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
 import SettingsSubPage from '@/components/Settings/SettingsSubPage'
 import SettingsSubPageSection from '@/components/Settings/SettingsSubPageSection'
 import UserImage from '@/components/User/UserImage'
+import vueFilePond from 'vue-filepond'
+import 'filepond/dist/filepond.min.css'
+
+const FilePond = vueFilePond()
 
 export default {
   name: 'ProfileSettings',
   components: {
     SettingsSubPage,
     SettingsSubPageSection,
-    UserImage
+    UserImage,
+    FilePond
   },
   setup () {
     // Enable access to localizations
@@ -216,35 +227,53 @@ export default {
       }
     }
     const profileData = ref(getDefaultProfileData())
-    const profilePictureInput = ref(null)
 
-    function handleFileSelection (event) {
-      profileData.value.profilePicture = event.target.files[0]
+    const profileDataChanged = computed(() => {
+      const defaults = getDefaultProfileData()
+      for (const key in defaults) {
+        if (defaults[key] !== profileData.value[key]) {
+          return true
+        }
+      }
+      return false
+    })
+
+    const userImagePond = ref(null)
+    const serverConfig = computed(() => {
+      return {
+        url: `${process.env.VUE_APP_BACKEND_BASE_URL}fp/`,
+        process: 'process/',
+        patch: 'patch/',
+        revert: 'revert/',
+        fetch: 'fetch/?target=',
+        load: 'load/'
+      }
+    })
+    const imageReady = ref(true)
+
+    function handleImageUploading () {
+      imageReady.value = false
+    }
+
+    function handleImageUploaded () {
+      profileData.value.profilePicture = userImagePond.value.getFile().serverId
+      imageReady.value = true
+    }
+
+    function handleImageUploadReset () {
+      profileData.value.profilePicture = ''
+      imageReady.value = true
     }
 
     async function handleSave () {
       loading.value = true
-      if (profileData.value.profilePicture !== '') {
-        store.dispatch({
-          type: 'user/updateProfilePicture',
-          profilePicture: profileData.value.profilePicture
-        })
-          .then((results) => {
-            if (!results.success) {
-              for (const key in results.errors) {
-                errors.value[key] = results.errors[key]
-              }
-            } else {
-              profilePictureInput.value.value = null
-            }
-          })
-      }
       store.dispatch({
         type: 'user/updateProfileData',
         username: profileData.value.username,
         password: profileData.value.password,
         firstname: profileData.value.firstname,
-        lastname: profileData.value.lastname
+        lastname: profileData.value.lastname,
+        profilePicture: profileData.value.profilePicture
       })
         .then((results) => {
           if (!results.success) {
@@ -253,14 +282,14 @@ export default {
             }
           } else {
             profileData.value = getDefaultProfileData()
-            profilePictureInput.value.value = null
+            userImagePond.value.removeFile(userImagePond.value.getFile())
           }
           validated.value = true
           loading.value = false
         })
     }
 
-    return { t, errors, validated, profileData, profilePictureInput, loading, handleFileSelection, handleSave, store }
+    return { t, errors, validated, profileData, profileDataChanged, loading, userImagePond, serverConfig, imageReady, handleImageUploading, handleImageUploaded, handleImageUploadReset, handleSave, store }
   }
 }
 </script>

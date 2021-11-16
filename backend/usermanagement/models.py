@@ -5,6 +5,8 @@ from cuser.models import AbstractCUser, CUserManager
 from cuser.models import Group as CUserGroup
 from django.db.models.fields import related
 from django_countries.fields import CountryField
+from django_drf_filepond.api import store_upload
+from django_drf_filepond.models import StoredUpload
 from django.utils.translation import gettext_lazy as _
 from djmoney.models.fields import MoneyField
 from djmoney.models.validators import MinMoneyValidator
@@ -40,6 +42,15 @@ class User(AbstractCUser):
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
         ),
+    )
+
+    profile_picture = models.ForeignKey(
+        StoredUpload,
+        verbose_name="Profile picture",
+        default=None,
+        blank=True,
+        null=True,
+        on_delete=models.SET_DEFAULT,
     )
 
     terms_and_conditions_accepted = models.BooleanField(

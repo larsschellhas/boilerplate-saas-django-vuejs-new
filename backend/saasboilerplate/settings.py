@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    "django_drf_filepond",
     "cuser",
     "usermanagement",
     "corsheaders",
@@ -153,6 +154,12 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
                       'content-type', 'accept', 'origin', 'authorization')
+
+
+# Filepond configuration
+DJANGO_DRF_FILEPOND_UPLOAD_TMP = os.path.join(
+    BASE_DIR, 'filepond-temp-uploads')
+DJANGO_DRF_FILEPOND_FILE_STORE_PATH = os.path.join(BASE_DIR, 'filepond-stored-uploads')
 
 
 # Custom User Model

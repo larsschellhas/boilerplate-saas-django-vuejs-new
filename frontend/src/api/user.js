@@ -77,16 +77,22 @@ export default {
     }
   },
 
-  async updateProfileData (url, username = '', password = '', firstname = '', lastname = '') {
+  async updateProfileData (url, username = '', password = '', firstname = '', lastname = '', profilePicture = '') {
     const updateData = {
       email: username,
       password: password,
       first_name: firstname,
-      last_name: lastname
+      last_name: lastname,
+      profile_picture_uid: profilePicture
     }
     removeEmptyKeys(updateData)
     try {
       const response = await api.patch(url, updateData)
+      if (response.data.profile_picture.upload_id) {
+        response.data.profile_picture = `${api.defaults.baseURL}fp/load/?id=${response.data.profile_picture.upload_id}`
+      } else {
+        response.data.profile_picture = ''
+      }
       return { success: true, data: response.data }
     } catch (error) {
       if (error.response.data) {
@@ -95,25 +101,6 @@ export default {
         errors.password = error.response.data.password
         errors.firstname = error.response.data.first_name
         errors.lastname = error.response.data.last_name
-        return { success: false, errors: errors }
-      } else {
-        return { success: false, errors: error }
-      }
-    }
-  },
-
-  async updateProfilePicture (profilePicture, url = '') {
-    try {
-      // const response = await api.post()
-      const response = {
-        data: {
-          profilePicture: URL.createObjectURL(profilePicture)
-        }
-      }
-      return { success: true, data: response.data }
-    } catch (error) {
-      if (error.response.data) {
-        const errors = {}
         errors.profilePicture = error.response.data.profile_picture
         return { success: false, errors: errors }
       } else {
