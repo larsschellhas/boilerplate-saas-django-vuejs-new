@@ -88,5 +88,29 @@
         "changePassword": "Passwort ändern"
       }
     }
+  },
+  "filepond": {
+    "labelIdle": "Ziehen Sie Ihre Dateien hierhin oder <span class='filepond--label-action'> durchsuchen Sie Ihren PC </span>",
+    "labelInvalidField": "Feld enthält ungültige Dateien",
+    "labelFileWaitingForSize": "Warte auf Größe",
+    "labelFileSizeNotAvailable": "Größe nicht verfügbar",
+    "labelFileLoading": "Laden",
+    "labelFileLoadError": "Fehler beim Laden",
+    "labelFileProcessing": "Hochladen",
+    "labelFileProcessingComplete": "Hochladen vollständig",
+    "labelFileProcessingAborted": "Hochladen abgebrochen",
+    "labelFileProcessingError": "Fehler beim Hochladen",
+    "labelFileProcessingRevertError": "Fehler beim rückgängig machen",
+    "labelFileRemoveError": "Fehler beim Entfernen",
+    "labelTapToCancel": "Tippen zum Abbrechen",
+    "labelTapToRetry": "Tippen zum Wiederholen",
+    "labelTapToUndo": "Tippen zum rückgängig machen",
+    "labelButtonRemoveItem": "Entfernen",
+    "labelButtonAbortItemLoad": "Abbrechen",
+    "labelButtonRetryItemLoad": "Wiederholen",
+    "labelButtonAbortItemProcessing": "Abbrechen",
+    "labelButtonUndoItemProcessing": "Rückgängig machen",
+    "labelButtonRetryItemProcessing": "Wiederholen",
+    "labelButtonProcessItem": "Hochladen"
   }
 }

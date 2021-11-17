@@ -28,10 +28,10 @@
         title="components.profileSettings.profilePicture.title"
       >
         <div class="row d-flex align-items-center justify-content-center">
-          <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+          <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
             <UserImage :size="160" />
           </div>
-          <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+          <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
             <label
               for="profile-picture-input"
               class="form-label mt-2"
@@ -41,10 +41,34 @@
             <file-pond
               ref="userImagePond"
               name="filepond"
-              label-idle="Drop files here..."
               :allow-multiple="false"
               accepted-file-types="image/jpeg, image/png"
               :server="serverConfig"
+              image-crop-aspect-ratio="1:1"
+              image-resize-target-width="400"
+              image-resize-target-height="400"
+              :label-idle="t('filepond.labelIdle')"
+              :label-invalid-field="t('filepond.labelInvalidField')"
+              :label-file-waiting-for-size="t('filepond.labelFileWaitingForSize')"
+              :label-file-size-not-available="t('filepond.labelFileSizeNotAvailable')"
+              :label-file-loading="t('filepond.labelFileLoading')"
+              :label-file-load-error="t('filepond.labelFileLoadError')"
+              :label-file-processing="t('filepond.labelFileProcessing')"
+              :label-file-processing-complete="t('filepond.labelFileProcessingComplete')"
+              :label-file-processing-aborted="t('filepond.labelFileProcessingAborted')"
+              :label-file-processing-error="t('filepond.labelFileProcessingError')"
+              :label-file-processing-revert-error="t('filepond.labelFileProcessingRevertError')"
+              :label-file-remove-error="t('filepond.labelFileRemoveError')"
+              :label-tap-to-cancel="t('filepond.labelTapToCancel')"
+              :label-tap-to-retry="t('filepond.labelTapToRetry')"
+              :label-tap-to-undo="t('filepond.labelTapToUndo')"
+              :label-button-remove-item="t('filepond.labelButtonRemoveItem')"
+              :label-button-abort-item-load="t('filepond.labelButtonAbortItemLoad')"
+              :label-button-retry-item-load="t('filepond.labelButtonRetryItemLoad')"
+              :label-button-abort-item-processing="t('filepond.labelButtonAbortItemProcessing')"
+              :label-button-undo-item-processing="t('filepond.labelButtonUndoItemProcessing')"
+              :label-button-retry-item-processing="t('filepond.labelButtonRetryItemProcessing')"
+              :label-button-process-item="t('filepond.labelButtonProcessItem')"
               @initfile="handleImageUploading()"
               @processfiles="handleImageUploaded()"
               @processfileabort="handleImageUploadReset()"
@@ -186,10 +210,26 @@ import { useStore } from 'vuex'
 import SettingsSubPage from '@/components/Settings/SettingsSubPage'
 import SettingsSubPageSection from '@/components/Settings/SettingsSubPageSection'
 import UserImage from '@/components/User/UserImage'
+
 import vueFilePond from 'vue-filepond'
 import 'filepond/dist/filepond.min.css'
+// Import image preview plugin styles
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
 
-const FilePond = vueFilePond()
+// Import image preview and file type validation plugins
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+
+const FilePond = vueFilePond(
+  FilePondPluginFileValidateType,
+  FilePondPluginImagePreview,
+  FilePondPluginImageCrop,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform
+)
 
 export default {
   name: 'ProfileSettings',
@@ -282,7 +322,7 @@ export default {
             }
           } else {
             profileData.value = getDefaultProfileData()
-            userImagePond.value.removeFile(userImagePond.value.getFile())
+            userImagePond.value.removeFile()
           }
           validated.value = true
           loading.value = false

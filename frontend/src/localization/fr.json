@@ -88,5 +88,29 @@
         "changePassword": "Changer de mot de passe"
       }
     }
+  },
+  "filepond": {
+    "labelIdle": "Glissez et déposez vos fichiers ou <span class='filepond--label-action'> Naviguez </span>",
+    "labelInvalidField": "Le champ contient des fichiers invalides",
+    "labelFileWaitingForSize": "En attente de la taille",
+    "labelFileSizeNotAvailable": "Taille non disponible",
+    "labelFileLoading": "Chargement",
+    "labelFileLoadError": "Erreur pendant le chargement",
+    "labelFileProcessing": "Télécharger",
+    "labelFileProcessingComplete": "Téléchargement complet",
+    "labelFileProcessingAborted": "Téléchargement annulé",
+    "labelFileProcessingError": "Erreur pendant le téléchargement",
+    "labelFileProcessingRevertError": "Erreur lors de la réversion",
+    "labelFileRemoveError": "Erreur lors de la suppression",
+    "labelTapToCancel": "tapez pour annuler",
+    "labelTapToRetry": "tapez pour réessayer",
+    "labelTapToUndo": "tapez pour annuler",
+    "labelButtonRemoveItem": "Supprimer",
+    "labelButtonAbortItemLoad": "Annuler",
+    "labelButtonRetryItemLoad": "Réessayer",
+    "labelButtonAbortItemProcessing": "Annuler",
+    "labelButtonUndoItemProcessing": "Annuler",
+    "labelButtonRetryItemProcessing": "Réessayer",
+    "labelButtonProcessItem": "Télécharger"
   }
 }
