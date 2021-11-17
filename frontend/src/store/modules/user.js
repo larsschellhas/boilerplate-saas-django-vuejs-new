@@ -73,28 +73,18 @@ const actions = {
   async updateProfileData ({ commit, getters }, { username, password, firstname, lastname, profilePicture }) {
     const result = await user.updateProfileData(getters.getUserURL, username, password, firstname, lastname, profilePicture)
     if (result.success) {
-      if (result.data.email) {
+      if ('email' in result.data) {
         commit('setEmail', result.data.email)
       }
-      if (result.data.first_name) {
+      if ('first_name' in result.data) {
         commit('setFirstname', result.data.first_name)
       }
-      if (result.data.last_name) {
+      if ('last_name' in result.data) {
         commit('setLastname', result.data.last_name)
       }
-      if (result.data.profile_picture) {
+      if ('profile_picture' in result.data) {
         commit('setProfilePicture', result.data.profile_picture)
       }
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async deleteProfilePicture ({ commit, getters }) {
-    const result = await user.deleteProfilePicture(getters.getUserURL)
-    if (result.success) {
-      commit('setProfilePicture', '')
       return { success: true }
     } else {
       return result
@@ -123,6 +113,7 @@ const actions = {
       commit('setLastname', result.data.last_name)
       commit('setIsStaff', result.data.is_staff)
       commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
+      commit('setProfilePicture', result.data.profile_picture)
       return { success: true }
     } else {
       return result

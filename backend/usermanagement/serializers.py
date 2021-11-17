@@ -31,7 +31,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     referrer_email = serializers.EmailField(write_only=True, required=False)
     referrer = ReferrerSerializer(required=False)
     profile_picture_uid = serializers.CharField(
-        write_only=True, required=False, max_length=22, min_length=22
+        write_only=True, required=False, max_length=22, min_length=22, allow_null=True
     )
     profile_picture = FilepondSerializer(required=False)
 
@@ -82,8 +82,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         if "profile_picture_uid" in attrs:
             try:
-                attrs['profile_picture_temp'] = TemporaryUpload.objects.get(
-                    upload_id=attrs["profile_picture_uid"])
+                if attrs["profile_picture_uid"] == None:
+                    attrs['profile_picture_temp'] = None
+                else:
+                    attrs['profile_picture_temp'] = TemporaryUpload.objects.get(
+                        upload_id=attrs["profile_picture_uid"])
             except Exception as error:
                 raise serializers.ValidationError(
                     {"profile_picture_uid": "Profile picture upload not found."})
@@ -101,10 +104,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             instance.set_password(validated_data.pop("password"))
 
         if 'profile_picture_temp' in validated_data:
-            stored_upload = store_upload(
-                validated_data["profile_picture_uid"], "profilePictures/{0}.{1}".format(validated_data["profile_picture_uid"], validated_data['profile_picture_temp'].upload_name.split('.')[-1]))
-            validated_data["profile_picture"] = StoredUpload.objects.get(
-                upload_id=validated_data["profile_picture_uid"])
+            if validated_data['profile_picture_temp'] is not None:
+                store_upload(
+                    validated_data["profile_picture_uid"], "profilePictures/{0}.{1}".format(validated_data["profile_picture_uid"], validated_data['profile_picture_temp'].upload_name.split('.')[-1]))
+                validated_data["profile_picture"] = StoredUpload.objects.get(
+                    upload_id=validated_data["profile_picture_uid"])
+            else:
+                validated_data["profile_picture"] = None
+
             if instance.profile_picture is not None:
                 delete_stored_upload(
                     instance.profile_picture.upload_id, delete_file=True)

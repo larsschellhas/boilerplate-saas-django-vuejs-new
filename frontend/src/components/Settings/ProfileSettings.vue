@@ -29,7 +29,19 @@
       >
         <div class="row d-flex align-items-center justify-content-center">
           <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
-            <UserImage :size="160" />
+            <UserImage
+              :size="160"
+              :deleted="profileData.profilePicture === null"
+            />
+            <button
+              v-show="profileData.profilePicture !== null"
+              class="btn btn-sm btn-danger"
+              title="Delete"
+              style="position: absolute; transform: translate(60px, -60px);"
+              @click="handleImageDelete()"
+            >
+              <i class="fas fa-trash" />
+            </button>
           </div>
           <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
             <label
@@ -305,6 +317,10 @@ export default {
       imageReady.value = true
     }
 
+    function handleImageDelete () {
+      profileData.value.profilePicture = null
+    }
+
     async function handleSave () {
       loading.value = true
       store.dispatch({
@@ -329,7 +345,7 @@ export default {
         })
     }
 
-    return { t, errors, validated, profileData, profileDataChanged, loading, userImagePond, serverConfig, imageReady, handleImageUploading, handleImageUploaded, handleImageUploadReset, handleSave, store }
+    return { t, errors, validated, profileData, profileDataChanged, loading, userImagePond, serverConfig, imageReady, handleImageUploading, handleImageUploaded, handleImageUploadReset, handleImageDelete, handleSave, store }
   }
 }
 </script>

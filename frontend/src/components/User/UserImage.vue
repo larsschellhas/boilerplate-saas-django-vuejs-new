@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="profilePictureUrl !== ''"
+    v-if="profilePictureUrl !== '' && !deleted"
     class="rounded-circle user-image"
     :style="`height: ${size}px; width: ${size}px; background-image: url( ${profilePictureUrl} ); background-size: cover; background-position: center;`"
   />
@@ -30,6 +30,10 @@ export default {
     size: {
       type: Number,
       default: 32
+    },
+    deleted: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {

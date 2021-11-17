@@ -46,15 +46,14 @@ export default {
 
   async registerUser (username, password, termsAndConditionsAccepted, firstname = '', lastname = '', referrerEmail = '') {
     // TO-DO Register
-    const registerData = {
+    const registerData = removeEmptyKeys({
       email: username,
       password: password,
       terms_and_conditions_accepted: termsAndConditionsAccepted,
       first_name: firstname,
       last_name: lastname,
       referrer_email: referrerEmail
-    }
-    removeEmptyKeys(registerData)
+    })
     try {
       const response = await api.post('users/', registerData)
       const data = {}
@@ -77,18 +76,18 @@ export default {
     }
   },
 
-  async updateProfileData (url, username = '', password = '', firstname = '', lastname = '', profilePicture = '') {
-    const updateData = {
+  async updateProfileData (url, username = '', password = '', firstname = '', lastname = '', profilePicture = '', initialSetupDone = '') {
+    const updateData = removeEmptyKeys({
       email: username,
       password: password,
       first_name: firstname,
       last_name: lastname,
-      profile_picture_uid: profilePicture
-    }
-    removeEmptyKeys(updateData)
+      profile_picture_uid: profilePicture,
+      initial_setup_done: initialSetupDone
+    })
     try {
       const response = await api.patch(url, updateData)
-      if (response.data.profile_picture.upload_id) {
+      if (response.data.profile_picture !== null) {
         response.data.profile_picture = `${api.defaults.baseURL}fp/load/?id=${response.data.profile_picture.upload_id}`
       } else {
         response.data.profile_picture = ''
@@ -109,27 +108,19 @@ export default {
     }
   },
 
-  async deleteProfilePicture (url) {
-    try {
-      // const response = await api.post()
-      const response = { data: {} }
-      return { success: true, data: response.data }
-    } catch (error) {
-      if (error.response.data) {
-        const errors = {}
-        errors.profilePicture = error.response.data.profile_picture
-        return { success: false, errors: errors }
-      } else {
-        return { success: false, errors: error }
-      }
-    }
-  },
-
   async getCurrentUser () {
     try {
       const response = await api.get('users/')
-      return { success: true, data: response.data.results[0] }
+      const userData = response.data.results[0]
+      debugger
+      if (userData.profile_picture !== null) {
+        userData.profile_picture = `${api.defaults.baseURL}fp/load/?id=${userData.profile_picture.upload_id}`
+      } else {
+        userData.profile_picture = ''
+      }
+      return { success: true, data: userData }
     } catch (error) {
+      debugger
       if (error.response.data) {
         return { success: false, errors: error.response.data }
       } else {
