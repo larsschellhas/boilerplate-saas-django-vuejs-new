@@ -43,7 +43,7 @@ class User(AbstractCUser):
             "Unselect this instead of deleting accounts."
         ),
     )
-    is_setup = models.BooleanField(
+    initial_setup_done = models.BooleanField(
         _("setup"),
         default=False,
         help_text=_(
