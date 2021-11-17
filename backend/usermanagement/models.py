@@ -43,6 +43,15 @@ class User(AbstractCUser):
             "Unselect this instead of deleting accounts."
         ),
     )
+    is_setup = models.BooleanField(
+        _("setup"),
+        default=False,
+        help_text=_(
+            "Designates whether this user has been setup with additional "
+            "information after their creation. This can be used for "
+            "displaying a 'First Setup' page after login."
+        )
+    )
 
     profile_picture = models.ForeignKey(
         StoredUpload,

@@ -18,6 +18,7 @@ class UserAdmin(CUserAdmin):
             _("Permissions"),
             {
                 "fields": (
+                    "is_setup",
                     "is_active",
                     "is_staff",
                     "is_superuser",

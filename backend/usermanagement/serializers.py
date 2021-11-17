@@ -44,6 +44,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "first_name",
             "last_name",
             "is_staff",
+            "is_setup",
             "referrer",
             "referrer_email",
             "terms_and_conditions_accepted",
