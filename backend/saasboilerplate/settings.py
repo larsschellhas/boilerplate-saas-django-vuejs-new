@@ -13,25 +13,27 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+import environ
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "2j_j!4dbhlf_xmb7&pksuu(5kaeirpkek3-9!$0x&ywf)s5#5$"
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Setup allowed hosts with the defined environmental variable if existing
+ALLOWED_HOSTS = [env("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in env.ENVIRON else []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -49,7 +51,8 @@ INSTALLED_APPS = [
     "djmoney",
     "drf_app_generators",
     "rest_framework_simplejwt",
-    "django_rest_passwordreset"
+    "django_rest_passwordreset",
+    "djstripe",
 ]
 
 MIDDLEWARE = [
@@ -87,7 +90,6 @@ WSGI_APPLICATION = "saasboilerplate.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -119,13 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = "en-gb"
-
 TIME_ZONE = "Europe/Berlin"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -185,3 +183,13 @@ SITE_NAME = 'SimplySaaS'
 FRONTEND_URL = 'https://localhost:8080/'
 # URL to your frontend page where users can reset their password
 FRONTEND_RESET_PASSWORD_PATH = 'login/reset/'
+
+
+### Stripe configuration
+STRIPE_LIVE_SECRET_KEY = env("STRIPE_LIVE_SECRET_KEY")
+STRIPE_TEST_SECRET_KEY = env("STRIPE_TEST_SECRET_KEY")
+STRIPE_LIVE_MODE = False
+# Get your webhook secret from the section in the Stripe dashboard where you added the webhook endpoint
+DJSTRIPE_WEBHOOK_SECRET = env("DJSTRIPE_WEBHOOK_SECRET")
+DJSTRIPE_USE_NATIVE_JSONFIELD = True
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"

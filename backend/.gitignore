@@ -131,3 +131,7 @@ dmypy.json
 # filepond
 filepond-stored-uploads/
 filepond-temp-uploads
+
+
+.azure/config
+.env.development

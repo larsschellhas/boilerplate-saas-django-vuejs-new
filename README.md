@@ -38,10 +38,21 @@ You need to have the following prerequisites installed:
 
 ### Backend project
 1. Enter the backend project directory (e.g. boilerplate-saas-django-vuejs/backend)
+2. Copy `.env.development.template`, rename it to ".env.development" and enter your credentials for your local development setup
 2. Install all python dependencies in a virtual environment via poetry by running `poetry install`
 3. Activate the virtual Python environment created by poetry with `poetry shell`
 4. Setup/migrate the database server with `python manage.py migrate`
 5. Run the webserver with `python manage.py runserver`
+
+#### Environmental variables
+Many crucial settings are set through environmental variables to keep them out of the code repository.
+If the environmental variable `WEBSITE_HOSTNAME` is not set, the development configuration is used which is read from `.env.development`. All environmental variables that need to be set are present in the file `.env.default.template`.
+
+##### Development setup
+For development purposes, it is enough to copy the template file, rename it to `.env.development`, and change the values of all settings accordingly.
+##### Production setup
+For your production setup, you should set all of the environmental variables in your server settings and add `WEBSITE_HOSTNAME` (if your cloud provider does not add it automatically)
+
 
 ### Frontend project
 1. Enter the frontend project directory (e.g. boilerplate-saas-django-vuejs/frontend)

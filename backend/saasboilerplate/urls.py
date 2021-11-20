@@ -42,4 +42,5 @@ urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('login/reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
