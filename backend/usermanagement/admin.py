@@ -4,7 +4,7 @@ from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group as StockGroup
 from django_drf_filepond.models import StoredUpload, TemporaryUpload, TemporaryUploadChunked
 from cuser.admin import UserAdmin as CUserAdmin
-from .models import SubscriptionPlan, User, Group, Workspace
+from .models import User, Group, Workspace
 from django.utils.translation import gettext_lazy as _
 
 
@@ -46,12 +46,6 @@ class GroupAdmin(BaseGroupAdmin):
 @admin.register(Workspace)
 class WorkspaceAdmin(ModelAdmin):
     pass
-
-
-@admin.register(SubscriptionPlan)
-class SubscriptionPlanAdmin(ModelAdmin):
-    list_display = ("name", "price_monthly", "price_yearly",
-                    "description", "features")
 
 
 @admin.register(StoredUpload)

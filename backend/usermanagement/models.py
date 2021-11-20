@@ -88,32 +88,6 @@ class Group(CUserGroup):
         proxy = True
 
 
-class SubscriptionPlan(models.Model):
-    """
-    Subscription plan which includes features, pricing, and other information
-    about a subscription that can be booked through a workspace.
-    """
-
-    created_on = models.DateTimeField(
-        verbose_name="Created at", auto_now_add=True)
-    name = models.CharField(verbose_name="Name", max_length=100, blank=False)
-    description = models.CharField(verbose_name="Description", max_length=200)
-    price_validators = [
-        MinMoneyValidator(0)
-    ]
-    price_monthly = MoneyField(verbose_name="Price with monthly payment", max_digits=19,
-                               decimal_places=2, default_currency="EUR", validators=price_validators, default=Money('10', 'EUR'))
-    price_yearly = MoneyField(verbose_name="Price with yearly payment", max_digits=19,
-                              decimal_places=2, default_currency="EUR", validators=price_validators, default=Money('10', 'EUR'))
-    features = models.JSONField(
-        verbose_name="The plan\'s features as a list of dictionaries e.g. [\"This is a feature\", \"This is another feature\"]")
-    buttonText = models.CharField(
-        verbose_name="Button text", max_length=40, blank=False)
-
-    def __str__(self):
-        return '{0} ({1} monthly)'.format(self.name, self.price_monthly)
-
-
 class Workspace(models.Model):
     """ Company or Workspace that acts as customer and tenant for the user. """
 
@@ -145,21 +119,6 @@ class Workspace(models.Model):
     admins = models.ManyToManyField(
         User, verbose_name="Workspace Admins", related_name="admins")
 
-    subscriptionPlan = models.ForeignKey(
-        SubscriptionPlan,
-        verbose_name="Subscription plan",
-        default=None,
-        blank=True,
-        null=True,
-        on_delete=models.SET_DEFAULT,
-    )
-
-    paymentCycle = models.CharField(
-        verbose_name="Payment cycle",
-        max_length=1,
-        choices=PAYMENTCYCLECHOICES,
-        default=YEARLY
-    )
 
     def __str__(self):
         return self.workspace_name

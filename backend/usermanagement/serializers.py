@@ -1,4 +1,4 @@
-from usermanagement.models import Group, Workspace, SubscriptionPlan
+from usermanagement.models import Group, Workspace
 from django.contrib.auth import get_user, get_user_model
 from django.db.models import fields
 from django_drf_filepond.api import store_upload, delete_stored_upload
@@ -192,9 +192,3 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ["url", "name"]
 
-
-class SubscriptionPlanSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = SubscriptionPlan
-        fields = ["url", "name", "description",
-                  "price_monthly", "price_monthly_currency", "price_yearly", "price_yearly_currency", "features", "buttonText"]

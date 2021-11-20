@@ -28,8 +28,6 @@ router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
 router.register(r"workspaces", userviews.WorkspaceViewSet,
                 basename="workspace")
-router.register(r"subscriptionplans", userviews.SubscriptionPlanViewSet,
-                basename="subscriptionplan")
 # router.register(r"groups", userviews.GroupViewSet, basename="group")
 
 # Wire up our API using automatic URL routing.
