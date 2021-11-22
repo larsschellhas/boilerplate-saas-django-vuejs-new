@@ -173,7 +173,17 @@ SIMPLE_JWT = {
 }
 DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Emails are send to the console, if an email server is not defined through environmental variables
+if "EMAIL_BACKEND" in env.ENVIRON & "EMAIL_HOST" in env.ENVIRON & "EMAIL_PORT" in env.ENVIRON & "EMAIL_USE_TLS" in env.ENVIRON & "EMAIL_HOST_USER" in env.ENVIRON & "EMAIL_HOST_PASSWORD" in env.ENVIRON:
+    EMAIL_BACKEND = env('EMAIL_BACKEND')
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_PORT = env('EMAIL_PORT')
+    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 ### Settings for customization
