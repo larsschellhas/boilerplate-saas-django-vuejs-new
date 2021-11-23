@@ -69,7 +69,8 @@
 				"request": "launch",
 				"type": "pwa-msedge",
 				"url": "http://localhost:8080",
-				"webRoot": "${workspaceFolder}/frontend/src",
+				"cwd": "${workspaceFolder}/frontend",
+				"webRoot": "src",
 				"breakOnLoad": true,
 				"sourceMapPathOverrides": {
 					"webpack:///src/*": "${webRoot}/*"
@@ -79,7 +80,8 @@
 				"name": "Python: Django",
 				"type": "python",
 				"request": "launch",
-				"program": "${workspaceFolder}/backend/manage.py",
+				"cwd": "${workspaceFolder}/backend",
+				"program": "manage.py",
 				"args": [
 					"runserver",
 					"8000"
