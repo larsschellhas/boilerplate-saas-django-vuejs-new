@@ -179,9 +179,10 @@ if "EMAIL_BACKEND" in env.ENVIRON and "EMAIL_HOST" in env.ENVIRON and "EMAIL_POR
     EMAIL_BACKEND = env('EMAIL_BACKEND')
     EMAIL_HOST = env('EMAIL_HOST')
     EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+    EMAIL_USE_TLS = env('EMAIL_USE_TLS', bool)
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    SERVER_EMAIL = env('EMAIL_FROM')
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

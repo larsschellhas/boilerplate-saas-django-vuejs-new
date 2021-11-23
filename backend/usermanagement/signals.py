@@ -2,7 +2,6 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.dispatch import receiver
 from django.template.loader import render_to_string
-from django.urls import reverse
 
 from django_rest_passwordreset.signals import reset_password_token_created
 
@@ -36,14 +35,12 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     email_html_message = render_to_string('usermanagement/user_reset_password_body.html', context)
 
     msg = EmailMultiAlternatives(
-        # subject:
-        email_plaintext_subject,
-        # message:
-        email_plaintext_message,
-        # from:
-        "noreply@somehost.local",
-        # to:
-        [reset_password_token.user.email]
+        subject=email_plaintext_subject,
+        body=email_plaintext_message,
+        from_email=getattr(settings, 'SERVER_EMAIL', 'noreply@somehost.local'),
+        to=[reset_password_token.user.email]
     )
     # msg.attach_alternative(email_html_message, "text/html")
     msg.send()
+    print("msg sent")
+    pass
