@@ -27,7 +27,6 @@ stripe = "^2.63.0"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
-autopep8 = "^1.6.0"
 pylint = "^2.11.1"
 
 [build-system]

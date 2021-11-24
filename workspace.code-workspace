@@ -6,8 +6,11 @@
 	],
 	"settings": {
 		"[python]": {
-			"editor.defaultFormatter": "ms-python.python"
+			"editor.defaultFormatter": "ms-python.python",
+			"editor.formatOnSave": true,
 		},
+		"python.linting.pylintEnabled": true,
+		"python.formatting.provider": "black",
 		"css.validate": false,
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": true,

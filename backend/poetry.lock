@@ -30,18 +30,6 @@ lazy-object-proxy = ">=1.4.0"
 wrapt = ">=1.11,<1.14"
 
 [[package]]
-name = "autopep8"
-version = "1.6.0"
-description = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-pycodestyle = ">=2.8.0"
-toml = "*"
-
-[[package]]
 name = "babel"
 version = "2.9.1"
 description = "Internationalization utilities"
@@ -430,14 +418,6 @@ babel = ">=2.8.0"
 tests = ["pytest (>=2.3.0)", "tox (>=1.6.0)"]
 
 [[package]]
-name = "pycodestyle"
-version = "2.8.0"
-description = "Python style guide checker"
-category = "dev"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-
-[[package]]
 name = "pyjwt"
 version = "2.3.0"
 description = "JSON Web Token implementation in Python"
@@ -603,7 +583,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "27aa20042ff4909060321dba36390dd6740f4d567ad2b7a92bcd7fb86005be44"
+content-hash = "b543fa4c5b5e9bf163c75643d8e8f33137d9dce63062f49a64c96759f704b820"
 
 [metadata.files]
 appdirs = [
@@ -617,10 +597,6 @@ asgiref = [
 astroid = [
     {file = "astroid-2.8.6-py3-none-any.whl", hash = "sha256:cd8326b424c971e7d87678609cf6275d22028afd37d6ac59c16d47f1245882f6"},
     {file = "astroid-2.8.6.tar.gz", hash = "sha256:5f6f75e45f15290e73b56f9dfde95b4bf96382284cde406ef4203e928335a495"},
-]
-autopep8 = [
-    {file = "autopep8-1.6.0-py2.py3-none-any.whl", hash = "sha256:ed77137193bbac52d029a52c59bec1b0629b5a186c495f1eb21b126ac466083f"},
-    {file = "autopep8-1.6.0.tar.gz", hash = "sha256:44f0932855039d2c15c4510d6df665e4730f2b8582704fa48f9c55bd3e17d979"},
 ]
 babel = [
     {file = "Babel-2.9.1-py2.py3-none-any.whl", hash = "sha256:ab49e12b91d937cd11f0b67cb259a57ab4ad2b59ac7a3b41d6c06c0ac5b0def9"},
@@ -793,10 +769,6 @@ psycopg2-binary = [
 py-moneyed = [
     {file = "py-moneyed-1.2.tar.gz", hash = "sha256:d745a52819604f42b3666f9b2504b71c27c1645d6d5027d95ec5ed1f28ca86e3"},
     {file = "py_moneyed-1.2-py2.py3-none-any.whl", hash = "sha256:c6131c7b7c1f8503552afe44d15c343ea50282d1d9e6fa8b3f1bd2affc1dae1e"},
-]
-pycodestyle = [
-    {file = "pycodestyle-2.8.0-py2.py3-none-any.whl", hash = "sha256:720f8b39dde8b293825e7ff02c475f3077124006db4f440dcbc9a20b76548a20"},
-    {file = "pycodestyle-2.8.0.tar.gz", hash = "sha256:eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f"},
 ]
 pyjwt = [
     {file = "PyJWT-2.3.0-py3-none-any.whl", hash = "sha256:e0c4bb8d9f0af0c7f5b1ec4c5036309617d03d56932877f2f7a0beeb5318322f"},
