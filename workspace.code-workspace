@@ -51,7 +51,12 @@
 			"editor.defaultFormatter": "vscode.html-language-features"
 		},
 		"editor.linkedEditing": true,
-		"stylelint.configFile": "${workspaceFolder}/frontend/.stylelintrc"
+		"stylelint.configFile": "${workspaceFolder}/frontend/.stylelintrc",
+		"python.linting.pylintArgs": [
+			"--load-plugins",
+			"pylint_django",
+			"--django-settings-module=saasboilerplate.settings"
+		]
 	},
 	"extensions": {
 		"recommendations": [
