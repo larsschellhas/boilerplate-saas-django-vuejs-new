@@ -7,14 +7,24 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('django_drf_filepond', '0010_temp_chunked_biginteger'),
-        ('usermanagement', '0016_rename_termsandconditionsaccepted_user_terms_and_conditions_accepted'),
+        ("django_drf_filepond", "0010_temp_chunked_biginteger"),
+        (
+            "usermanagement",
+            "0016_rename_termsandconditionsaccepted_user_terms_and_conditions_accepted",
+        ),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='profile_picture',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to='django_drf_filepond.storedupload', verbose_name='Profile picture'),
+            model_name="user",
+            name="profile_picture",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_DEFAULT,
+                to="django_drf_filepond.storedupload",
+                verbose_name="Profile picture",
+            ),
         ),
     ]

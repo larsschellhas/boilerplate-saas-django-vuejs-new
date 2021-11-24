@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0014_workspace_state'),
+        ("usermanagement", "0014_workspace_state"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='termsAndConditionsAccepted',
-            field=models.BooleanField(default=False, help_text='Designates whether a user accepted the terms and conditions. Acceptance is required to use any functionality of the app.', verbose_name='Terms and Conditions accepted'),
+            model_name="user",
+            name="termsAndConditionsAccepted",
+            field=models.BooleanField(
+                default=False,
+                help_text="Designates whether a user accepted the terms and conditions. Acceptance is required to use any functionality of the app.",
+                verbose_name="Terms and Conditions accepted",
+            ),
         ),
     ]

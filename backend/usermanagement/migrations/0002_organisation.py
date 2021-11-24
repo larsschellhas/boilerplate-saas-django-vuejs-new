@@ -7,21 +7,40 @@ import django_countries.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0001_initial'),
+        ("usermanagement", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Organisation',
+            name="Organisation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_on', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
-                ('street', models.CharField(max_length=100, verbose_name='Street')),
-                ('streetnumber', models.CharField(max_length=10, verbose_name='Street')),
-                ('postal_code', models.CharField(max_length=10, verbose_name='Street')),
-                ('city', models.CharField(max_length=100, verbose_name='Street')),
-                ('country', django_countries.fields.CountryField(max_length=2, verbose_name='Country')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
+                ("street", models.CharField(max_length=100, verbose_name="Street")),
+                (
+                    "streetnumber",
+                    models.CharField(max_length=10, verbose_name="Street"),
+                ),
+                ("postal_code", models.CharField(max_length=10, verbose_name="Street")),
+                ("city", models.CharField(max_length=100, verbose_name="Street")),
+                (
+                    "country",
+                    django_countries.fields.CountryField(
+                        max_length=2, verbose_name="Country"
+                    ),
+                ),
             ],
         ),
     ]

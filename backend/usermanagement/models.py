@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.conf import settings
 from cuser.models import AbstractCUser, CUserManager
@@ -12,14 +11,14 @@ class UserManager(CUserManager):
     """ Inherited UserManager to ensure that created superusers are active. """
 
     def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
 
@@ -43,7 +42,7 @@ class User(AbstractCUser):
             "Designates whether this user has been setup with additional "
             "information after their creation. This can be used for "
             "displaying a 'First Setup' page after login."
-        )
+        ),
     )
 
     profile_picture = models.ForeignKey(
@@ -61,7 +60,7 @@ class User(AbstractCUser):
         help_text=_(
             "Designates whether a user accepted the terms and conditions. "
             "Acceptance is required to use any functionality of the app."
-        )
+        ),
     )
 
     referrer = models.ForeignKey(
@@ -84,25 +83,32 @@ class Group(CUserGroup):
 class Workspace(models.Model):
     """ Company or Workspace that acts as customer and tenant for the user. """
 
-    created_on = models.DateTimeField(
-        verbose_name="Created at", auto_now_add=True)
+    created_on = models.DateTimeField(verbose_name="Created at", auto_now_add=True)
     workspace_name = models.CharField(
-        verbose_name="Workspace name", max_length=100, blank=False)
-    
+        verbose_name="Workspace name", max_length=100, blank=False
+    )
+
     customer = models.ForeignKey(
-        Customer, null=True, blank=True, on_delete=models.SET_NULL,
-        help_text="The workspace's Stripe Customer object, if it exists"
+        Customer,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="The workspace's Stripe Customer object, if it exists",
     )
     subscription = models.ForeignKey(
-        Subscription, null=True, blank=True, on_delete=models.SET_NULL,
-        help_text="The workspace's Stripe Subscription object, if it exists"
+        Subscription,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="The workspace's Stripe Subscription object, if it exists",
     )
 
     members = models.ManyToManyField(
-        User, verbose_name="Workspace Members", related_name="members")
+        User, verbose_name="Workspace Members", related_name="members"
+    )
     admins = models.ManyToManyField(
-        User, verbose_name="Workspace Admins", related_name="admins")
-
+        User, verbose_name="Workspace Admins", related_name="admins"
+    )
 
     def __str__(self):
         return str(self.workspace_name)
@@ -110,25 +116,25 @@ class Workspace(models.Model):
     def add_member(self, user):
         """ Adds a member to a workspace """
 
-        if (user not in self.members.all()):
+        if user not in self.members.all():
             self.members.add(user.id)
 
     def add_admin(self, user):
         """ Adds an admin to a workspace """
 
         self.add_member(user)
-        if (user not in self.admins.all()):
+        if user not in self.admins.all():
             self.admins.add(user.id)
 
     def remove_admin(self, user):
         """ Removes an admin from a workspace """
 
-        if (user in self.admins.all()):
+        if user in self.admins.all():
             self.admins.remove(user.id)
 
     def remove_member(self, user):
         """ Removes a member from a workspace """
 
         self.remove_admin(user)
-        if (user in self.members.all()):
+        if user in self.members.all():
             self.members.remove(user.id)

@@ -150,14 +150,19 @@ REST_FRAMEWORK = {
 
 # Cross Origin Handling
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
-                      'content-type', 'accept', 'origin', 'authorization')
+CORS_ALLOW_HEADERS = (
+    "content-disposition",
+    "accept-encoding",
+    "content-type",
+    "accept",
+    "origin",
+    "authorization",
+)
 
 
 # Filepond configuration
-DJANGO_DRF_FILEPOND_UPLOAD_TMP = os.path.join(
-    BASE_DIR, 'filepond-temp-uploads')
-DJANGO_DRF_FILEPOND_FILE_STORE_PATH = os.path.join(BASE_DIR, 'filepond-stored-uploads')
+DJANGO_DRF_FILEPOND_UPLOAD_TMP = os.path.join(BASE_DIR, "filepond-temp-uploads")
+DJANGO_DRF_FILEPOND_FILE_STORE_PATH = os.path.join(BASE_DIR, "filepond-stored-uploads")
 
 
 # Custom User Model
@@ -165,35 +170,42 @@ AUTH_USER_MODEL = "usermanagement.User"
 
 
 # Default auto field
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
 
 
 # Emails are send to the console, if an email server is not defined through environmental variables
-if "EMAIL_BACKEND" in env.ENVIRON and "EMAIL_HOST" in env.ENVIRON and "EMAIL_PORT" in env.ENVIRON and "EMAIL_USE_TLS" in env.ENVIRON and "EMAIL_HOST_USER" in env.ENVIRON and "EMAIL_HOST_PASSWORD" in env.ENVIRON:
-    EMAIL_BACKEND = env('EMAIL_BACKEND')
-    EMAIL_HOST = env('EMAIL_HOST')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS', bool)
-    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    SERVER_EMAIL = env('EMAIL_FROM')
+if (
+    "EMAIL_BACKEND" in env.ENVIRON
+    and "EMAIL_HOST" in env.ENVIRON
+    and "EMAIL_PORT" in env.ENVIRON
+    and "EMAIL_USE_TLS" in env.ENVIRON
+    and "EMAIL_HOST_USER" in env.ENVIRON
+    and "EMAIL_HOST_PASSWORD" in env.ENVIRON
+):
+    EMAIL_BACKEND = env("EMAIL_BACKEND")
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_PORT = env("EMAIL_PORT")
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS", bool)
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    SERVER_EMAIL = env("EMAIL_FROM")
 else:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 ### Settings for customization
 # Enter the name of your site. It will be used, e.g., in emails
-SITE_NAME = 'SimplySaaS'
+SITE_NAME = "SimplySaaS"
 # URLs to your frontend (with trailing slash '/' )
-FRONTEND_URL = 'https://localhost:8080/'
+FRONTEND_URL = "https://localhost:8080/"
 # URL to your frontend page where users can reset their password
-FRONTEND_RESET_PASSWORD_PATH = 'login/reset/'
+FRONTEND_RESET_PASSWORD_PATH = "login/reset/"
 
 
 ### Stripe configuration

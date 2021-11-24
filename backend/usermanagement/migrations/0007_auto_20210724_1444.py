@@ -8,26 +8,62 @@ import django_countries.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0006_auto_20210724_1355'),
+        ("usermanagement", "0006_auto_20210724_1355"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Workspace',
+            name="Workspace",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_on', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
-                ('street', models.CharField(max_length=100, verbose_name='Street')),
-                ('streetnumber', models.CharField(max_length=10, verbose_name='Street number')),
-                ('postal_code', models.CharField(max_length=10, verbose_name='Postal code')),
-                ('city', models.CharField(max_length=100, verbose_name='City')),
-                ('country', django_countries.fields.CountryField(max_length=2, verbose_name='Country')),
-                ('admins', models.ManyToManyField(related_name='admins', to=settings.AUTH_USER_MODEL, verbose_name='Workspace Admins')),
-                ('members', models.ManyToManyField(related_name='members', to=settings.AUTH_USER_MODEL, verbose_name='Workspace Members')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
+                ("street", models.CharField(max_length=100, verbose_name="Street")),
+                (
+                    "streetnumber",
+                    models.CharField(max_length=10, verbose_name="Street number"),
+                ),
+                (
+                    "postal_code",
+                    models.CharField(max_length=10, verbose_name="Postal code"),
+                ),
+                ("city", models.CharField(max_length=100, verbose_name="City")),
+                (
+                    "country",
+                    django_countries.fields.CountryField(
+                        max_length=2, verbose_name="Country"
+                    ),
+                ),
+                (
+                    "admins",
+                    models.ManyToManyField(
+                        related_name="admins",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Workspace Admins",
+                    ),
+                ),
+                (
+                    "members",
+                    models.ManyToManyField(
+                        related_name="members",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Workspace Members",
+                    ),
+                ),
             ],
         ),
         migrations.DeleteModel(
-            name='Organisation',
+            name="Organisation",
         ),
     ]

@@ -7,28 +7,40 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0011_subscriptionplan_buttontext'),
+        ("usermanagement", "0011_subscriptionplan_buttontext"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='workspace',
-            name='paymentCycle',
-            field=models.CharField(choices=[('Y', 'Yearly'), ('M', 'Monthly')], default='Y', max_length=1, verbose_name='Payment cycle'),
+            model_name="workspace",
+            name="paymentCycle",
+            field=models.CharField(
+                choices=[("Y", "Yearly"), ("M", "Monthly")],
+                default="Y",
+                max_length=1,
+                verbose_name="Payment cycle",
+            ),
         ),
         migrations.AddField(
-            model_name='workspace',
-            name='subscription',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to='usermanagement.subscriptionplan', verbose_name='Subscription plan'),
+            model_name="workspace",
+            name="subscription",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_DEFAULT,
+                to="usermanagement.subscriptionplan",
+                verbose_name="Subscription plan",
+            ),
         ),
         migrations.AlterField(
-            model_name='workspace',
-            name='company_name',
-            field=models.CharField(max_length=100, verbose_name='Company name'),
+            model_name="workspace",
+            name="company_name",
+            field=models.CharField(max_length=100, verbose_name="Company name"),
         ),
         migrations.AlterField(
-            model_name='workspace',
-            name='workspace_name',
-            field=models.CharField(max_length=100, verbose_name='Workspace name'),
+            model_name="workspace",
+            name="workspace_name",
+            field=models.CharField(max_length=100, verbose_name="Workspace name"),
         ),
     ]

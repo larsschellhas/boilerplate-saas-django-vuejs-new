@@ -7,14 +7,14 @@ import usermanagement.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0002_organisation'),
+        ("usermanagement", "0002_organisation"),
     ]
 
     operations = [
         migrations.AlterModelManagers(
-            name='user',
+            name="user",
             managers=[
-                ('objects', usermanagement.models.UserManager()),
+                ("objects", usermanagement.models.UserManager()),
             ],
         ),
     ]

@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0010_alter_subscriptionplan_features'),
+        ("usermanagement", "0010_alter_subscriptionplan_features"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='subscriptionplan',
-            name='buttonText',
-            field=models.CharField(default='Select', max_length=40, verbose_name='Button text'),
+            model_name="subscriptionplan",
+            name="buttonText",
+            field=models.CharField(
+                default="Select", max_length=40, verbose_name="Button text"
+            ),
             preserve_default=False,
         ),
     ]

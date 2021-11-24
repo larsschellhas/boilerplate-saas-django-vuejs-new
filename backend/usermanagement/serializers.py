@@ -50,12 +50,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "referrer_email",
             "terms_and_conditions_accepted",
             "profile_picture",
-            "profile_picture_uid"
+            "profile_picture_uid",
         )
         extra_kwargs = {
             "is_staff": {"read_only": True},
             "referrer": {"read_only": True},
-            "profile_picture": {"read_only": True}
+            "profile_picture": {"read_only": True},
         }
 
     def validate_terms_and_conditions_accepted(self, value):
@@ -63,7 +63,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         if value:
             return value
         else:
-            raise serializers.ValidationError("Terms and conditions must be accepted to create an account.")
+            raise serializers.ValidationError(
+                "Terms and conditions must be accepted to create an account."
+            )
 
     def validate(self, attrs):
         """
@@ -75,21 +77,24 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         if "referrer_email" in attrs:
             try:
-                attrs["referrer"] = get_user_model().objects.get(email=attrs["referrer_email"])
+                attrs["referrer"] = get_user_model().objects.get(
+                    email=attrs["referrer_email"]
+                )
             except Exception as error:
-                raise serializers.ValidationError(
-                    {"referrer_email": error.message})
+                raise serializers.ValidationError({"referrer_email": error.message})
 
         if "profile_picture_uid" in attrs:
             try:
                 if attrs["profile_picture_uid"] == None:
-                    attrs['profile_picture_temp'] = None
+                    attrs["profile_picture_temp"] = None
                 else:
-                    attrs['profile_picture_temp'] = TemporaryUpload.objects.get(
-                        upload_id=attrs["profile_picture_uid"])
+                    attrs["profile_picture_temp"] = TemporaryUpload.objects.get(
+                        upload_id=attrs["profile_picture_uid"]
+                    )
             except Exception as error:
                 raise serializers.ValidationError(
-                    {"profile_picture_uid": "Profile picture upload not found."})
+                    {"profile_picture_uid": "Profile picture upload not found."}
+                )
 
         return attrs
 
@@ -103,18 +108,27 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         if "password" in validated_data:
             instance.set_password(validated_data.pop("password"))
 
-        if 'profile_picture_temp' in validated_data:
-            if validated_data['profile_picture_temp'] is not None:
+        if "profile_picture_temp" in validated_data:
+            if validated_data["profile_picture_temp"] is not None:
                 store_upload(
-                    validated_data["profile_picture_uid"], "profilePictures/{0}.{1}".format(validated_data["profile_picture_uid"], validated_data['profile_picture_temp'].upload_name.split('.')[-1]))
+                    validated_data["profile_picture_uid"],
+                    "profilePictures/{0}.{1}".format(
+                        validated_data["profile_picture_uid"],
+                        validated_data["profile_picture_temp"].upload_name.split(".")[
+                            -1
+                        ],
+                    ),
+                )
                 validated_data["profile_picture"] = StoredUpload.objects.get(
-                    upload_id=validated_data["profile_picture_uid"])
+                    upload_id=validated_data["profile_picture_uid"]
+                )
             else:
                 validated_data["profile_picture"] = None
 
             if instance.profile_picture is not None:
                 delete_stored_upload(
-                    instance.profile_picture.upload_id, delete_file=True)
+                    instance.profile_picture.upload_id, delete_file=True
+                )
 
         return super().update(instance, validated_data)
 
@@ -131,7 +145,8 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
 class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
     workspace_name = serializers.CharField(required=True, min_length=4, max_length=120)
-    class Meta: 
+
+    class Meta:
         model = Workspace
         fields = ["url", "workspace_name", "subscription", "customer"]
 
@@ -164,14 +179,35 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class PriceSerialzer(serializers.ModelSerializer):
     class Meta:
         model = Price
-        fields = ["djstripe_id", "id", "type", "metadata", "currency", "recurring", "unit_amount", "unit_amount_decimal", "billing_scheme"]
+        fields = [
+            "djstripe_id",
+            "id",
+            "type",
+            "metadata",
+            "currency",
+            "recurring",
+            "unit_amount",
+            "unit_amount_decimal",
+            "billing_scheme",
+        ]
 
 
 class ProductSerializer(serializers.ModelSerializer):
     prices = PriceSerialzer(instance="get_prices", many=True)
+
     class Meta:
         model = Product
-        fields = ["djstripe_id", "id", "name", "type", "metadata", "description", "statement_descriptor", "unit_label", "prices"]
+        fields = [
+            "djstripe_id",
+            "id",
+            "name",
+            "type",
+            "metadata",
+            "description",
+            "statement_descriptor",
+            "unit_label",
+            "prices",
+        ]
 
     def get_prices(self, instance):
         return Price.objects.all().filter(product=instance)

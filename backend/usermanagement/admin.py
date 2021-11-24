@@ -2,7 +2,11 @@ from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group as StockGroup
-from django_drf_filepond.models import StoredUpload, TemporaryUpload, TemporaryUploadChunked
+from django_drf_filepond.models import (
+    StoredUpload,
+    TemporaryUpload,
+    TemporaryUploadChunked,
+)
 from cuser.admin import UserAdmin as CUserAdmin
 from .models import User, Group, Workspace
 from django.utils.translation import gettext_lazy as _
@@ -12,7 +16,17 @@ from django.utils.translation import gettext_lazy as _
 class UserAdmin(CUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "terms_and_conditions_accepted", "profile_picture")}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "terms_and_conditions_accepted",
+                    "profile_picture",
+                )
+            },
+        ),
         (_("Referrer"), {"fields": ("referrer",)}),
         (
             _("Permissions"),
@@ -29,8 +43,7 @@ class UserAdmin(CUserAdmin):
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
-    list_display = ("email", "first_name", "last_name",
-                    "is_staff", "is_active")
+    list_display = ("email", "first_name", "last_name", "is_staff", "is_active")
     search_fields = ("email", "first_name", "last_name", "referrer__email")
     ordering = ("-is_staff", "-is_active", "email")
 

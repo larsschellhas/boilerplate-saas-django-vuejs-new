@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0009_auto_20210728_0638'),
+        ("usermanagement", "0009_auto_20210728_0638"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='subscriptionplan',
-            name='features',
-            field=models.JSONField(verbose_name='The plan\'s features as a list of dictionaries e.g. ["This is a feature", "This is another feature"]'),
+            model_name="subscriptionplan",
+            name="features",
+            field=models.JSONField(
+                verbose_name='The plan\'s features as a list of dictionaries e.g. ["This is a feature", "This is another feature"]'
+            ),
         ),
     ]

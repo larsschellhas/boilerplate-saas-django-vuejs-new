@@ -35,9 +35,12 @@ urlpatterns = [
     path("", include(router.urls)),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    url(r'^fp/', include('django_drf_filepond.urls')),
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('login/reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    url(r"^fp/", include("django_drf_filepond.urls")),
+    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path(
+        "login/reset/",
+        include("django_rest_passwordreset.urls", namespace="password_reset"),
+    ),
     path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0017_user_profile_picture'),
+        ("usermanagement", "0017_user_profile_picture"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='is_setup',
-            field=models.BooleanField(default=False, help_text="Designates whether this user has been setup with additional information after their creation. This can be used for displaying a 'First Setup' page after login.", verbose_name='setup'),
+            model_name="user",
+            name="is_setup",
+            field=models.BooleanField(
+                default=False,
+                help_text="Designates whether this user has been setup with additional information after their creation. This can be used for displaying a 'First Setup' page after login.",
+                verbose_name="setup",
+            ),
         ),
     ]

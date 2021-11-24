@@ -6,28 +6,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usermanagement', '0003_auto_20210719_2207'),
+        ("usermanagement", "0003_auto_20210719_2207"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='organisations',
-            field=models.ManyToManyField(to='usermanagement.Organisation', verbose_name='Organisation Memberships'),
+            model_name="user",
+            name="organisations",
+            field=models.ManyToManyField(
+                to="usermanagement.Organisation",
+                verbose_name="Organisation Memberships",
+            ),
         ),
         migrations.AlterField(
-            model_name='organisation',
-            name='city',
-            field=models.CharField(max_length=100, verbose_name='City'),
+            model_name="organisation",
+            name="city",
+            field=models.CharField(max_length=100, verbose_name="City"),
         ),
         migrations.AlterField(
-            model_name='organisation',
-            name='postal_code',
-            field=models.CharField(max_length=10, verbose_name='Postal code'),
+            model_name="organisation",
+            name="postal_code",
+            field=models.CharField(max_length=10, verbose_name="Postal code"),
         ),
         migrations.AlterField(
-            model_name='organisation',
-            name='streetnumber',
-            field=models.CharField(max_length=10, verbose_name='Street number'),
+            model_name="organisation",
+            name="streetnumber",
+            field=models.CharField(max_length=10, verbose_name="Street number"),
         ),
     ]

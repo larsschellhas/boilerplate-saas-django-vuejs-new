@@ -1,7 +1,12 @@
 from usermanagement.models import Group, Workspace
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, permissions
-from usermanagement.serializers import UserSerializer, GroupSerializer, WorkspaceSerializer, ProductSerializer
+from usermanagement.serializers import (
+    UserSerializer,
+    GroupSerializer,
+    WorkspaceSerializer,
+    ProductSerializer,
+)
 from djstripe.models import Product
 
 # Create your views here.
@@ -16,7 +21,12 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
-        return get_user_model().objects.all().filter(id=self.request.user.id).order_by('id')
+        return (
+            get_user_model()
+            .objects.all()
+            .filter(id=self.request.user.id)
+            .order_by("id")
+        )
 
 
 class WorkspaceViewSet(viewsets.ModelViewSet):
@@ -29,7 +39,7 @@ class WorkspaceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Workspace.objects.filter(members=self.request.user.id).order_by('id')
+        return Workspace.objects.filter(members=self.request.user.id).order_by("id")
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -37,7 +47,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
 
-    queryset = Group.objects.all().order_by('id')
+    queryset = Group.objects.all().order_by("id")
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -47,6 +57,6 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows products to be viewed or edited.
     """
 
-    queryset = Product.objects.all().order_by('djstripe_id')
+    queryset = Product.objects.all().order_by("djstripe_id")
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
