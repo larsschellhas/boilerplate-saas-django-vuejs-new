@@ -20,7 +20,7 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
 
 class WorkspaceViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that allows workspaces to be viewed or edited.
     """
 
     Workspace.objects.all()
