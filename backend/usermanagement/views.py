@@ -15,7 +15,7 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
-        return get_user_model().objects.all().filter(id=self.request.user.id)
+        return get_user_model().objects.all().filter(id=self.request.user.id).order_by('id')
 
 
 class WorkspaceViewSet(viewsets.ModelViewSet):
@@ -28,7 +28,7 @@ class WorkspaceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Workspace.objects.filter(members=self.request.user.id)
+        return Workspace.objects.filter(members=self.request.user.id).order_by('id')
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -36,7 +36,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
 
-    queryset = Group.objects.all()
+    queryset = Group.objects.all().order_by('id')
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
