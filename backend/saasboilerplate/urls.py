@@ -17,7 +17,6 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from rest_framework.authtoken import views
 from usermanagement import views as userviews
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -26,8 +25,8 @@ from rest_framework_simplejwt.views import (
 
 router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
-router.register(r"workspaces", userviews.WorkspaceViewSet,
-                basename="workspace")
+router.register(r"workspaces", userviews.WorkspaceViewSet, basename="workspace")
+router.register(r"products", userviews.ProductViewSet, basename="product")
 # router.register(r"groups", userviews.GroupViewSet, basename="group")
 
 # Wire up our API using automatic URL routing.

@@ -1,7 +1,8 @@
 from usermanagement.models import Group, Workspace
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, permissions
-from usermanagement.serializers import UserSerializer, GroupSerializer, WorkspaceSerializer
+from usermanagement.serializers import UserSerializer, GroupSerializer, WorkspaceSerializer, ProductSerializer
+from djstripe.models import Product
 
 # Create your views here.
 
@@ -41,3 +42,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows products to be viewed or edited.
+    """
+
+    queryset = Product.objects.all().order_by('djstripe_id')
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
