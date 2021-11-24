@@ -3,16 +3,9 @@ from django.db import models
 from django.conf import settings
 from cuser.models import AbstractCUser, CUserManager
 from cuser.models import Group as CUserGroup
-from django.db.models.fields import related
-from django_countries.fields import CountryField
-from django_drf_filepond.api import store_upload
 from django_drf_filepond.models import StoredUpload
 from django.utils.translation import gettext_lazy as _
-from djmoney.models.fields import MoneyField
-from djmoney.models.validators import MinMoneyValidator
-from djmoney.money import Money
-
-# Create your models here.
+from djstripe.models import Customer, Subscription
 
 
 class UserManager(CUserManager):
@@ -91,28 +84,19 @@ class Group(CUserGroup):
 class Workspace(models.Model):
     """ Company or Workspace that acts as customer and tenant for the user. """
 
-    YEARLY = "Y"
-    MONTHLY = "M"
-    PAYMENTCYCLECHOICES = [
-        (YEARLY, "Yearly"),
-        (MONTHLY, "Monthly")
-    ]
-
     created_on = models.DateTimeField(
         verbose_name="Created at", auto_now_add=True)
     workspace_name = models.CharField(
         verbose_name="Workspace name", max_length=100, blank=False)
-    company_name = models.CharField(
-        verbose_name="Company name", max_length=100, blank=False)
-    street = models.CharField(verbose_name="Street",
-                              max_length=100, blank=False)
-    streetnumber = models.CharField(
-        verbose_name="Street number", max_length=10, blank=False)
-    postal_code = models.CharField(
-        verbose_name="Postal code", max_length=10, blank=False)
-    city = models.CharField(verbose_name="City", max_length=100, blank=False)
-    state = models.CharField(verbose_name="State", max_length=100, blank=True)
-    country = CountryField(verbose_name="Country")
+    
+    customer = models.ForeignKey(
+        Customer, null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The workspace's Stripe Customer object, if it exists"
+    )
+    subscription = models.ForeignKey(
+        Subscription, null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The workspace's Stripe Subscription object, if it exists"
+    )
 
     members = models.ManyToManyField(
         User, verbose_name="Workspace Members", related_name="members")
@@ -121,7 +105,7 @@ class Workspace(models.Model):
 
 
     def __str__(self):
-        return self.workspace_name
+        return str(self.workspace_name)
 
     def add_member(self, user):
         """ Adds a member to a workspace """

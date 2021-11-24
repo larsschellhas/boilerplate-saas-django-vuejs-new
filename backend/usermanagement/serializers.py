@@ -1,4 +1,4 @@
-from djstripe.models.core import Price
+from djstripe.models.core import Customer, Price
 from usermanagement.models import Group, Workspace
 from django.contrib.auth import get_user_model
 from django_drf_filepond.api import store_upload, delete_stored_upload
@@ -6,7 +6,7 @@ from django_drf_filepond.models import StoredUpload, TemporaryUpload
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-from djstripe.models import Product
+from djstripe.models import Product, Subscription
 
 
 class ReferrerSerializer(serializers.HyperlinkedModelSerializer):
@@ -119,58 +119,26 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return super().update(instance, validated_data)
 
 
-class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
+        model = Customer
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+
+
+class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
+    workspace_name = serializers.CharField(required=True, min_length=4, max_length=120)
+    class Meta: 
         model = Workspace
-        fields = ["url", "workspace_name", "company_name", "street", "streetnumber",
-                  "postal_code", "city", "state", "country", "subscriptionPlan", "paymentCycle"]
+        fields = ["url", "workspace_name", "subscription", "customer"]
 
-    def validate(self, attrs):
-        """
-        Method to check the entered data for user creation.
-
-        It checks first, whether the two provided passwords match. If not, an exception is raised.
-        If a referrer email is provided, the referrer is added to the user.
-        """
-
-        if attrs["workspace_name"] == "":
-            raise serializers.ValidationError(
-                {"workspace_name": "Workspace name must not be empty."}
-            )
-        if attrs["company_name"] == "":
-            raise serializers.ValidationError(
-                {"company_name": "Company name must not be empty."}
-            )
-        if attrs["street"] == "":
-            raise serializers.ValidationError(
-                {"street": "Street must not be empty."}
-            )
-        if attrs["streetnumber"] == "":
-            raise serializers.ValidationError(
-                {"streetnumber": "Street number must not be empty."}
-            )
-        if attrs["postal_code"] == "":
-            raise serializers.ValidationError(
-                {"postal_code": "Postal code must not be empty."}
-            )
-        if attrs["city"] == "":
-            raise serializers.ValidationError(
-                {"city": "City must not be empty."}
-            )
-        if attrs["country"] == "":
-            raise serializers.ValidationError(
-                {"country": "Country must not be empty."}
-            )
-        if attrs["subscriptionPlan"] == "":
-            raise serializers.ValidationError(
-                {"subscriptionPlan": "Subscription plan must not be empty."}
-            )
-        if attrs["paymentCycle"] == "":
-            raise serializers.ValidationError(
-                {"paymentCycle": "Payment cycle must not be empty."}
-            )
-
-        return attrs
+    def validate_workspace_name(self, value):
+        """ Method to check the entered workspace name. """
+        if value == "":
+            raise serializers.ValidationError("Workspace name must not be empty.")
 
     def create(self, validated_data):
         """ Method to create a valid workspace. """
