@@ -1,6 +1,5 @@
 from usermanagement.models import Group, Workspace
-from django.contrib.auth import get_user, get_user_model
-from django.db.models import fields
+from django.contrib.auth import get_user_model
 from django_drf_filepond.api import store_upload, delete_stored_upload
 from django_drf_filepond.models import StoredUpload, TemporaryUpload
 from rest_framework import serializers
