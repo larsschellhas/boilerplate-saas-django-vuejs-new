@@ -10,8 +10,8 @@
       class="card w-100"
     >
       <div class="card-body text-center">
-        {{ footerText }} <router-link :to="footerLinkRoute">
-          {{ footerLinkText }}
+        {{ t(footerText, {pagetitle: pagetitle}) }} <router-link :to="footerLinkRoute">
+          {{ t(footerLinkText, {pagetitle: pagetitle}) }}
         </router-link>
       </div>
     </div>
@@ -19,20 +19,32 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n'
+
 export default {
   props: {
     footerText: {
       type: String,
-      default: 'New to SimplySaaS?'
+      default: 'components.loginForm.footerText'
     },
     footerLinkText: {
       type: String,
-      default: 'Create an account.'
+      default: 'components.loginForm.footerLinkText'
     },
     footerLinkRoute: {
       type: Object,
       default: () => { return { name: 'RegisterView' } }
+    },
+    pagetitle: {
+      type: String,
+      default: 'SimplySaaS'
     }
+  },
+  setup () {
+    // Enable access to localizations
+    const { t } = useI18n()
+
+    return { t }
   }
 }
 </script>

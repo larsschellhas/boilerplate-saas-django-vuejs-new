@@ -52,6 +52,13 @@
       "createAccount": "Konto erstellen",
       "signIn": "Anmelden.",
       "title": "Registriere dich für {pagetitle}"
+    },
+    "resetPasswordForm": {
+      "title": "Setze dein Passwort zurück",
+      "tokenSentConfirmation": "Falls ein Konto mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen deines Passworts gesendet!",
+      "passwordResetConfirmation": "Dein Passwort wurde erfolgreich zurückgesetzt. Du wirst zur Anmeldung weitergeleitet.",
+      "resetPassword": "Passwort zurücksetzen",
+      "newPassword": "Neues Passwort"
     }
   },
   "forms": {

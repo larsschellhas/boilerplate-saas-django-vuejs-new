@@ -4,8 +4,8 @@
       {{ t("components.registerForm.title", {pagetitle: pagetitle}) }}
     </p>
     <LoginCard
-      :footer-text="t('components.registerForm.alreadyHaveAnAccount')"
-      :footer-link-text="t('components.registerForm.signIn')"
+      footer-text="components.registerForm.alreadyHaveAnAccount"
+      footer-link-text="components.registerForm.signIn"
       :footer-link-route="{
         name: 'LoginView'
       }"

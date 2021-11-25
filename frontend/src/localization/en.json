@@ -52,6 +52,13 @@
       "createAccount": "Create Account",
       "signIn": "Sign in.",
       "title": "Sign up for {pagetitle}"
+    },
+    "resetPasswordForm": {
+      "title": "Reset your password",
+      "tokenSentConfirmation": "If this email exists, a password reset link has been sent!",
+      "passwordResetConfirmation": "Your password was successfully reset. You are being forwarded to the login.",
+      "resetPassword": "Reset password",
+      "newPassword": "New password"
     }
   },
   "forms": {

@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4 d-flex flex-column align-items-center">
     <p class="fs-4 text fw-light">
-      Reset your password
+      {{ t('components.resetPasswordForm.title') }}
     </p>
     <transition name="fade">
       <div
@@ -9,7 +9,7 @@
         class="alert alert-success fade show w-100 my-0"
         role="alert"
       >
-        If this email exists, a password reset link has been sent!
+        {{ t('components.resetPasswordForm.tokenSentConfirmation') }}
       </div>
     </transition>
     <transition name="fade">
@@ -18,7 +18,7 @@
         class="alert alert-success fade show w-100 my-0"
         role="alert"
       >
-        Your password was successfully reset. You are being forwarded to the login.
+        {{ t('components.resetPasswordForm.passwordResetConfirmation') }}
       </div>
     </transition>
     <LoginCard v-if="!resetSent && !passwordReset">
@@ -27,7 +27,7 @@
           <label
             for="email1"
             class="form-label"
-          >Email address</label>
+          >{{ t("forms.email") }}</label>
           <input
             id="email1"
             v-model="resetPasswordData.username"
@@ -59,10 +59,10 @@
             class="spinner-border spinner-border-sm text-light"
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">{{ t("forms.loading") }}</span>
           </div>
           <span v-else>
-            Reset password
+            {{ t('components.resetPasswordForm.resetPassword') }}
           </span>
         </button>
       </form>
@@ -72,14 +72,14 @@
           class="spinner-border spinner-border text-primary d-block mx-auto"
           role="status"
         >
-          <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden">{{ t("forms.loading") }}</span>
         </div>
         <form v-if="tokenValid">
           <div class="mb-3">
             <label
               for="password1"
               class="form-label"
-            >New password</label>
+            >{{ t('components.resetPasswordForm.newPassword') }}</label>
             <input
               id="password1"
               v-model="resetPasswordData.password"
@@ -110,10 +110,10 @@
               class="spinner-border spinner-border-sm text-light"
               role="status"
             >
-              <span class="visually-hidden">Loading...</span>
+              <span class="visually-hidden">{{ t("forms.loading") }}</span>
             </div>
             <span v-else>
-              Submit
+              {{ t("forms.submit") }}
             </span>
           </button>
         </form>
@@ -125,6 +125,7 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import router from '../../router'
 import LoginCard from './LoginCard'
 
@@ -139,6 +140,8 @@ export default {
     }
   },
   setup (props) {
+    // Enable access to localizations
+    const { t } = useI18n()
     // Enable access to vuex store
     const store = useStore()
 
@@ -221,7 +224,7 @@ export default {
     })
     // END - Reset password
 
-    return { resetPasswordData, handlePasswordResetInitiate, handlePasswordResetValidate, handlePasswordResetConfirm, resetSent, passwordReset, tokenValid, loading, store, errors }
+    return { t, resetPasswordData, handlePasswordResetInitiate, handlePasswordResetValidate, handlePasswordResetConfirm, resetSent, passwordReset, tokenValid, loading, store, errors }
   }
 }
 </script>

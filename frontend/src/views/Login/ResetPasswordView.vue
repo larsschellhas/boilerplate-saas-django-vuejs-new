@@ -8,7 +8,6 @@
       height="60"
     >
     <ResetPasswordForm
-      pagetitle="SimplySaaS"
       :token="token"
     />
   </div>

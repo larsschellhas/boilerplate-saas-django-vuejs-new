@@ -22,11 +22,12 @@
       </div>
     </transition>
     <LoginCard
-      :footer-text="t('components.loginForm.footerText',{pagetitle: pagetitle})"
-      :footer-link-text="t('components.loginForm.footerLinkText')"
+      footer-text="components.loginForm.footerText"
+      footer-link-text="components.loginForm.footerLinkText"
       :footer-link-route="{
         name: 'RegisterView'
       }"
+      :pagetitle="pagetitle"
     >
       <form>
         <div class="mb-3">

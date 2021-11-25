@@ -52,6 +52,13 @@
       "createAccount": "Enregistrer",
       "signIn": "Connecter",
       "title": "S'inscrire à {pagetitle}"
+    },
+    "resetPasswordForm": {
+      "title": "Réinitialiser votre mot de passe",
+      "tokenSentConfirmation": "Si cet e-mail existe, un lien de réinitialisation du mot de passe a été envoyé !",
+      "passwordResetConfirmation": "Votre mot de passe a été réinitialisé avec succès. Vous êtes redirigé vers le login.",
+      "resetPassword": "Réinitialiser le mot de passe",
+      "newPassword": "Nouveau mot de passe"
     }
   },
   "forms": {
