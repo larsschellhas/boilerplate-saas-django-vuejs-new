@@ -1,9 +1,9 @@
-from django.db import models
-from django.conf import settings
 from cuser.models import AbstractCUser, CUserManager
 from cuser.models import Group as CUserGroup
-from django_drf_filepond.models import StoredUpload
+from django.conf import settings
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_drf_filepond.models import StoredUpload
 from djstripe.models import Customer, Subscription
 
 
@@ -74,6 +74,8 @@ class User(AbstractCUser):
 
 
 class Group(CUserGroup):
+    """ Custom group model to replace standard group in admin dashboard """
+
     class Meta:
         verbose_name = _("group")
         verbose_name_plural = _("groups")

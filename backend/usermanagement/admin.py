@@ -1,19 +1,27 @@
+""" Admin setup of usermanagement app
+
+This module contains the setup of the admin dashboard for the models of the usermanagement app.
+It registers all custom models as well as django-drf-filepond's models.
+"""
+
+from cuser.admin import UserAdmin as CUserAdmin
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group as StockGroup
+from django.utils.translation import gettext_lazy as _
 from django_drf_filepond.models import (
     StoredUpload,
     TemporaryUpload,
     TemporaryUploadChunked,
 )
-from cuser.admin import UserAdmin as CUserAdmin
-from .models import User, Group, Workspace
-from django.utils.translation import gettext_lazy as _
+
+from .models import Group, User, Workspace
 
 
 @admin.register(User)
 class UserAdmin(CUserAdmin):
+
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (
@@ -53,24 +61,24 @@ admin.site.unregister(StockGroup)
 
 @admin.register(Group)
 class GroupAdmin(BaseGroupAdmin):
-    pass
+    """ Admin config for model usermanagement.Group """
 
 
 @admin.register(Workspace)
 class WorkspaceAdmin(ModelAdmin):
-    pass
+    """ Admin config for model usermanagement.Workspace """
 
 
 @admin.register(StoredUpload)
 class StoredUploadAdmin(ModelAdmin):
-    pass
+    """ Admin config for model django_drf_filepond.StoredUpload """
 
 
 @admin.register(TemporaryUpload)
 class TemporaryUploadAdmin(ModelAdmin):
-    pass
+    """ Admin config for model django_drf_filepond.TemporaryUpload """
 
 
 @admin.register(TemporaryUploadChunked)
 class TemporaryUploadChunkedAdmin(ModelAdmin):
-    pass
+    """ Admin config for model django_drf_filepond.TemporaryChunkedUpload """
