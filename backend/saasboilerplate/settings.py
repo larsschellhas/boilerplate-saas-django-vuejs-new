@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="this-should-not-be-your-secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -209,10 +209,20 @@ FRONTEND_RESET_PASSWORD_PATH = "login/reset/"
 
 
 ### Stripe configuration
-STRIPE_LIVE_SECRET_KEY = env("STRIPE_LIVE_SECRET_KEY")
-STRIPE_TEST_SECRET_KEY = env("STRIPE_TEST_SECRET_KEY")
+STRIPE_LIVE_SECRET_KEY = env(
+    "STRIPE_LIVE_SECRET_KEY",
+    default="",
+)
+STRIPE_TEST_SECRET_KEY = env(
+    "STRIPE_TEST_SECRET_KEY",
+    default="",
+)
 STRIPE_LIVE_MODE = False
-# Get your webhook secret from the section in the Stripe dashboard where you added the webhook endpoint
-DJSTRIPE_WEBHOOK_SECRET = env("DJSTRIPE_WEBHOOK_SECRET")
+# Get your webhook secret from the section in the Stripe dashboard
+# where you added the webhook endpoint
+DJSTRIPE_WEBHOOK_SECRET = env(
+    "DJSTRIPE_WEBHOOK_SECRET",
+    default="",
+)
 DJSTRIPE_USE_NATIVE_JSONFIELD = True
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
