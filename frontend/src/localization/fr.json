@@ -30,6 +30,21 @@
       "passwordForgotten": "Vous avez oublié votre mot de passe ?",
       "title": "Connectez-vous à {pagetitle}"
     },
+    "productCard": {
+      "intervals": {
+        "year": "par an",
+        "month": "par mois"
+      }
+    },
+    "productOverview": {
+      "yearlyPayment": "paiement annuel",
+      "subtitle": "Construisez rapidement un tableau de prix efficace pour vos clients potentiels avec ce composant. Il est construit avec les composants Bootstrap par défaut et les utilitaires avec peu de personnalisation.",
+      "title": "Tarifs",
+      "monthlyPayment": "paiement mensuel",
+      "contactUs": "Contactez nous",
+      "getStarted": "Commencez",
+      "signUpForFree": "S'inscrire gratuitement"
+    },
     "profileSettings": {
       "title": "Profil",
       "profilePicture": {

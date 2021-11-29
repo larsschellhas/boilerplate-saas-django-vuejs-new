@@ -30,6 +30,21 @@
       "passwordForgotten": "Forgot your password?",
       "title": "Sign in to {pagetitle}"
     },
+    "productCard": {
+      "intervals": {
+        "year": "per year",
+        "month": "per month"
+      }
+    },
+    "productOverview": {
+      "monthlyPayment": "monthly payment",
+      "subtitle": "Quickly build an effective pricing table for your potential customers with this component. It’s built with default Bootstrap components and utilities with little customization.",
+      "title": "Pricing",
+      "yearlyPayment": "yearly payment",
+      "contactUs": "Contact us",
+      "getStarted": "Get started",
+      "signUpForFree": "Sign up for free"
+    },
     "profileSettings": {
       "title": "Profile",
       "profilePicture": {

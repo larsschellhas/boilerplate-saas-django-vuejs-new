@@ -1,21 +1,19 @@
 <template>
   <div
     id="home-view"
-    class="d-flex justify-content-center m-4"
+    class="d-flex flex-column align-items-center"
   >
-    <h2>{{ t("views.home.title") }}</h2>
+    <div class="container-fluid text-center bg-primary text-white p-4">
+      <h2>{{ t("views.home.title") }}</h2>
+    </div>
+    <ProductOverview />
   </div>
 </template>
 
-<script>
+<script setup>
 import { useI18n } from 'vue-i18n'
+import ProductOverview from '@/components/Product/ProductOverview'
 
-export default {
-  name: 'HomeView',
-  setup (props) {
-    // Enable access to localizations
-    const { t } = useI18n()
-    return { t }
-  }
-}
+// Enable access to localizations
+const { t } = useI18n()
 </script>

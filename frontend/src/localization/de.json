@@ -30,6 +30,21 @@
       "passwordForgotten": "Passwort vergessen?",
       "title": "Melde dich bei {pagetitle} an"
     },
+    "productCard": {
+      "intervals": {
+        "year": "pro Jahr",
+        "month": "pro Monat"
+      }
+    },
+    "productOverview": {
+      "yearlyPayment": "jährliche Zahlung",
+      "subtitle": "Erstellen Sie mit dieser Komponente schnell eine effektive Preisübersicht für Ihre potenziellen Kunden. Es ist mit Standard-Bootstrap-Komponenten und Utilities mit wenigen Anpassungen gebaut.",
+      "title": "Preise",
+      "monthlyPayment": "monatliche Zahlung",
+      "contactUs": "Kontaktieren Sie uns",
+      "getStarted": "Jetzt loslegen",
+      "signUpForFree": "Kostenlos registrieren"
+    },
     "profileSettings": {
       "title": "Profil",
       "profilePicture": {
