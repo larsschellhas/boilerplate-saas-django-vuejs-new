@@ -17,7 +17,7 @@ const getters = {
 const actions = {
   async retrieveProducts ({ commit, getters }) {
     const result = await subscriptions.getProducts()
-    if ('position' in result.data.results.metadata) {
+    if ('position' in result.data.results[0].metadata) {
       result.data.results.sort((a, b) => (a.metadata.position > b.metadata.position ? 1 : -1))
     }
     if (result.success) {
