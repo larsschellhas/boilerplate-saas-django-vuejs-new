@@ -1,13 +1,5 @@
-import { api } from './axiosConfig'
-
-function removeEmptyKeys (dict) {
-  for (const key in dict) {
-    if (dict[key] === '') {
-      delete dict[key]
-    }
-  }
-  return dict
-}
+import { api } from '@/api/axiosConfig'
+import { removeEmptyKeys } from '@/api/utils'
 
 export default {
   async getTokens (username, password) {
@@ -112,7 +104,6 @@ export default {
     try {
       const response = await api.get('users/')
       const userData = response.data.results[0]
-      debugger
       if (userData.profile_picture !== null) {
         userData.profile_picture = `${api.defaults.baseURL}fp/load/?id=${userData.profile_picture.upload_id}`
       } else {
@@ -120,7 +111,6 @@ export default {
       }
       return { success: true, data: userData }
     } catch (error) {
-      debugger
       if (error.response.data) {
         return { success: false, errors: error.response.data }
       } else {
