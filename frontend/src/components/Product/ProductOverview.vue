@@ -38,6 +38,7 @@
         <ProductCard
           :product="product"
           :interval="interval"
+          @selection="(data) => {handleSelection(productId = data.productId, priceId = data.priceId)}"
         />
       </div>
     </div>
@@ -63,6 +64,11 @@ const monthlyInterval = ref(true)
 const interval = computed(() => {
   return monthlyInterval.value ? 'month' : 'year'
 })
+
+function handleSelection (productId, priceId) {
+  console.log(productId)
+  console.log(priceId)
+}
 
 onMounted(() => {
   store.dispatch('subscriptions/retrieveProducts')
