@@ -1,7 +1,8 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import user from './modules/user'
 import localization from './modules/localization'
+import subscriptions from './modules/subscriptions'
+import user from './modules/user'
 import { storeLocalizationPlugin } from '@/i18n'
 
 export default createStore({
@@ -13,8 +14,9 @@ export default createStore({
     }
   },
   modules: {
-    user,
-    localization
+    localization,
+    subscriptions,
+    user
   },
   plugins: [
     storeLocalizationPlugin,
