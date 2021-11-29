@@ -27,6 +27,10 @@
         type="button"
         class="btn w-100 btn-lg"
         :class="props.product.metadata.buttonHtmlClass ? props.product.metadata.buttonHtmlClass : 'btn-primary'"
+        @click="$emit('selection', {
+          productId: props.product.id,
+          priceId: price.id
+        })"
       >
         {{ t(props.product.metadata.buttonText) }}
       </button>
@@ -35,14 +39,9 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, defineEmits } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
-
-// Enable access to localizations
-const { t } = useI18n()
-// Enable access to vuex store
-const store = useStore()
 
 const props = defineProps({
   product: {
@@ -54,6 +53,13 @@ const props = defineProps({
     default: 'month'
   }
 })
+
+defineEmits(['selection'])
+
+// Enable access to localizations
+const { t } = useI18n()
+// Enable access to vuex store
+const store = useStore()
 
 const price = computed(() => {
   return props.product.prices.find(price => price.recurring.interval === props.interval)
