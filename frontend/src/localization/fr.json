@@ -8,20 +8,20 @@
   },
   "components": {
     "aboutSettings": {
-      "title": "À propos de l'application",
-      "appVersion": "Version de l'application"
+      "appVersion": "Version de l'application",
+      "title": "À propos de l'application"
     },
     "headerNavigation": {
       "signIn": "Connecter",
       "signUp": "Enregistrer"
     },
     "headerUserContextMenu": {
-      "signedInAs": "Connecté en tant que",
-      "signOut": "Déconnecter",
-      "yourWorkspaces": "Vos espaces de travail",
-      "upgrade": "Mise à niveau",
       "help": "Aide",
-      "settings": "Paramètres"
+      "settings": "Paramètres",
+      "signOut": "Déconnecter",
+      "signedInAs": "Connecté en tant que",
+      "upgrade": "Mise à niveau",
+      "yourWorkspaces": "Vos espaces de travail"
     },
     "loginForm": {
       "footerLinkText": "Créer un compte.",
@@ -32,34 +32,34 @@
     },
     "productCard": {
       "intervals": {
-        "year": "par an",
-        "month": "par mois"
+        "month": "par mois",
+        "year": "par an"
       }
     },
     "productOverview": {
-      "yearlyPayment": "paiement annuel",
-      "subtitle": "Construisez rapidement un tableau de prix efficace pour vos clients potentiels avec ce composant. Il est construit avec les composants Bootstrap par défaut et les utilitaires avec peu de personnalisation.",
-      "title": "Tarifs",
-      "monthlyPayment": "paiement mensuel",
       "contactUs": "Contactez nous",
       "getStarted": "Commencez",
-      "signUpForFree": "S'inscrire gratuitement"
+      "monthlyPayment": "paiement mensuel",
+      "signUpForFree": "S'inscrire gratuitement",
+      "subtitle": "Construisez rapidement un tableau de prix efficace pour vos clients potentiels avec ce composant. Il est construit avec les composants Bootstrap par défaut et les utilitaires avec peu de personnalisation.",
+      "title": "Tarifs",
+      "yearlyPayment": "paiement annuel"
     },
     "profileSettings": {
-      "title": "Profil",
-      "profilePicture": {
-        "title": "Photo de profil",
-        "new-profile-picture": "Changer de photo de profil"
+      "email": {
+        "title": "E-mail"
       },
       "name": {
         "title": "Nom"
       },
-      "email": {
-        "title": "E-mail"
-      },
       "password": {
         "title": "Mot de passe"
-      }
+      },
+      "profilePicture": {
+        "new-profile-picture": "Changer de photo de profil",
+        "title": "Photo de profil"
+      },
+      "title": "Profil"
     },
     "registerForm": {
       "acceptTermsAndConditions": "J'accepte les termes et conditions",
@@ -69,70 +69,70 @@
       "title": "S'inscrire à {pagetitle}"
     },
     "resetPasswordForm": {
-      "title": "Réinitialiser votre mot de passe",
-      "tokenSentConfirmation": "Si cet e-mail existe, un lien de réinitialisation du mot de passe a été envoyé !",
+      "newPassword": "Nouveau mot de passe",
       "passwordResetConfirmation": "Votre mot de passe a été réinitialisé avec succès. Vous êtes redirigé vers le login.",
       "resetPassword": "Réinitialiser le mot de passe",
-      "newPassword": "Nouveau mot de passe"
-    }
-  },
-  "forms": {
-    "email": "Adresse e-mail",
-    "loading": "Charger...",
-    "password": "Mot de passe",
-    "submit": "Soumettre",
-    "save": "Sauver",
-    "firstname": "Prénom",
-    "lastname": "Nom de famille"
-  },
-  "views": {
-    "home": {
-      "title": "SaaS-Boilerplate pour Vue.JS et Django"
-    },
-    "dashboard": {
-      "title": "Bonjour {firstname} {lastname} ! Belle journée pour pêcher, n'est-ce pas ?"
-    },
-    "settings": {
-      "title": "Paramètres",
-      "search": "Recherche d'un paramètre...",
-      "categories": {
-        "profile": "Profil",
-        "notifications": "Notifications",
-        "appearance": "Apparition",
-        "privacy-security": "Confidentialité et sécurité",
-        "help-support": "Aide & support",
-        "about": "À propos de l'application"
-      },
-      "subsettings": {
-        "changePicture": "Modifier la photo de profil",
-        "changeName": "Changer de nom",
-        "changeEmail": "Changer d'addresse e-mail",
-        "changePassword": "Changer de mot de passe"
-      }
+      "title": "Réinitialiser votre mot de passe",
+      "tokenSentConfirmation": "Si cet e-mail existe, un lien de réinitialisation du mot de passe a été envoyé !"
     }
   },
   "filepond": {
-    "labelIdle": "Glissez et déposez vos fichiers ou <span class='filepond--label-action'> Naviguez </span>",
-    "labelInvalidField": "Le champ contient des fichiers invalides",
-    "labelFileWaitingForSize": "En attente de la taille",
-    "labelFileSizeNotAvailable": "Taille non disponible",
-    "labelFileLoading": "Chargement",
+    "labelButtonAbortItemLoad": "Annuler",
+    "labelButtonAbortItemProcessing": "Annuler",
+    "labelButtonProcessItem": "Télécharger",
+    "labelButtonRemoveItem": "Supprimer",
+    "labelButtonRetryItemLoad": "Réessayer",
+    "labelButtonRetryItemProcessing": "Réessayer",
+    "labelButtonUndoItemProcessing": "Annuler",
     "labelFileLoadError": "Erreur pendant le chargement",
+    "labelFileLoading": "Chargement",
     "labelFileProcessing": "Télécharger",
-    "labelFileProcessingComplete": "Téléchargement complet",
     "labelFileProcessingAborted": "Téléchargement annulé",
+    "labelFileProcessingComplete": "Téléchargement complet",
     "labelFileProcessingError": "Erreur pendant le téléchargement",
     "labelFileProcessingRevertError": "Erreur lors de la réversion",
     "labelFileRemoveError": "Erreur lors de la suppression",
+    "labelFileSizeNotAvailable": "Taille non disponible",
+    "labelFileWaitingForSize": "En attente de la taille",
+    "labelIdle": "Glissez et déposez vos fichiers ou <span class='filepond--label-action'> Naviguez </span>",
+    "labelInvalidField": "Le champ contient des fichiers invalides",
     "labelTapToCancel": "tapez pour annuler",
     "labelTapToRetry": "tapez pour réessayer",
-    "labelTapToUndo": "tapez pour annuler",
-    "labelButtonRemoveItem": "Supprimer",
-    "labelButtonAbortItemLoad": "Annuler",
-    "labelButtonRetryItemLoad": "Réessayer",
-    "labelButtonAbortItemProcessing": "Annuler",
-    "labelButtonUndoItemProcessing": "Annuler",
-    "labelButtonRetryItemProcessing": "Réessayer",
-    "labelButtonProcessItem": "Télécharger"
+    "labelTapToUndo": "tapez pour annuler"
+  },
+  "forms": {
+    "email": "Adresse e-mail",
+    "firstname": "Prénom",
+    "lastname": "Nom de famille",
+    "loading": "Charger...",
+    "password": "Mot de passe",
+    "save": "Sauver",
+    "submit": "Soumettre"
+  },
+  "views": {
+    "dashboard": {
+      "title": "Bonjour {firstname} {lastname} ! Belle journée pour pêcher, n'est-ce pas ?"
+    },
+    "home": {
+      "title": "SaaS-Boilerplate pour Vue.JS et Django"
+    },
+    "settings": {
+      "categories": {
+        "about": "À propos de l'application",
+        "appearance": "Apparition",
+        "help-support": "Aide & support",
+        "notifications": "Notifications",
+        "privacy-security": "Confidentialité et sécurité",
+        "profile": "Profil"
+      },
+      "search": "Recherche d'un paramètre...",
+      "subsettings": {
+        "changeEmail": "Changer d'addresse e-mail",
+        "changeName": "Changer de nom",
+        "changePassword": "Changer de mot de passe",
+        "changePicture": "Modifier la photo de profil"
+      },
+      "title": "Paramètres"
+    }
   }
 }

@@ -8,20 +8,20 @@
   },
   "components": {
     "aboutSettings": {
-      "title": "About the app",
-      "appVersion": "App version"
+      "appVersion": "App version",
+      "title": "About the app"
     },
     "headerNavigation": {
       "signIn": "Sign in",
       "signUp": "Sign up"
     },
     "headerUserContextMenu": {
-      "signedInAs": "Signed in as",
-      "signOut": "Sign out",
-      "yourWorkspaces": "Your workspace",
-      "upgrade": "Upgrade",
       "help": "Help",
-      "settings": "Settings"
+      "settings": "Settings",
+      "signOut": "Sign out",
+      "signedInAs": "Signed in as",
+      "upgrade": "Upgrade",
+      "yourWorkspaces": "Your workspace"
     },
     "loginForm": {
       "footerLinkText": "Create an account.",
@@ -32,34 +32,34 @@
     },
     "productCard": {
       "intervals": {
-        "year": "per year",
-        "month": "per month"
+        "month": "per month",
+        "year": "per year"
       }
     },
     "productOverview": {
-      "monthlyPayment": "monthly payment",
-      "subtitle": "Quickly build an effective pricing table for your potential customers with this component. It’s built with default Bootstrap components and utilities with little customization.",
-      "title": "Pricing",
-      "yearlyPayment": "yearly payment",
       "contactUs": "Contact us",
       "getStarted": "Get started",
-      "signUpForFree": "Sign up for free"
+      "monthlyPayment": "monthly payment",
+      "signUpForFree": "Sign up for free",
+      "subtitle": "Quickly build an effective pricing table for your potential customers with this component. It’s built with default Bootstrap components and utilities with little customization.",
+      "title": "Pricing",
+      "yearlyPayment": "yearly payment"
     },
     "profileSettings": {
-      "title": "Profile",
-      "profilePicture": {
-        "title": "Profile picture",
-        "new-profile-picture": "Change profile picture"
+      "email": {
+        "title": "Email"
       },
       "name": {
         "title": "Name"
       },
-      "email": {
-        "title": "Email"
-      },
       "password": {
         "title": "Password"
-      }
+      },
+      "profilePicture": {
+        "new-profile-picture": "Change profile picture",
+        "title": "Profile picture"
+      },
+      "title": "Profile"
     },
     "registerForm": {
       "acceptTermsAndConditions": "I accept the terms and conditions",
@@ -69,70 +69,70 @@
       "title": "Sign up for {pagetitle}"
     },
     "resetPasswordForm": {
-      "title": "Reset your password",
-      "tokenSentConfirmation": "If this email exists, a password reset link has been sent!",
+      "newPassword": "New password",
       "passwordResetConfirmation": "Your password was successfully reset. You are being forwarded to the login.",
       "resetPassword": "Reset password",
-      "newPassword": "New password"
-    }
-  },
-  "forms": {
-    "email": "Email address",
-    "loading": "Loading...",
-    "password": "Password",
-    "submit": "Submit",
-    "save": "Save",
-    "firstname": "Firstname",
-    "lastname": "Lastname"
-  },
-  "views": {
-    "home": {
-      "title": "SaaS-Boilerplate for Vue.JS and Django"
-    },
-    "dashboard": {
-      "title": "Mornin' {firstname} {lastname}! Great day for fishin', ain't it?"
-    },
-    "settings": {
-      "title": "Settings",
-      "search": "Search for a setting...",
-      "categories": {
-        "profile": "Profile",
-        "notifications": "Notifications",
-        "appearance": "Appearance",
-        "privacy-security": "Privacy & Security",
-        "help-support": "Help & Support",
-        "about": "About the app"
-      },
-      "subsettings": {
-        "changePicture": "Change profile picture",
-        "changeName": "Change name",
-        "changeEmail": "Change email",
-        "changePassword": "Change password"
-      }
+      "title": "Reset your password",
+      "tokenSentConfirmation": "If this email exists, a password reset link has been sent!"
     }
   },
   "filepond": {
-    "labelIdle": "Drag & Drop your files or <span class='filepond--label-action'> Browse </span>",
-    "labelInvalidField": "Field contains invalid files",
-    "labelFileWaitingForSize": "Waiting for size",
-    "labelFileSizeNotAvailable": "Size not available",
-    "labelFileLoading": "Loading",
+    "labelButtonAbortItemLoad": "Abort",
+    "labelButtonAbortItemProcessing": "Cancel",
+    "labelButtonProcessItem": "Upload",
+    "labelButtonRemoveItem": "Remove",
+    "labelButtonRetryItemLoad": "Retry",
+    "labelButtonRetryItemProcessing": "Retry",
+    "labelButtonUndoItemProcessing": "Undo",
     "labelFileLoadError": "Error during load",
+    "labelFileLoading": "Loading",
     "labelFileProcessing": "Uploading",
-    "labelFileProcessingComplete": "Upload complete",
     "labelFileProcessingAborted": "Upload cancelled",
+    "labelFileProcessingComplete": "Upload complete",
     "labelFileProcessingError": "Error during upload",
     "labelFileProcessingRevertError": "Error during revert",
     "labelFileRemoveError": "Error during remove",
+    "labelFileSizeNotAvailable": "Size not available",
+    "labelFileWaitingForSize": "Waiting for size",
+    "labelIdle": "Drag & Drop your files or <span class='filepond--label-action'> Browse </span>",
+    "labelInvalidField": "Field contains invalid files",
     "labelTapToCancel": "tap to cancel",
     "labelTapToRetry": "tap to retry",
-    "labelTapToUndo": "tap to undo",
-    "labelButtonRemoveItem": "Remove",
-    "labelButtonAbortItemLoad": "Abort",
-    "labelButtonRetryItemLoad": "Retry",
-    "labelButtonAbortItemProcessing": "Cancel",
-    "labelButtonUndoItemProcessing": "Undo",
-    "labelButtonRetryItemProcessing": "Retry",
-    "labelButtonProcessItem": "Upload"
+    "labelTapToUndo": "tap to undo"
+  },
+  "forms": {
+    "email": "Email address",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "loading": "Loading...",
+    "password": "Password",
+    "save": "Save",
+    "submit": "Submit"
+  },
+  "views": {
+    "dashboard": {
+      "title": "Mornin' {firstname} {lastname}! Great day for fishin', ain't it?"
+    },
+    "home": {
+      "title": "SaaS-Boilerplate for Vue.JS and Django"
+    },
+    "settings": {
+      "categories": {
+        "about": "About the app",
+        "appearance": "Appearance",
+        "help-support": "Help & Support",
+        "notifications": "Notifications",
+        "privacy-security": "Privacy & Security",
+        "profile": "Profile"
+      },
+      "search": "Search for a setting...",
+      "subsettings": {
+        "changeEmail": "Change email",
+        "changeName": "Change name",
+        "changePassword": "Change password",
+        "changePicture": "Change profile picture"
+      },
+      "title": "Settings"
+    }
   }
 }

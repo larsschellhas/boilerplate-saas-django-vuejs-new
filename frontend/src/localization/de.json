@@ -8,20 +8,20 @@
   },
   "components": {
     "aboutSettings": {
-      "title": "Über die Anwendung",
-      "appVersion": "App-Version"
+      "appVersion": "App-Version",
+      "title": "Über die Anwendung"
     },
     "headerNavigation": {
       "signIn": "Anmelden",
       "signUp": "Registrieren"
     },
     "headerUserContextMenu": {
-      "signedInAs": "Angemeldet als",
-      "signOut": "Abmelden",
-      "yourWorkspaces": "Deine Arbeitsbereiche",
-      "upgrade": "Upgrade",
       "help": "Hilfe",
-      "settings": "Einstellungen"
+      "settings": "Einstellungen",
+      "signOut": "Abmelden",
+      "signedInAs": "Angemeldet als",
+      "upgrade": "Upgrade",
+      "yourWorkspaces": "Deine Arbeitsbereiche"
     },
     "loginForm": {
       "footerLinkText": "Erstelle ein Konto.",
@@ -32,34 +32,34 @@
     },
     "productCard": {
       "intervals": {
-        "year": "pro Jahr",
-        "month": "pro Monat"
+        "month": "pro Monat",
+        "year": "pro Jahr"
       }
     },
     "productOverview": {
-      "yearlyPayment": "jährliche Zahlung",
-      "subtitle": "Erstellen Sie mit dieser Komponente schnell eine effektive Preisübersicht für Ihre potenziellen Kunden. Es ist mit Standard-Bootstrap-Komponenten und Utilities mit wenigen Anpassungen gebaut.",
-      "title": "Preise",
-      "monthlyPayment": "monatliche Zahlung",
       "contactUs": "Kontaktieren Sie uns",
       "getStarted": "Jetzt loslegen",
-      "signUpForFree": "Kostenlos registrieren"
+      "monthlyPayment": "monatliche Zahlung",
+      "signUpForFree": "Kostenlos registrieren",
+      "subtitle": "Erstellen Sie mit dieser Komponente schnell eine effektive Preisübersicht für Ihre potenziellen Kunden. Es ist mit Standard-Bootstrap-Komponenten und Utilities mit wenigen Anpassungen gebaut.",
+      "title": "Preise",
+      "yearlyPayment": "jährliche Zahlung"
     },
     "profileSettings": {
-      "title": "Profil",
-      "profilePicture": {
-        "title": "Profilbild",
-        "new-profile-picture": "Profilbild ändern"
+      "email": {
+        "title": "E-Mail"
       },
       "name": {
         "title": "Name"
       },
-      "email": {
-        "title": "E-Mail"
-      },
       "password": {
         "title": "Passwort"
-      }
+      },
+      "profilePicture": {
+        "new-profile-picture": "Profilbild ändern",
+        "title": "Profilbild"
+      },
+      "title": "Profil"
     },
     "registerForm": {
       "acceptTermsAndConditions": "Ich akzeptiere die AGB und die Datenschutzerklärung",
@@ -69,70 +69,70 @@
       "title": "Registriere dich für {pagetitle}"
     },
     "resetPasswordForm": {
-      "title": "Setze dein Passwort zurück",
-      "tokenSentConfirmation": "Falls ein Konto mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen deines Passworts gesendet!",
+      "newPassword": "Neues Passwort",
       "passwordResetConfirmation": "Dein Passwort wurde erfolgreich zurückgesetzt. Du wirst zur Anmeldung weitergeleitet.",
       "resetPassword": "Passwort zurücksetzen",
-      "newPassword": "Neues Passwort"
-    }
-  },
-  "forms": {
-    "email": "E-Mail Adresse",
-    "loading": "Lade...",
-    "password": "Passwort",
-    "submit": "Senden",
-    "save": "Speichern",
-    "firstname": "Vorname",
-    "lastname": "Nachname"
-  },
-  "views": {
-    "home": {
-      "title": "SaaS-Boilerplate für Vue.JS und Django"
-    },
-    "dashboard": {
-      "title": "Moin {firstname} {lastname}! Großartiger Tag zum Fischen, ne?"
-    },
-    "settings": {
-      "title": "Einstellungen",
-      "search": "Einstellung suchen...",
-      "categories": {
-        "profile": "Profil",
-        "notifications": "Benachrichtigungen",
-        "appearance": "Darstellung",
-        "privacy-security": "Datenschutz & Sicherheit",
-        "help-support": "Hilfe & Support",
-        "about": "Über die Anwendung"
-      },
-      "subsettings": {
-        "changePicture": "Profilbild ändern",
-        "changeName": "Namen ändern",
-        "changeEmail": "E-Mail-Adresse ändern",
-        "changePassword": "Passwort ändern"
-      }
+      "title": "Setze dein Passwort zurück",
+      "tokenSentConfirmation": "Falls ein Konto mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen deines Passworts gesendet!"
     }
   },
   "filepond": {
-    "labelIdle": "Ziehen Sie Ihre Dateien hierhin oder <span class='filepond--label-action'> durchsuchen Sie Ihren PC </span>",
-    "labelInvalidField": "Feld enthält ungültige Dateien",
-    "labelFileWaitingForSize": "Warte auf Größe",
-    "labelFileSizeNotAvailable": "Größe nicht verfügbar",
-    "labelFileLoading": "Laden",
+    "labelButtonAbortItemLoad": "Abbrechen",
+    "labelButtonAbortItemProcessing": "Abbrechen",
+    "labelButtonProcessItem": "Hochladen",
+    "labelButtonRemoveItem": "Entfernen",
+    "labelButtonRetryItemLoad": "Wiederholen",
+    "labelButtonRetryItemProcessing": "Wiederholen",
+    "labelButtonUndoItemProcessing": "Rückgängig machen",
     "labelFileLoadError": "Fehler beim Laden",
+    "labelFileLoading": "Laden",
     "labelFileProcessing": "Hochladen",
-    "labelFileProcessingComplete": "Hochladen vollständig",
     "labelFileProcessingAborted": "Hochladen abgebrochen",
+    "labelFileProcessingComplete": "Hochladen vollständig",
     "labelFileProcessingError": "Fehler beim Hochladen",
     "labelFileProcessingRevertError": "Fehler beim rückgängig machen",
     "labelFileRemoveError": "Fehler beim Entfernen",
+    "labelFileSizeNotAvailable": "Größe nicht verfügbar",
+    "labelFileWaitingForSize": "Warte auf Größe",
+    "labelIdle": "Ziehen Sie Ihre Dateien hierhin oder <span class='filepond--label-action'> durchsuchen Sie Ihren PC </span>",
+    "labelInvalidField": "Feld enthält ungültige Dateien",
     "labelTapToCancel": "Tippen zum Abbrechen",
     "labelTapToRetry": "Tippen zum Wiederholen",
-    "labelTapToUndo": "Tippen zum rückgängig machen",
-    "labelButtonRemoveItem": "Entfernen",
-    "labelButtonAbortItemLoad": "Abbrechen",
-    "labelButtonRetryItemLoad": "Wiederholen",
-    "labelButtonAbortItemProcessing": "Abbrechen",
-    "labelButtonUndoItemProcessing": "Rückgängig machen",
-    "labelButtonRetryItemProcessing": "Wiederholen",
-    "labelButtonProcessItem": "Hochladen"
+    "labelTapToUndo": "Tippen zum rückgängig machen"
+  },
+  "forms": {
+    "email": "E-Mail Adresse",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "loading": "Lade...",
+    "password": "Passwort",
+    "save": "Speichern",
+    "submit": "Senden"
+  },
+  "views": {
+    "dashboard": {
+      "title": "Moin {firstname} {lastname}! Großartiger Tag zum Fischen, ne?"
+    },
+    "home": {
+      "title": "SaaS-Boilerplate für Vue.JS und Django"
+    },
+    "settings": {
+      "categories": {
+        "about": "Über die Anwendung",
+        "appearance": "Darstellung",
+        "help-support": "Hilfe & Support",
+        "notifications": "Benachrichtigungen",
+        "privacy-security": "Datenschutz & Sicherheit",
+        "profile": "Profil"
+      },
+      "search": "Einstellung suchen...",
+      "subsettings": {
+        "changeEmail": "E-Mail-Adresse ändern",
+        "changeName": "Namen ändern",
+        "changePassword": "Passwort ändern",
+        "changePicture": "Profilbild ändern"
+      },
+      "title": "Einstellungen"
+    }
   }
 }
