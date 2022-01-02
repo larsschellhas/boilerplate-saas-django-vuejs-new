@@ -1,10 +1,29 @@
 repos:
-  - repo: https://github.com/python-poetry/poetry
-    rev: '1.1.12'  # add version here
+  - repo: local
     hooks:
       - id: poetry-check
+        name: Run poetry-check
+        language: system
+        entry: bash -c 'cd backend && exec poetry check'
+        pass_filenames: false
+        types: [toml]
+        files: ^backend/pyproject.toml
       - id: poetry-lock
+        name: Rund poetry-lock
+        language: system
+        entry: bash -c 'cd backend && exec poetry lock'
+        pass_filenames: false
+        types: [toml]
+        files: ^backend/pyproject.toml
       - id: poetry-export
-        args: ["-f", "requirements.txt", "-o", "requirements.txt"]
-      - id: poetry-export
-        args: ["--dev", "-f", "requirements.txt", "-o", "requirements-dev.txt"]
+        name: Export non-dev dependencies
+        language: system
+        entry: bash -c 'cd backend && exec poetry export -f requirements.txt -o requirements.txt'
+        pass_filenames: false
+        files: ^backend/poetry.lock
+      - id: poetry-export-dev
+        name: Export dev dependencies
+        language: system
+        entry: bash -c 'cd backend && exec poetry export --dev -f requirements.txt -o requirements-dev.txt'
+        pass_filenames: false
+        files: ^backend/poetry.lock
