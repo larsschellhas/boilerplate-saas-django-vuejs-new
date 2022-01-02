@@ -9,7 +9,7 @@ repos:
         types: [toml]
         files: ^backend/pyproject.toml
       - id: poetry-lock
-        name: Rund poetry-lock
+        name: Run poetry-lock
         language: system
         entry: bash -c 'cd backend && exec poetry lock'
         pass_filenames: false
