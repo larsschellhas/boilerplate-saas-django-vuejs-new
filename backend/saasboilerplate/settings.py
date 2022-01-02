@@ -30,7 +30,11 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="this-should-not-be-your-secret")
 DEBUG = True
 
 # Setup allowed hosts with the defined environmental variable if existing
-ALLOWED_HOSTS = [env("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in env.ENVIRON else []
+# 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
+# For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
+ALLOWED_HOSTS = (
+    env("WEBSITE_HOSTNAME").split(" ") if "WEBSITE_HOSTNAME" in env.ENVIRON else []
+)
 
 
 # Application definition
@@ -89,11 +93,14 @@ WSGI_APPLICATION = "saasboilerplate.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": env("DBENGINE", cast=str, default="django.db.backends.sqlite3"),
+        "NAME": env("DBNAME", cast=str, default=BASE_DIR / "db.sqlite3"),
+        "HOST": env("DBHOSTNAME", cast=str, default="localhost"),
+        "USER": env("DBUSER", cast=str, default="user"),
+        "PASSWORD": env("DBPASS", cast=str, default="password"),
+        "PORT": env("DBPORT", cast=str, default="5432"),
     }
 }
 
@@ -203,7 +210,7 @@ else:
 # Enter the name of your site. It will be used, e.g., in emails
 SITE_NAME = "SimplySaaS"
 # URLs to your frontend (with trailing slash '/' )
-FRONTEND_URL = "https://localhost:8080/"
+FRONTEND_URL = "https://localhost/"
 # URL to your frontend page where users can reset their password
 FRONTEND_RESET_PASSWORD_PATH = "login/reset/"
 

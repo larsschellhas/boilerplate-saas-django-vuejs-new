@@ -56,7 +56,8 @@
 			"--load-plugins",
 			"pylint_django",
 			"--django-settings-module=saasboilerplate.settings"
-		]
+		],
+		"python.pythonPath": "./backend/.venv/bin/python",
 	},
 	"extensions": {
 		"recommendations": [

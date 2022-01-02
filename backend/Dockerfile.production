@@ -1,0 +1,72 @@
+###########
+# BUILDER #
+###########
+
+FROM python:3.10-slim as builder
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /usr/src/app
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip
+
+# Install development requirements via pip
+COPY requirements.txt /usr/src/app/
+COPY requirements.development.txt /usr/src/app/
+RUN python -m pip install -r requirements.development.txt
+
+# Lint using black
+RUN python -m black /usr/src/app/
+
+# Build wheels
+RUN python -m pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.dev.txt
+
+
+#########
+# FINAL #
+#########
+
+FROM python:3.10-slim
+
+# Create directory for the app user
+RUN mkdir -p /home/app
+
+# Create the app user
+RUN adduser --system --group app
+
+# Create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/backend
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/filepond-stored-uploads
+RUN mkdir $APP_HOME/filepond-temp-uploads
+WORKDIR $APP_HOME
+
+# Install netcat (nc)
+RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y netcat
+
+COPY --from=builder /usr/src/app/wheels /wheels
+COPY --from=builder /usr/src/app/requirements.txt /.
+RUN pip install --no-cache /wheels/*
+
+# Copy entrypoint.production.sh
+COPY entrypoint.production.sh $APP_HOME/.
+RUN sed -i 's/\r$//g' $APP_HOME/entrypoint.production.sh
+RUN chmod +x $APP_HOME/entrypoint.production.sh
+
+COPY . $APP_HOME
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+USER app
+
+# run entrypoint.sh
+ENTRYPOINT ["/home/app/backend/entrypoint.production.sh"]

@@ -81,7 +81,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                     email=attrs["referrer_email"]
                 )
             except Exception as error:
-                raise serializers.ValidationError({"referrer_email": error.message})
+                raise serializers.ValidationError(
+                    {"referrer_email": "Referrer not found. Error: " + str(error)}
+                )
 
         if "profile_picture_uid" in attrs:
             try:
@@ -93,7 +95,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                     )
             except Exception as error:
                 raise serializers.ValidationError(
-                    {"profile_picture_uid": "Profile picture upload not found."}
+                    {
+                        "profile_picture_uid": "Profile picture upload not found. Error: "
+                        + str(error)
+                    }
                 )
 
         return attrs

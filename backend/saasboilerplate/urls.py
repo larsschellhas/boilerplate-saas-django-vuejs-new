@@ -32,15 +32,15 @@ router.register(r"products", userviews.ProductViewSet, basename="product")
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path("", include(router.urls)),
-    path("admin/", admin.site.urls),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    url(r"^fp/", include("django_drf_filepond.urls")),
-    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/", include(router.urls)),
+    path("api/admin/", admin.site.urls),
+    path("api/api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    url(r"^api/fp/", include("django_drf_filepond.urls")),
+    path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path(
-        "login/reset/",
+        "api/login/reset/",
         include("django_rest_passwordreset.urls", namespace="password_reset"),
     ),
-    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    path("api/stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
