@@ -12,6 +12,7 @@ then
 fi
 
 python manage.py migrate --no-input
+python manage.py djstripe_sync_models
 python manage.py collectstatic --no-input
 
 exec "$@"
