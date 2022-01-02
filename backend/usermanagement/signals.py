@@ -25,8 +25,8 @@ def password_reset_token_created(
         "sitetitle": getattr(settings, "SITE_NAME", "SimplySaaS"),
         "current_user": reset_password_token.user,
         "email": reset_password_token.user.email,
-        "resetlink": "{}{}?token={}".format(
-            settings.FRONTEND_URL,
+        "resetlink": "https://{}/{}?token={}".format(
+            settings.ALLOWED_HOSTS[0],
             settings.FRONTEND_RESET_PASSWORD_PATH,
             reset_password_token.key,
         ),

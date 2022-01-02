@@ -1,1 +1,4 @@
 .vscode/settings.json
+.azure/config
+.env.development
+.env.production

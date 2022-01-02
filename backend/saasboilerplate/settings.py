@@ -209,8 +209,6 @@ else:
 ### Settings for customization
 # Enter the name of your site. It will be used, e.g., in emails
 SITE_NAME = "SimplySaaS"
-# URLs to your frontend (with trailing slash '/' )
-FRONTEND_URL = "https://localhost/"
 # URL to your frontend page where users can reset their password
 FRONTEND_RESET_PASSWORD_PATH = "login/reset/"
 

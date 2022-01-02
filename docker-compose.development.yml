@@ -24,7 +24,7 @@ services:
     expose:
       - 8000
     env_file:
-      - ./backend/.env.development
+      - ./.env.development
     depends_on:
       - postgresql-db
 
@@ -37,6 +37,8 @@ services:
     volumes:
       - ./frontend/src:/usr/src/app/src
       - dev_frontend_volume:/usr/src/app/dist
+    env_file:
+      - ./.env.development
   
   nginx:
     build: 
