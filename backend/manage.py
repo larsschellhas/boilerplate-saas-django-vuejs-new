@@ -6,12 +6,13 @@ import environ
 
 env = environ.Env()
 
+
 def main():
     """Run administrative tasks."""
-    
+
     if "WEBSITE_HOSTNAME" not in env.ENVIRON:
-        environ.Env.read_env('.env.development')
-        environ.Env.read_env('.env.local', overwrite=True)
+        environ.Env.read_env("../.env.development")
+        environ.Env.read_env("../.env.local", overwrite=True)
 
     settings_module = (
         "saasboilerplate.production"
