@@ -14,6 +14,11 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import environ
+import json
+
+from urllib import request
+from cryptography.x509 import load_pem_x509_certificate
+from cryptography.hazmat.backends import default_backend
 
 env = environ.Env()
 
@@ -54,8 +59,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "djmoney",
     "drf_app_generators",
-    "rest_framework_simplejwt",
-    "django_rest_passwordreset",
+    "rest_framework_jwt",
     "djstripe",
 ]
 
@@ -147,8 +151,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 50,
@@ -179,12 +182,43 @@ AUTH_USER_MODEL = "usermanagement.User"
 # Default auto field
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-}
-DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
+AUTH0_DOMAIN = env(
+    "AUTH0_DOMAIN",
+    default="",
+)
+API_IDENTIFIER = env(
+    "AUTH0_API_IDENTIFIER",
+    default="",
+)
+PUBLIC_KEY = None
+JWT_ISSUER = None
 
+if AUTH0_DOMAIN:
+    jsonurl = request.urlopen("https://" + AUTH0_DOMAIN + "/.well-known/jwks.json")
+    jwks = json.loads(jsonurl.read().decode("utf-8"))
+    cert = (
+        "-----BEGIN CERTIFICATE-----\n"
+        + jwks["keys"][0]["x5c"][0]
+        + "\n-----END CERTIFICATE-----"
+    )
+    certificate = load_pem_x509_certificate(cert.encode("utf-8"), default_backend())
+    PUBLIC_KEY = certificate.public_key()
+    JWT_ISSUER = "https://" + AUTH0_DOMAIN + "/"
+
+
+def jwt_get_username_from_payload_handler(payload):
+    """This method is used to map the username from the access_token payload to the Django user"""
+    return "auth0user"
+
+
+JWT_AUTH = {
+    "JWT_PAYLOAD_GET_USERNAME_HANDLER": jwt_get_username_from_payload_handler,
+    "JWT_PUBLIC_KEY": PUBLIC_KEY,
+    "JWT_ALGORITHM": "RS256",
+    "JWT_AUDIENCE": API_IDENTIFIER,
+    "JWT_ISSUER": JWT_ISSUER,
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+}
 
 # Emails are send to the console, if an email server is not defined through environmental variables
 if (
@@ -209,8 +243,6 @@ else:
 ### Settings for customization
 # Enter the name of your site. It will be used, e.g., in emails
 SITE_NAME = "SimplySaaS"
-# URL to your frontend page where users can reset their password
-FRONTEND_RESET_PASSWORD_PATH = "login/reset/"
 
 
 ### Stripe configuration

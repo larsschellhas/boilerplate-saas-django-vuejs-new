@@ -18,10 +18,6 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from usermanagement import views as userviews
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
@@ -36,8 +32,8 @@ urlpatterns = [
     path("api/admin/", admin.site.urls),
     path("api/api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     url(r"^api/fp/", include("django_drf_filepond.urls")),
-    path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # path("api/login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path(
         "api/login/reset/",
         include("django_rest_passwordreset.urls", namespace="password_reset"),
