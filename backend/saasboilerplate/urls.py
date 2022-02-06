@@ -34,9 +34,9 @@ urlpatterns = [
     url(r"^api/fp/", include("django_drf_filepond.urls")),
     # path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     # path("api/login/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path(
-        "api/login/reset/",
-        include("django_rest_passwordreset.urls", namespace="password_reset"),
-    ),
+    # path(
+    #     "api/login/reset/",
+    #     include("django_rest_passwordreset.urls", namespace="password_reset"),
+    # ),
     path("api/stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
