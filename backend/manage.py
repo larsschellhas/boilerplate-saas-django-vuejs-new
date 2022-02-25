@@ -16,7 +16,7 @@ def main():
 
     settings_module = (
         "saasboilerplate.production"
-        if "WEBSITE_HOSTNAME" in env.ENVIRON
+        if env("PRODUCTION", default=False)
         else "saasboilerplate.settings"
     )
     env.ENVIRON.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
