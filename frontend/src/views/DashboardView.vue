@@ -7,24 +7,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
+import { injectAuth } from 'vue-auth0-plugin'
 
-export default {
-  name: 'DashboardView',
-  setup () {
-    // Enable access to localizations
-    const { t } = useI18n()
-    // Enable access to vuex store
-    const store = useStore()
+// Enable access to localizations
+const { t } = useI18n()
+// Enable access to auth service
+const auth = injectAuth()
 
-    const title = computed(() => {
-      return t('views.dashboard.title', { firstname: store.getters['user/getFirstname'], lastname: store.getters['user/getLastname'] })
-    })
-
-    return { title }
-  }
-}
+const title = computed(() => {
+  return t('views.dashboard.title', { firstname: auth.user.name, lastname: auth.user.lastname })
+})
 </script>

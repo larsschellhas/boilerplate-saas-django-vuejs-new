@@ -1,5 +1,6 @@
 import axios from 'axios'
-import store from '@/store/index.js'
+import store from '@/store'
+import { AuthenticationProperties } from 'vue-auth0-plugin'
 
 export const api = axios.create({
   baseURL: process.env.VUE_APP_BACKEND_BASE_URL,
@@ -9,9 +10,10 @@ export const api = axios.create({
 })
 
 api.interceptors.request.use(
-  (config) => {
-    if (store.getters['user/getAccessToken']) {
-      config.headers.common.Authorization = 'Bearer ' + store.getters['user/getAccessToken']
+  async (config) => {
+    if (AuthenticationProperties.authenticated) {
+      const token = await AuthenticationProperties.getTokenSilently()
+      config.headers.common.Authorization = 'Bearer ' + token
     }
     return config
   }
@@ -22,22 +24,12 @@ api.interceptors.response.use(
     return res
   },
   async (err) => {
-    const originalConfig = err.config
-    if (err.response) {
+    if (err.response && err.response.status === 401) {
       // If access Token was expired
-      if (err.response.status === 401 && originalConfig.url !== 'login/') {
-        if (!originalConfig._retry && originalConfig.url !== 'login/refresh/' && store.state.user.refreshToken !== '') {
-          originalConfig._retry = true
-          await store.dispatch('user/refreshAccessToken')
-          originalConfig.headers.Authorization = 'Bearer ' + store.state.user.accessToken
-          return api(originalConfig)
-        } else {
-          store.dispatch({
-            type: 'logout',
-            target: { path: window.location.pathname }
-          })
-        }
-      }
+      store.dispatch({
+        type: 'logout',
+        target: { path: window.location.pathname }
+      })
     }
     return Promise.reject(err)
   }

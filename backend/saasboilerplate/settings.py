@@ -10,15 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
-from datetime import timedelta
-import os
-import environ
 import json
-
+import os
+from pathlib import Path
 from urllib import request
-from cryptography.x509 import load_pem_x509_certificate
+
+import environ
 from cryptography.hazmat.backends import default_backend
+from cryptography.x509 import load_pem_x509_certificate
 
 env = environ.Env()
 
@@ -183,11 +182,11 @@ AUTH_USER_MODEL = "usermanagement.User"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 AUTH0_DOMAIN = env(
-    "AUTH0_DOMAIN",
+    "VUE_APP_AUTH0_DOMAIN",
     default="",
 )
 API_IDENTIFIER = env(
-    "AUTH0_API_IDENTIFIER",
+    "VUE_APP_AUTH0_API_IDENTIFIER",
     default="",
 )
 PUBLIC_KEY = None
@@ -208,7 +207,8 @@ if AUTH0_DOMAIN:
 
 def jwt_get_username_from_payload_handler(payload):
     """This method is used to map the username from the access_token payload to the Django user"""
-    return "auth0user"
+    print(payload)
+    return "lars@schellhas.engineering"
 
 
 JWT_AUTH = {

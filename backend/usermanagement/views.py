@@ -1,15 +1,29 @@
-from usermanagement.models import Group, Workspace
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, permissions
-from usermanagement.serializers import (
-    UserSerializer,
-    GroupSerializer,
-    WorkspaceSerializer,
-    ProductSerializer,
-)
+from django.http import HttpResponse
 from djstripe.models import Product
+from rest_framework import permissions, viewsets
+from rest_framework.decorators import api_view
+
+from usermanagement.models import Group, Workspace
+from usermanagement.serializers import (
+    GroupSerializer,
+    ProductSerializer,
+    UserSerializer,
+    WorkspaceSerializer,
+)
 
 # Create your views here.
+
+
+def public(request):
+    """Test view for public access with auth0"""
+    return HttpResponse("You don't need to be authenticated to see this")
+
+
+@api_view(["GET"])
+def private(request):
+    """Test view for private access with auth0"""
+    return HttpResponse("You should not see this message if not authenticated!")
 
 
 class CurrentUserViewSet(viewsets.ModelViewSet):
