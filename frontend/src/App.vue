@@ -6,26 +6,23 @@
   <router-view />
 </template>
 
-<script>
+<script setup>
 import HeaderBar from '@/components/Header/HeaderBar'
+import { injectAuth } from 'vue-auth0-plugin'
 
-export default {
-  components: {
-    HeaderBar
-  },
-  setup () {
-    const pagetitle = 'SimplySaaS'
+// Enable access auth0
+const auth = injectAuth()
 
-    const routes = [
-      {
-        name: 'app.headerNavigation.links.home',
-        url: '/'
-      }
-    ]
+const pagetitle = 'SimplySaaS'
 
-    return { routes, pagetitle }
+const routes = [
+  {
+    name: 'app.headerNavigation.links.home',
+    url: '/'
   }
-}
+]
+
+auth.handleRedirectCallback()
 </script>
 
 <style>
