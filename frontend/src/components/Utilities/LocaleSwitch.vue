@@ -2,12 +2,12 @@
   <div class="locale-changer">
     <select
       v-model="locale"
-      class="px-2 mx-auto nav-link link-light"
+      class="px-2 mx-auto nav-link link-light cursor-pointer"
     >
       <option
         v-for="availableLocale in getSupportedLocales()"
         :key="`locale-${availableLocale}`"
-        class="bg-dark"
+        class="bg-dark cursor-pointer"
         :value="availableLocale.code"
       >
         {{ availableLocale.name }}

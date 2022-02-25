@@ -32,15 +32,13 @@
   </nav>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup>
+import { ref, onMounted, defineProps } from 'vue'
 import HeaderNavigation from '@/components/Header/HeaderNavigation.vue'
 import HeaderUserContextMenu from '@/components/Header/HeaderUserContextMenu.vue'
 
-export default {
-  name: 'HeaderBar',
-  components: { HeaderNavigation, HeaderUserContextMenu },
-  props: {
+defineProps(
+  {
     routes: {
       type: Array,
       required: true
@@ -49,28 +47,25 @@ export default {
       type: String,
       default: 'My Site'
     }
-  },
-  setup (props) {
-    const pagetitleStyle = ref('')
+  }
+)
 
-    const centerPagetitle = function () {
-      const logo = document.getElementById('pagetitle')
-      if (window.innerWidth < 768) {
-        const translation = (window.innerWidth - logo.clientWidth) / 2 - logo.offsetLeft
-        pagetitleStyle.value = `transform: translatex(${translation}px)`
-      } else {
-        pagetitleStyle.value = ''
-      }
-    }
+const pagetitleStyle = ref('')
 
-    onMounted(() => {
-      window.onresize = centerPagetitle
-      centerPagetitle()
-    })
-
-    return { pagetitleStyle, centerPagetitle }
+const centerPagetitle = function () {
+  const logo = document.getElementById('pagetitle')
+  if (window.innerWidth < 768) {
+    const translation = (window.innerWidth - logo.clientWidth) / 2 - logo.offsetLeft
+    pagetitleStyle.value = `transform: translatex(${translation}px)`
+  } else {
+    pagetitleStyle.value = ''
   }
 }
+
+onMounted(() => {
+  window.onresize = centerPagetitle
+  centerPagetitle()
+})
 </script>
 
 <style lang="scss">
