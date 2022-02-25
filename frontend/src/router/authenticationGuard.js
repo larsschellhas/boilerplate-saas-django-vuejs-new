@@ -29,7 +29,6 @@ export const authenticationGuard = (to, from, next) => {
 
   watch(AuthenticationState, async () => {
     if (AuthenticationProperties.client && !AuthenticationState.loading) {
-      console.log(AuthenticationState)
       guardAction()
     }
   })
