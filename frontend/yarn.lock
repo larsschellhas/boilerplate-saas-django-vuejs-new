@@ -9782,10 +9782,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-auth0-plugin@2.6.0-beta.1:
-  version "2.6.0-beta.1"
-  resolved "https://registry.yarnpkg.com/vue-auth0-plugin/-/vue-auth0-plugin-2.6.0-beta.1.tgz#b25b8726c952ecd1f2cba85b78cf65e2c97f80ba"
-  integrity sha512-LB9Y3/Mt2G/F/r/Lh+DK4QpMBsqZmMw6j36EFxdUAX7r2Vq67K7gusT3LGCdenUHBXbXujf0ceKGR2kvaF/XPA==
+vue-auth0-plugin@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/vue-auth0-plugin/-/vue-auth0-plugin-2.5.1.tgz#b4a81b20dd005392681597cb168e11516439bbdd"
+  integrity sha512-2gFtWFFIiwn1yOprj2vyFJLqP9ZL7qG1aJjJNRzWEsL+C40uAlrh/cHfVfxU13PWtw+eeJn3zHtNLfUPSOzIEg==
   dependencies:
     "@auth0/auth0-spa-js" "^1.15.0"
 
