@@ -32,7 +32,5 @@ urlpatterns = [
     path("api/admin/", admin.site.urls),
     path("api/api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     url(r"^api/fp/", include("django_drf_filepond.urls")),
-    url(r"^api/public/", userviews.public),
-    url(r"^api/private/", userviews.private),
     path("api/stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

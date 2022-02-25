@@ -15,17 +15,6 @@ from usermanagement.serializers import (
 # Create your views here.
 
 
-def public(request):
-    """Test view for public access with auth0"""
-    return HttpResponse("You don't need to be authenticated to see this")
-
-
-@api_view(["GET"])
-def private(request):
-    """Test view for private access with auth0"""
-    return HttpResponse("You should not see this message if not authenticated!")
-
-
 class CurrentUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
