@@ -8,12 +8,15 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 
 import os
+import environ
+
+env = environ.Env()
 
 from django.core.asgi import get_asgi_application
 
 settings_module = (
     "saasboilerplate.production"
-    if "WEBSITE_HOSTNAME" in os.environ
+    if env("PRODUCTION", default=False)
     else "saasboilerplate.settings"
 )
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)

@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 """
 
 import os
+import environ
+
+env = environ.Env()
 
 from django.core.wsgi import get_wsgi_application
 
@@ -15,7 +18,7 @@ from django.core.wsgi import get_wsgi_application
 # on Azure App Service and should use the production settings in production.py.
 settings_module = (
     "saasboilerplate.production"
-    if "WEBSITE_HOSTNAME" in os.environ
+    if env("PRODUCTION", default=False)
     else "saasboilerplate.settings"
 )
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
