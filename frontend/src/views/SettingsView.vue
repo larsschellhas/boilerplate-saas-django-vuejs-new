@@ -138,7 +138,7 @@ export default {
           display: block;
 
           &:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgb(0 0 0 / 10%);
           }
         }
       }

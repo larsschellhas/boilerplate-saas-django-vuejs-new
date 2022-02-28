@@ -135,11 +135,11 @@ export default {
         text-align: start;
 
         &:hover {
-          background-color: rgba(0, 0, 0, 0.1);
+          background-color: rgb(0 0 0 / 10%);
         }
 
         &:not(.search-result).router-link-exact-active {
-          background-color: rgba(0, 0, 0, 0.1);
+          background-color: rgb(0 0 0 / 10%);
 
           &::before {
             content: "";
