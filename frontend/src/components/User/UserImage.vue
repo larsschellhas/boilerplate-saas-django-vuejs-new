@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 import { injectAuth } from 'vue-auth0-plugin'
 
 const props = defineProps({

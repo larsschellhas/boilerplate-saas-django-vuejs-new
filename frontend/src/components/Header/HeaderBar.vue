@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted } from 'vue'
 import HeaderNavigation from '@/components/Header/HeaderNavigation.vue'
 import HeaderUserContextMenu from '@/components/Header/HeaderUserContextMenu.vue'
 
