@@ -18,6 +18,7 @@ from urllib import request
 import environ
 from cryptography.hazmat.backends import default_backend
 from cryptography.x509 import load_pem_x509_certificate
+from django.contrib.auth import get_user_model
 
 env = environ.Env()
 
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "django_drf_filepond",
-    "cuser",
     "usermanagement",
     "corsheaders",
     "django_extensions",
@@ -175,7 +175,7 @@ DJANGO_DRF_FILEPOND_FILE_STORE_PATH = os.path.join(BASE_DIR, "filepond-stored-up
 
 
 # Custom User Model
-AUTH_USER_MODEL = "usermanagement.User"
+AUTH_USER_MODEL = "usermanagement.MyUser"
 
 
 # Default auto field
@@ -207,8 +207,19 @@ if AUTH0_DOMAIN:
 
 def jwt_get_username_from_payload_handler(payload):
     """This method is used to map the username from the access_token payload to the Django user"""
-    print(payload)
-    return "lars@schellhas.engineering"
+
+    try:
+        user = get_user_model().objects.get(auth_provider_sub=payload["sub"])
+        print("User exists")
+        return user.auth_provider_sub
+    except get_user_model().DoesNotExist:
+        print("User does not exist")
+        print(payload)
+        user = get_user_model().objects.create_user(
+            auth_provider_sub=payload["sub"], is_active=True
+        )
+        print(user)
+        return jwt_get_username_from_payload_handler(payload)
 
 
 JWT_AUTH = {

@@ -23,14 +23,12 @@ router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
 router.register(r"workspaces", userviews.WorkspaceViewSet, basename="workspace")
 router.register(r"products", userviews.ProductViewSet, basename="product")
-# router.register(r"groups", userviews.GroupViewSet, basename="group")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/admin/", admin.site.urls),
-    path("api/api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     url(r"^api/fp/", include("django_drf_filepond.urls")),
     path("api/stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

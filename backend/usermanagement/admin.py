@@ -4,11 +4,9 @@ This module contains the setup of the admin dashboard for the models of the user
 It registers all custom models as well as django-drf-filepond's models.
 """
 
-from cuser.admin import UserAdmin as CUserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
-from django.contrib.auth.models import Group as StockGroup
 from django.utils.translation import gettext_lazy as _
 from django_drf_filepond.models import (
     StoredUpload,
@@ -16,11 +14,11 @@ from django_drf_filepond.models import (
     TemporaryUploadChunked,
 )
 
-from .models import Group, User, Workspace
+from .models import MyUser, Workspace
 
 
-@admin.register(User)
-class UserAdmin(CUserAdmin):
+@admin.register(MyUser)
+class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
@@ -54,14 +52,6 @@ class UserAdmin(CUserAdmin):
     list_display = ("email", "first_name", "last_name", "is_staff", "is_active")
     search_fields = ("email", "first_name", "last_name", "referrer__email")
     ordering = ("-is_staff", "-is_active", "email")
-
-
-admin.site.unregister(StockGroup)
-
-
-@admin.register(Group)
-class GroupAdmin(BaseGroupAdmin):
-    """ Admin config for model usermanagement.Group """
 
 
 @admin.register(Workspace)
