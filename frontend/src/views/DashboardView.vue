@@ -18,6 +18,6 @@ const { t } = useI18n()
 const auth = injectAuth()
 
 const title = computed(() => {
-  return t('views.dashboard.title', { firstname: auth.user.name, lastname: auth.user.lastname })
+  return t('views.dashboard.title', { firstname: auth.user.nickname, lastname: auth.user.name })
 })
 </script>
