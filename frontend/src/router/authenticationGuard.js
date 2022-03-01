@@ -1,22 +1,16 @@
 import { watch } from 'vue'
 import { AuthenticationProperties, AuthenticationState } from 'vue-auth0-plugin'
 
-export const authenticationGuard = (to, from, next) => {
-  // Ignored because of false positive - it's used in the watcher below
-  // eslint-disable-next-line no-unused-vars
+export const authenticationGuard = (to, from) => {
   const guardAction = () => {
     if (AuthenticationProperties.authenticated) {
       if (to.meta.allowAuthenticated) {
-        return next()
+        return true
       } else {
-        return next({
-          name: 'DashboardView'
-        })
+        return { name: 'DashboardView' }
       }
-    } else {
-      if (to.meta.allowAnonymous) {
-        return next()
-      }
+    } else if (to.meta.allowAnonymous) {
+      return true
     }
 
     AuthenticationProperties.loginWithRedirect({ appState: { targetUrl: to.fullPath } })
@@ -29,7 +23,7 @@ export const authenticationGuard = (to, from, next) => {
 
   watch(AuthenticationState, async () => {
     if (AuthenticationProperties.client && !AuthenticationState.loading) {
-      guardAction()
+      return guardAction()
     }
   })
 }
