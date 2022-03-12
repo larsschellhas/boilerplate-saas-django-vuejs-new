@@ -3,6 +3,7 @@ version: '3.9'
 services:
   postgresql-db:
     image: postgres:14-alpine
+    restart: unless-stopped
     volumes:
       - postgresqldb_data:/var/lib/postgresql/data
     environment:
@@ -16,6 +17,7 @@ services:
       dockerfile: Dockerfile.development
     image: saasboilerplate-backend:dev
     command: gunicorn saasboilerplate.wsgi:application --bind 0.0.0.0:8000 --reload
+    restart: unless-stopped
     volumes:
       - ./backend:/home/app/backend
       - filepond_stored:/home/app/backend/filepond-stored-uploads
@@ -34,6 +36,7 @@ services:
       dockerfile: Dockerfile.development
     image: saasboilerplate-frontend:dev
     command: yarn build --watch --no-clean
+    restart: on-failure
     volumes:
       - ./frontend/src:/usr/src/app/src
       - dev_frontend_volume:/usr/src/app/dist
@@ -45,6 +48,7 @@ services:
       context: ./
       dockerfile: nginx/Dockerfile.development
     image: saasboilerplate-nginx:dev
+    restart: unless-stopped
     volumes:
       - dev_frontend_volume:/home/app/frontend
       - dev_static_volume:/home/app/backend/staticfiles
