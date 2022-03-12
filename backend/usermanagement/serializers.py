@@ -1,11 +1,9 @@
-from multiprocessing.sharedctypes import Value
-from djstripe.models.core import Customer, Price
 from django.contrib.auth import get_user_model
-from django_drf_filepond.api import store_upload, delete_stored_upload
 from django_drf_filepond.models import StoredUpload
+from djstripe.models import Product, Subscription
+from djstripe.models.core import Customer, Price
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from djstripe.models import Product, Subscription
 
 
 class ReferrerSerializer(serializers.HyperlinkedModelSerializer):
