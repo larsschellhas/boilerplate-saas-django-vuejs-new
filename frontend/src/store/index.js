@@ -8,9 +8,9 @@ import { storeLocalizationPlugin } from '@/i18n'
 export default createStore({
   strict: process.env.NODE_ENV !== 'production',
   actions: {
-    async logout ({ commit, dispatch }, { target }) {
+    async logout ({ commit, dispatch }) {
       commit('localization/resetState')
-      dispatch('user/logout', { target })
+      dispatch('user/logout')
     }
   },
   modules: {

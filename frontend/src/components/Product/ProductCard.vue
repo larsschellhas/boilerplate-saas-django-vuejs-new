@@ -27,7 +27,7 @@
         type="button"
         class="btn w-100 btn-lg"
         :class="props.product.metadata.buttonHtmlClass ? props.product.metadata.buttonHtmlClass : 'btn-primary'"
-        @click="$emit('selection', {
+        @click="$emit('product-selection', {
           productId: props.product.id,
           priceId: price.id
         })"
@@ -54,7 +54,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['selection'])
+defineEmits(['product-selection'])
 
 // Enable access to localizations
 const { t } = useI18n()

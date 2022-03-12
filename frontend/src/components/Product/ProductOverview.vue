@@ -1,11 +1,5 @@
 <template>
   <div class="container text-center p-4">
-    <h2 class="h1">
-      {{ t('components.productOverview.title') }}
-    </h2>
-    <p class="fs-5 text-muted">
-      {{ t('components.productOverview.subtitle') }}
-    </p>
     <div class="form-switch d-flex justify-content-center align-items-center mb-4">
       <label
         class="form-check-label"
@@ -38,7 +32,7 @@
         <ProductCard
           :product="product"
           :interval="interval"
-          @selection="(data) => {handleSelection(productId = data.productId, priceId = data.priceId)}"
+          @product-selection="(data) => {handleSelection(productId = data.productId, priceId = data.priceId)}"
         />
       </div>
     </div>

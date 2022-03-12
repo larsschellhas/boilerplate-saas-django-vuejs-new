@@ -1,12 +1,11 @@
 import user from '@/api/user'
-import { pushOrReload } from '../../router'
 
 const getDefaultState = () => {
   return {
     url: '',
     email: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     isStaff: false,
     termsAndConditionsAccepted: false,
     profilePicture: '',
@@ -24,14 +23,14 @@ const getters = {
   getEmail: state => {
     return state.email
   },
-  getFirstname: state => {
-    return state.firstname
+  getFirstName: state => {
+    return state.firstName
   },
-  getLastname: state => {
-    return state.lastname
+  getLastName: state => {
+    return state.lastName
   },
   getFullName: state => {
-    return state.firstname + ' ' + state.lastname
+    return state.firstName + ' ' + state.lastName
   },
   isStaff: state => {
     return state.isStaff
@@ -54,50 +53,18 @@ const getters = {
 }
 
 const actions = {
-  async register ({ commit }, { username, password, firstname, lastname, termsAndConditionsAccepted, referrerEmail, target }) {
-    const result = await user.registerUser(username, password, termsAndConditionsAccepted, firstname, lastname, referrerEmail)
-    if (result.success) {
-      commit('setURL', result.data.url)
-      commit('setEmail', result.data.email)
-      commit('setFirstname', result.data.first_name)
-      commit('setLastname', result.data.last_name)
-      commit('setIsStaff', result.data.is_staff)
-      commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
-      pushOrReload(target)
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async updateProfileData ({ commit, getters }, { username, password, firstname, lastname, profilePicture }) {
-    const result = await user.updateProfileData(getters.getUserURL, username, password, firstname, lastname, profilePicture)
+  async updateProfileData ({ commit, getters }, { email, firstname, lastname }) {
+    const result = await user.updateProfileData(getters.getUserURL, email, firstname, lastname)
     if (result.success) {
       if ('email' in result.data) {
         commit('setEmail', result.data.email)
       }
       if ('first_name' in result.data) {
-        commit('setFirstname', result.data.first_name)
+        commit('setFirstName', result.data.first_name)
       }
       if ('last_name' in result.data) {
-        commit('setLastname', result.data.last_name)
+        commit('setLastName', result.data.last_name)
       }
-      if ('profile_picture' in result.data) {
-        commit('setProfilePicture', result.data.profile_picture)
-      }
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async login ({ commit, dispatch }, { username, password, target }) {
-    const result = await user.getTokens(username, password)
-    if (result.success) {
-      commit('setAccessToken', result.data.access)
-      commit('setRefreshToken', result.data.refresh)
-      await dispatch('getCurrentUser')
-      pushOrReload(target)
       return { success: true }
     } else {
       return result
@@ -109,58 +76,18 @@ const actions = {
     if (result.success) {
       commit('setURL', result.data.url)
       commit('setEmail', result.data.email)
-      commit('setFirstname', result.data.first_name)
-      commit('setLastname', result.data.last_name)
+      commit('setFirstName', result.data.first_name)
+      commit('setLastName', result.data.last_name)
       commit('setIsStaff', result.data.is_staff)
-      commit('setTermsAndConditionsAccepted', result.data.terms_and_conditions_accepted)
-      commit('setProfilePicture', result.data.profile_picture)
       return { success: true }
     } else {
       return result
     }
   },
 
-  async logout ({ commit }, { target }) {
+  async logout ({ commit }) {
     commit('resetState')
-    pushOrReload(target)
     return { success: true }
-  },
-
-  async refreshAccessToken ({ commit, state }) {
-    const result = await user.refreshAccessToken(state.refreshToken)
-    if (result.success) {
-      commit('setAccessToken', result.data)
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async resetPasswordInitiate ({ state }, { username }) {
-    const result = await user.resetPasswordInitiate(username)
-    if (result.success) {
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async resetPasswordValidate ({ commit }, { token }) {
-    const result = await user.resetPasswordValidate(token)
-    if (result.success) {
-      return { success: true }
-    } else {
-      return result
-    }
-  },
-
-  async resetPasswordConfirm ({ commit }, { password, token }) {
-    const result = await user.resetPasswordConfirm(password, token)
-    if (result.success) {
-      return { success: true }
-    } else {
-      return result
-    }
   }
 }
 
@@ -171,26 +98,14 @@ const mutations = {
   setEmail (state, status) {
     state.email = status
   },
-  setFirstname (state, status) {
+  setFirstName (state, status) {
     state.firstname = status
   },
-  setLastname (state, status) {
+  setLastName (state, status) {
     state.lastname = status
   },
   setIsStaff (state, status) {
     state.isStaff = status
-  },
-  setTermsAndConditionsAccepted (state, status) {
-    state.termsAndConditionsAccepted = status
-  },
-  setProfilePicture (state, status) {
-    state.profilePicture = status
-  },
-  setAccessToken (state, status) {
-    state.accessToken = status
-  },
-  setRefreshToken (state, status) {
-    state.refreshToken = status
   },
   resetState (state) {
     Object.assign(state, getDefaultState())

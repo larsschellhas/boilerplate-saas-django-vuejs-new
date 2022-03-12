@@ -23,6 +23,16 @@ const routes = [
     beforeEnter: authenticationGuard
   },
   {
+    path: '/signup',
+    name: 'SetupView',
+    component: () => import(/* webpackChunkName: "Setup" */ '../views/SetupView.vue'),
+    meta: {
+      allowAnonymous: false,
+      allowAuthenticated: true
+    },
+    beforeEnter: authenticationGuard
+  },
+  {
     path: '/settings/:category',
     name: 'SettingsView',
     props: true,

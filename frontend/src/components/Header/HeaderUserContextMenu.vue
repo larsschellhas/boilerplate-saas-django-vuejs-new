@@ -108,12 +108,15 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { injectAuth } from 'vue-auth0-plugin'
+import { useStore } from 'vuex'
 import UserImage from '../User/UserImage.vue'
 
 // Enable access to localizations
 const { t } = useI18n()
-// Enable access auth0
+// Enable access to auth service
 const auth = injectAuth()
+// Enable access to store
+const store = useStore()
 
 const user = computed(() => {
   if (auth.user) {
@@ -135,7 +138,8 @@ const signup = function () {
   })
 }
 
-const logout = function () {
+const logout = async function () {
+  await store.dispatch('logout')
   auth.logout({
     returnTo: window.location.origin
   })
