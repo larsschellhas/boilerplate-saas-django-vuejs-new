@@ -21,7 +21,6 @@ from usermanagement import views as userviews
 
 router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
-router.register(r"workspaces", userviews.WorkspaceViewSet, basename="workspace")
 router.register(r"products", userviews.ProductViewSet, basename="product")
 
 # Wire up our API using automatic URL routing.

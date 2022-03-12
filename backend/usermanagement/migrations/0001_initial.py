@@ -3,23 +3,6 @@
 from django.db import migrations, models
 import django.utils.timezone
 import usermanagement.models
-import environ
-from django.contrib.auth import get_user_model
-
-env = environ.Env()
-
-
-def create_data(apps, schema_editor):
-    """Creates admin user"""
-    User = get_user_model()
-    user = User(
-        email=env("ADMIN_EMAIL"),
-        is_active=True,
-        first_name="Super",
-        last_name="Admin",
-    )
-    user.save()
-    user.set_password(env("ADMIN_PASSWORD"))
 
 
 class Migration(migrations.Migration):
@@ -159,5 +142,4 @@ class Migration(migrations.Migration):
                 ("objects", usermanagement.models.UserManager()),
             ],
         ),
-        migrations.RunPython(create_data),
     ]

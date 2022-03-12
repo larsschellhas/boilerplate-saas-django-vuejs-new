@@ -14,7 +14,7 @@ from django_drf_filepond.models import (
     TemporaryUploadChunked,
 )
 
-from .models import MyUser, Workspace
+from .models import MyUser
 
 
 @admin.register(MyUser)
@@ -28,17 +28,15 @@ class UserAdmin(BaseUserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
-                    "terms_and_conditions_accepted",
-                    "profile_picture",
+                    "auth_provider_sub",
+                    "stripe_customer",
                 )
             },
         ),
-        (_("Referrer"), {"fields": ("referrer",)}),
         (
             _("Permissions"),
             {
                 "fields": (
-                    "initial_setup_done",
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -50,13 +48,8 @@ class UserAdmin(BaseUserAdmin):
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
     list_display = ("email", "first_name", "last_name", "is_staff", "is_active")
-    search_fields = ("email", "first_name", "last_name", "referrer__email")
+    search_fields = ("email", "first_name", "last_name")
     ordering = ("-is_staff", "-is_active", "email")
-
-
-@admin.register(Workspace)
-class WorkspaceAdmin(ModelAdmin):
-    """ Admin config for model usermanagement.Workspace """
 
 
 @admin.register(StoredUpload)

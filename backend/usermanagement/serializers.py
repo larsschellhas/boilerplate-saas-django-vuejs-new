@@ -1,5 +1,5 @@
+from multiprocessing.sharedctypes import Value
 from djstripe.models.core import Customer, Price
-from usermanagement.models import Workspace
 from django.contrib.auth import get_user_model
 from django_drf_filepond.api import store_upload, delete_stored_upload
 from django_drf_filepond.models import StoredUpload
@@ -22,6 +22,37 @@ class FilepondSerializer(serializers.ModelSerializer):
         fields = ["upload_id"]
 
 
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = (
+            "id",
+            "address",
+            "balance",
+            "currency",
+            "default_source",
+            "delinquent",
+            "coupon",
+            "coupon_start",
+            "coupon_end",
+            "email",
+            "invoice_prefix",
+            "invoice_settings",
+            "default_payment_method",
+            "name",
+            "phone",
+            "preferred_locales",
+            "shipping",
+            "tax_exempt",
+            "date_purged",
+        )
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     """ Serializer for the user API """
 
@@ -35,6 +66,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         validators=[UniqueValidator(queryset=get_user_model().objects.all())],
         write_only=True,
     )
+    stripe_customer = CustomerSerializer()
 
     class Meta:
         model = get_user_model()
@@ -45,63 +77,24 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "last_name",
             "is_staff",
             "auth_provider_sub",
+            "stripe_customer",
         )
         extra_kwargs = {
             "is_staff": {"read_only": True},
+            "stripe_customer": {"read_only": True},
         }
 
-    def validate(self, attrs):
-        """
-        Method to check the entered data for user creation.
-
-        It checks first, whether the two provided passwords match. If not, an exception is raised.
-        If a referrer email is provided, the referrer is added to the user.
-        """
-
-        return attrs
+    def update(self, instance, validated_data):
+        user = super().update(instance, validated_data)
+        if (user.email != "") and (user.stripe_customer is None):
+            user.stripe_customer = Customer.get_or_create(subscriber=user)[0]
+        return user
 
     def create(self, validated_data):
         """ Method to create a valid user. """
         user = get_user_model().objects.create_user(**validated_data)
 
         return user
-
-
-class CustomerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customer
-
-
-class SubscriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subscription
-
-
-class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
-    workspace_name = serializers.CharField(required=True, min_length=4, max_length=120)
-
-    class Meta:
-        model = Workspace
-        fields = ["url", "workspace_name", "subscription", "customer"]
-
-    def validate_workspace_name(self, value):
-        """ Method to check the entered workspace name. """
-        if value == "":
-            raise serializers.ValidationError("Workspace name must not be empty.")
-
-    def create(self, validated_data):
-        """ Method to create a valid workspace. """
-
-        workspace = Workspace(**validated_data)
-        workspace.save()
-
-        user = None
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            user = request.user
-        workspace.add_admin(user)
-
-        return workspace
 
 
 class PriceSerialzer(serializers.ModelSerializer):

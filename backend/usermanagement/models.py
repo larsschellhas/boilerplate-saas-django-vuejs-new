@@ -1,3 +1,4 @@
+from email.policy import default
 from uuid import uuid4
 import django
 from django.contrib.auth.models import (
@@ -43,7 +44,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(auth_provider_sub, password, **extra_fields)
 
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, auth_provider_sub, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -52,15 +53,13 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(auth_provider_sub, password, **extra_fields)
 
 
 class AbstractMyUser(AbstractBaseUser, PermissionsMixin):
     """
     An abstract base class implementing a fully featured User model with
     admin-compliant permissions.
-
-    Email and password are required. Other fields are optional.
     """
 
     auth_provider_sub = models.CharField(
@@ -87,6 +86,10 @@ class AbstractMyUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+
+    stripe_customer = models.OneToOneField(
+        Customer, on_delete=models.CASCADE, null=True, default=None, blank=True
+    )
 
     objects = UserManager()
 
@@ -126,63 +129,3 @@ class MyUser(AbstractMyUser):
 
     class Meta(AbstractMyUser.Meta):
         swappable = "AUTH_USER_MODEL"
-
-
-class Workspace(models.Model):
-    """ Company or Workspace that acts as customer and tenant for the user. """
-
-    created_on = models.DateTimeField(verbose_name="Created at", auto_now_add=True)
-    workspace_name = models.CharField(
-        verbose_name="Workspace name", max_length=100, blank=False
-    )
-
-    customer = models.ForeignKey(
-        Customer,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        help_text="The workspace's Stripe Customer object, if it exists",
-    )
-    subscription = models.ForeignKey(
-        Subscription,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        help_text="The workspace's Stripe Subscription object, if it exists",
-    )
-
-    members = models.ManyToManyField(
-        MyUser, verbose_name="Workspace Members", related_name="members"
-    )
-    admins = models.ManyToManyField(
-        MyUser, verbose_name="Workspace Admins", related_name="admins"
-    )
-
-    def __str__(self):
-        return str(self.workspace_name)
-
-    def add_member(self, user):
-        """ Adds a member to a workspace """
-
-        if user not in self.members.all():
-            self.members.add(user.id)
-
-    def add_admin(self, user):
-        """ Adds an admin to a workspace """
-
-        self.add_member(user)
-        if user not in self.admins.all():
-            self.admins.add(user.id)
-
-    def remove_admin(self, user):
-        """ Removes an admin from a workspace """
-
-        if user in self.admins.all():
-            self.admins.remove(user.id)
-
-    def remove_member(self, user):
-        """ Removes a member from a workspace """
-
-        self.remove_admin(user)
-        if user in self.members.all():
-            self.members.remove(user.id)
