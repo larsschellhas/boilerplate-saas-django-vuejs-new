@@ -16,7 +16,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.development
     image: saasboilerplate-backend:dev
-    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
+    command: ["sh", "-c", "python manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
     restart: unless-stopped
     volumes:
       - ./backend:/home/app/backend
