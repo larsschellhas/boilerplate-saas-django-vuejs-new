@@ -29,17 +29,19 @@ const store = useStore()
 
 async function updateUserFromAuth () {
   if (auth.client && !auth.loading) {
-    if (store.getters['user/getUserURL'] === '') {
-      await store.dispatch({
-        type: 'user/getCurrentUser'
+    if (auth.authenticated) {
+      if (store.getters['user/getUserURL'] === '') {
+        await store.dispatch({
+          type: 'user/getCurrentUser'
+        })
+      }
+      store.dispatch({
+        type: 'user/updateProfileData',
+        email: auth.user.email,
+        first_name: auth.user.first_name,
+        last_name: auth.user.last_name
       })
     }
-    store.dispatch({
-      type: 'user/updateProfileData',
-      email: auth.user.email,
-      first_name: auth.user.first_name,
-      last_name: auth.user.last_name
-    })
   } else {
     setTimeout(updateUserFromAuth, 500)
     console.log('Wait for 500 ms')
