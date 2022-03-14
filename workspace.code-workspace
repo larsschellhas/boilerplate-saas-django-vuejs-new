@@ -74,82 +74,20 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Docker: Python - Django",
-				"type": "docker",
-				"request": "launch",
-				"preLaunchTask": "docker-run: debug",
-				"python": {
-					"pathMappings": [
-						{
-							"localRoot": "${workspaceFolder}/backend",
-							"remoteRoot": "/app"
-						}
-					],
-					"projectType": "django"
-				}
-			},
-			{
-				"name": "Frontend: Edge",
-				"request": "launch",
-				"type": "pwa-msedge",
-				"url": "http://localhost:8080",
-				"cwd": "${workspaceFolder}/frontend",
-				"webRoot": "src",
-				"breakOnLoad": true,
-				"sourceMapPathOverrides": {
-					"webpack:///src/*": "${webRoot}/*"
-				}
-			},
-			{
-				"name": "Python: Django",
-				"type": "python",
-				"request": "launch",
-				"cwd": "${workspaceFolder}/backend",
-				"program": "manage.py",
-				"args": [
-					"runserver",
-					"8000"
-				],
-				"django": true
-			},
-			{
-				"name": "Launch Microsoft Edge and open the Edge DevTools",
-				"request": "launch",
-				"type": "vscode-edge-devtools.debug",
-				"url": ""
-			}
-		]
-	},
-	"tasks": {
-		"version": "2.0.0",
-		"tasks": [
-			{
-				"type": "docker-build",
-				"label": "docker-build",
-				"platform": "python",
-				"dockerBuild": {
-					"tag": "saasboilerplate:latest",
-					"dockerfile": "${workspaceFolder}/backend/Dockerfile.development",
-					"context": "${workspaceFolder}/backend",
-					"pull": true
-				}
-			},
-			{
-				"type": "docker-run",
-				"label": "docker-run: debug",
-				"dependsOn": [
-					"docker-build"
-				],
-				"python": {
-					"args": [
-						"runserver",
-						"0.0.0.0:8000",
-						"--nothreading",
-						"--noreload"
-					],
-					"file": "manage.py"
-				}
-			}
+        "name": "Backend: Remote Attach",
+        "type": "python",
+        "request": "attach",
+        "connect": {
+            "host": "0.0.0.0",
+            "port": 5678
+        },
+        "pathMappings": [
+            {
+                "localRoot": "${workspaceFolder}/backend",
+                "remoteRoot": "."
+            }
+        ]
+    }
 		]
 	}
 }
