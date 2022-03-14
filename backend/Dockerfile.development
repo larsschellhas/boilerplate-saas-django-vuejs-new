@@ -26,10 +26,10 @@ WORKDIR $APP_HOME
 # Install netcat (nc)
 RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y netcat
 
-# Install requirements via pip
+# Install development requirements via pip
 RUN python -m pip install --upgrade pip
-COPY requirements.txt /home/app/backend/
-RUN python -m pip install --no-cache-dir -r requirements.txt
+COPY requirements-dev.txt /home/app/backend/
+RUN python -m pip install --no-cache-dir -r requirements-dev.txt
 
 # Copy entrypoint.sh
 COPY entrypoint.sh /home/app/backend/

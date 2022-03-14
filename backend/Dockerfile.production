@@ -15,10 +15,10 @@ WORKDIR /usr/src/app
 # Upgrade pip
 RUN python -m pip install --upgrade pip
 
-# Install development requirements via pip
+# Install requirements via pip
 COPY requirements.txt /usr/src/app/
-COPY requirements.development.txt /usr/src/app/
-RUN python -m pip install -r requirements.development.txt
+COPY requirements.txt /usr/src/app/
+RUN python -m pip install -r requirements.txt
 
 # Lint using black
 RUN python -m black /usr/src/app/
