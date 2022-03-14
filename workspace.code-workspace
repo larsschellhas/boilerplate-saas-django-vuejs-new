@@ -93,11 +93,11 @@
 				"request": "launch",
 				"type": "pwa-msedge",
 				"url": "http://localhost",
-				"cwd": "${workspaceFolder}/frontend",
-				"webRoot": "src",
+				"cwd": "${workspaceFolder}",
+				"webRoot": "${workspaceFolder}",
 				"breakOnLoad": true,
 				"sourceMapPathOverrides": {
-					"webpack:///src/*": "${webRoot}/*"
+					"webpack://frontend/*": "${webRoot}/frontend/*"
 				}
 			}
 		]
