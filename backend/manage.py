@@ -13,7 +13,8 @@ def main():
     if not env("PRODUCTION", default=False):
         environ.Env.read_env("../.env.development")
         environ.Env.read_env("../.env.local", overwrite=True)
-        initialize_django_debugger()
+        if sys.argv[1] == "runserver":
+            initialize_django_debugger()
 
     settings_module = (
         "saasboilerplate.production"
