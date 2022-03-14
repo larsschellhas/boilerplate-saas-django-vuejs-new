@@ -87,7 +87,19 @@
                 "remoteRoot": "."
             }
         ]
-    }
+    },
+		{
+				"name": "Frontend: Edge",
+				"request": "launch",
+				"type": "pwa-msedge",
+				"url": "http://localhost",
+				"cwd": "${workspaceFolder}/frontend",
+				"webRoot": "src",
+				"breakOnLoad": true,
+				"sourceMapPathOverrides": {
+					"webpack:///src/*": "${webRoot}/*"
+				}
+			}
 		]
 	}
 }
