@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  postgresql-db:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    volumes:
+      - postgresqldb_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=saasboilerplatedb
+      - POSTGRES_USER=saasboilerplatedbuser
+      - POSTGRES_PASSWORD=saasboilerplatedbpassword
+
+  backend-django:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.development
+    image: saasboilerplate-backend:dev
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
+    restart: unless-stopped
+    volumes:
+      - ./backend:/home/app/backend
+      - filepond_stored:/home/app/backend/filepond-stored-uploads
+      - filepond_temp:/home/app/backend/filepond-temp-uploads
+      - dev_static_volume:/home/app/backend/staticfiles
+    expose:
+      - 8000
+      - 5678
+    env_file:
+      - ./.env.development
+    depends_on:
+      - postgresql-db
+
+  frontend-vuejs:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.development
+    image: saasboilerplate-frontend:dev
+    command: yarn build --watch --no-clean
+    restart: on-failure
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - dev_frontend_volume:/usr/src/app/dist
+    env_file:
+      - ./.env.development
+  
+  nginx:
+    build: 
+      context: ./
+      dockerfile: nginx/Dockerfile.development
+    image: saasboilerplate-nginx:dev
+    restart: unless-stopped
+    volumes:
+      - dev_frontend_volume:/home/app/frontend
+      - dev_static_volume:/home/app/backend/staticfiles
+    ports:
+      - 80:80
+    depends_on:
+      - backend-django
+
+volumes:
+  postgresqldb_data:
+  dev_static_volume:
+  dev_frontend_volume:
+  filepond_stored:
+  filepond_temp:

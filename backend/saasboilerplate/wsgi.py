@@ -14,8 +14,6 @@ env = environ.Env()
 
 from django.core.wsgi import get_wsgi_application
 
-# If WEBSITE_HOSTNAME is defined as an environment variable, then we're running
-# on Azure App Service and should use the production settings in production.py.
 settings_module = (
     "saasboilerplate.production"
     if env("PRODUCTION", default=False)

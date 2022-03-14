@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import sys
 import environ
+from debugger import initialize_django_debugger
 
 env = environ.Env()
 
@@ -9,9 +10,10 @@ env = environ.Env()
 def main():
     """Run administrative tasks."""
 
-    if "WEBSITE_HOSTNAME" not in env.ENVIRON:
+    if not env("PRODUCTION", default=False):
         environ.Env.read_env("../.env.development")
         environ.Env.read_env("../.env.local", overwrite=True)
+        initialize_django_debugger()
 
     settings_module = (
         "saasboilerplate.production"
