@@ -25,7 +25,8 @@ services:
       - dev_static_volume:/home/app/backend/staticfiles
     expose:
       - 8000
-      - 5678
+    ports:
+      - "5678:5678"
     env_file:
       - ./.env.development
     depends_on:
