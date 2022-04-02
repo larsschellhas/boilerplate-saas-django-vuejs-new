@@ -21,7 +21,6 @@ from usermanagement import views as userviews
 
 router = routers.DefaultRouter()
 router.register(r"users", userviews.CurrentUserViewSet, basename="user")
-router.register(r"products", userviews.ProductViewSet, basename="product")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -29,5 +28,4 @@ urlpatterns = [
     path("api/", include(router.urls)),
     path("api/admin/", admin.site.urls),
     url(r"^api/fp/", include("django_drf_filepond.urls")),
-    path("api/stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

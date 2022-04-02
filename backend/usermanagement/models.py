@@ -1,5 +1,3 @@
-from email.policy import default
-from uuid import uuid4
 import django
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -10,8 +8,6 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django_drf_filepond.models import StoredUpload
-from djstripe.models import Customer, Subscription
 
 if django.VERSION >= (3, 2):
     from django.contrib.auth.hashers import make_password
@@ -86,10 +82,6 @@ class AbstractMyUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-
-    stripe_customer = models.OneToOneField(
-        Customer, on_delete=models.CASCADE, null=True, default=None, blank=True
-    )
 
     objects = UserManager()
 

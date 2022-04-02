@@ -29,7 +29,6 @@ class UserAdmin(BaseUserAdmin):
                     "first_name",
                     "last_name",
                     "auth_provider_sub",
-                    "stripe_customer",
                 )
             },
         ),

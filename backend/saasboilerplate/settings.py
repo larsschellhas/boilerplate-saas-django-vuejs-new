@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     "djmoney",
     "drf_app_generators",
     "rest_framework_jwt",
-    "djstripe",
 ]
 
 MIDDLEWARE = [
