@@ -74,30 +74,6 @@
       "tokenSentConfirmation": "Falls ein Konto mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen deines Passworts gesendet!"
     }
   },
-  "filepond": {
-    "labelButtonAbortItemLoad": "Abbrechen",
-    "labelButtonAbortItemProcessing": "Abbrechen",
-    "labelButtonProcessItem": "Hochladen",
-    "labelButtonRemoveItem": "Entfernen",
-    "labelButtonRetryItemLoad": "Wiederholen",
-    "labelButtonRetryItemProcessing": "Wiederholen",
-    "labelButtonUndoItemProcessing": "Rückgängig machen",
-    "labelFileLoadError": "Fehler beim Laden",
-    "labelFileLoading": "Laden",
-    "labelFileProcessing": "Hochladen",
-    "labelFileProcessingAborted": "Hochladen abgebrochen",
-    "labelFileProcessingComplete": "Hochladen vollständig",
-    "labelFileProcessingError": "Fehler beim Hochladen",
-    "labelFileProcessingRevertError": "Fehler beim rückgängig machen",
-    "labelFileRemoveError": "Fehler beim Entfernen",
-    "labelFileSizeNotAvailable": "Größe nicht verfügbar",
-    "labelFileWaitingForSize": "Warte auf Größe",
-    "labelIdle": "Ziehen Sie Ihre Dateien hierhin oder <span class='filepond--label-action'> durchsuchen Sie Ihren PC </span>",
-    "labelInvalidField": "Feld enthält ungültige Dateien",
-    "labelTapToCancel": "Tippen zum Abbrechen",
-    "labelTapToRetry": "Tippen zum Wiederholen",
-    "labelTapToUndo": "Tippen zum rückgängig machen"
-  },
   "forms": {
     "email": "E-Mail Adresse",
     "firstname": "Vorname",

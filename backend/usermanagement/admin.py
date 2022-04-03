@@ -1,24 +1,19 @@
 """ Admin setup of usermanagement app
 
 This module contains the setup of the admin dashboard for the models of the usermanagement app.
-It registers all custom models as well as django-drf-filepond's models.
+It registers all custom models.
 """
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
-from django.contrib.admin.options import ModelAdmin
 from django.utils.translation import gettext_lazy as _
-from django_drf_filepond.models import (
-    StoredUpload,
-    TemporaryUpload,
-    TemporaryUploadChunked,
-)
 
 from .models import MyUser
 
 
 @admin.register(MyUser)
 class UserAdmin(BaseUserAdmin):
+    """ Admin configuration for the custom user model """
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
@@ -49,18 +44,3 @@ class UserAdmin(BaseUserAdmin):
     list_display = ("email", "first_name", "last_name", "is_staff", "is_active")
     search_fields = ("email", "first_name", "last_name")
     ordering = ("-is_staff", "-is_active", "email")
-
-
-@admin.register(StoredUpload)
-class StoredUploadAdmin(ModelAdmin):
-    """ Admin config for model django_drf_filepond.StoredUpload """
-
-
-@admin.register(TemporaryUpload)
-class TemporaryUploadAdmin(ModelAdmin):
-    """ Admin config for model django_drf_filepond.TemporaryUpload """
-
-
-@admin.register(TemporaryUploadChunked)
-class TemporaryUploadChunkedAdmin(ModelAdmin):
-    """ Admin config for model django_drf_filepond.TemporaryChunkedUpload """

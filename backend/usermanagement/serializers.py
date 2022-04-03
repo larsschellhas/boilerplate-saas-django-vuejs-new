@@ -1,5 +1,6 @@
+""" Serializers for the user management """
+
 from django.contrib.auth import get_user_model
-from django_drf_filepond.models import StoredUpload
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
@@ -10,14 +11,6 @@ class ReferrerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ("url", "first_name", "last_name")
-
-
-class FilepondSerializer(serializers.ModelSerializer):
-    """ Serializer for the filepond API """
-
-    class Meta:
-        model = StoredUpload
-        fields = ["upload_id"]
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -74,30 +74,6 @@
       "tokenSentConfirmation": "If this email exists, a password reset link has been sent!"
     }
   },
-  "filepond": {
-    "labelButtonAbortItemLoad": "Abort",
-    "labelButtonAbortItemProcessing": "Cancel",
-    "labelButtonProcessItem": "Upload",
-    "labelButtonRemoveItem": "Remove",
-    "labelButtonRetryItemLoad": "Retry",
-    "labelButtonRetryItemProcessing": "Retry",
-    "labelButtonUndoItemProcessing": "Undo",
-    "labelFileLoadError": "Error during load",
-    "labelFileLoading": "Loading",
-    "labelFileProcessing": "Uploading",
-    "labelFileProcessingAborted": "Upload cancelled",
-    "labelFileProcessingComplete": "Upload complete",
-    "labelFileProcessingError": "Error during upload",
-    "labelFileProcessingRevertError": "Error during revert",
-    "labelFileRemoveError": "Error during remove",
-    "labelFileSizeNotAvailable": "Size not available",
-    "labelFileWaitingForSize": "Waiting for size",
-    "labelIdle": "Drag & Drop your files or <span class='filepond--label-action'> Browse </span>",
-    "labelInvalidField": "Field contains invalid files",
-    "labelTapToCancel": "tap to cancel",
-    "labelTapToRetry": "tap to retry",
-    "labelTapToUndo": "tap to undo"
-  },
   "forms": {
     "email": "Email address",
     "firstname": "Firstname",

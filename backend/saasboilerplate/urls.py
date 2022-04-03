@@ -27,5 +27,4 @@ router.register(r"users", userviews.CurrentUserViewSet, basename="user")
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/admin/", admin.site.urls),
-    url(r"^api/fp/", include("django_drf_filepond.urls")),
 ]

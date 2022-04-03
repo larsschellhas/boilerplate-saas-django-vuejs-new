@@ -74,30 +74,6 @@
       "tokenSentConfirmation": "Si cet e-mail existe, un lien de réinitialisation du mot de passe a été envoyé !"
     }
   },
-  "filepond": {
-    "labelButtonAbortItemLoad": "Annuler",
-    "labelButtonAbortItemProcessing": "Annuler",
-    "labelButtonProcessItem": "Télécharger",
-    "labelButtonRemoveItem": "Supprimer",
-    "labelButtonRetryItemLoad": "Réessayer",
-    "labelButtonRetryItemProcessing": "Réessayer",
-    "labelButtonUndoItemProcessing": "Annuler",
-    "labelFileLoadError": "Erreur pendant le chargement",
-    "labelFileLoading": "Chargement",
-    "labelFileProcessing": "Télécharger",
-    "labelFileProcessingAborted": "Téléchargement annulé",
-    "labelFileProcessingComplete": "Téléchargement complet",
-    "labelFileProcessingError": "Erreur pendant le téléchargement",
-    "labelFileProcessingRevertError": "Erreur lors de la réversion",
-    "labelFileRemoveError": "Erreur lors de la suppression",
-    "labelFileSizeNotAvailable": "Taille non disponible",
-    "labelFileWaitingForSize": "En attente de la taille",
-    "labelIdle": "Glissez et déposez vos fichiers ou <span class='filepond--label-action'> Naviguez </span>",
-    "labelInvalidField": "Le champ contient des fichiers invalides",
-    "labelTapToCancel": "tapez pour annuler",
-    "labelTapToRetry": "tapez pour réessayer",
-    "labelTapToUndo": "tapez pour annuler"
-  },
   "forms": {
     "email": "Adresse e-mail",
     "firstname": "Prénom",
