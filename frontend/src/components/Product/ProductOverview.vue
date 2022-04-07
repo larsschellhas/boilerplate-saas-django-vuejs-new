@@ -40,19 +40,14 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import ProductCard from '@/components/Product/ProductCard'
 import { useI18n } from 'vue-i18n'
-import { useStore } from 'vuex'
 
 // Enable access to localizations
 const { t } = useI18n()
-// Enable access to vuex store
-const store = useStore()
 
-const products = computed(() => {
-  return store.getters['subscriptions/getProducts']
-})
+const products = []
 
 const monthlyInterval = ref(true)
 const interval = computed(() => {
@@ -63,8 +58,4 @@ function handleSelection (productId, priceId) {
   console.log(productId)
   console.log(priceId)
 }
-
-onMounted(() => {
-  store.dispatch('subscriptions/retrieveProducts')
-})
 </script>
