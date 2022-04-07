@@ -44,7 +44,6 @@ async function updateUserFromAuth () {
     }
   } else {
     setTimeout(updateUserFromAuth, 500)
-    console.log('Wait for 500 ms')
   }
 }
 // END: Update user from data provided from auth provder
