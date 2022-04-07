@@ -3,6 +3,11 @@
     :routes="routes"
     :title="pagetitle"
   />
+  <a
+    href="#!"
+    class="button"
+    @click.prevent="payments.openCheckout(productId=26474)"
+  >Buy Now!</a>
   <router-view />
 </template>
 
@@ -11,6 +16,7 @@ import HeaderBar from '@/components/Header/HeaderBar'
 import { onMounted } from 'vue'
 import { injectAuth } from 'vue-auth0-plugin'
 import { useStore } from 'vuex'
+import payments from './subscriptions'
 
 const pagetitle = 'SimplySaaS'
 
@@ -46,13 +52,14 @@ async function updateUserFromAuth () {
     setTimeout(updateUserFromAuth, 500)
   }
 }
-// END: Update user from data provided from auth provder
 
 onMounted(() => {
   updateUserFromAuth()
 })
+// END: Update user from data provided from auth provder
 
 auth.handleRedirectCallback()
+payments.setup()
 </script>
 
 <style>
