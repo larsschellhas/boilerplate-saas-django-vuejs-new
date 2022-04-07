@@ -16,7 +16,7 @@ from django.core.wsgi import get_wsgi_application
 
 settings_module = (
     "saasboilerplate.production"
-    if env("PRODUCTION", default=False)
+    if env("VUE_APP_PRODUCTION", default=False)
     else "saasboilerplate.settings"
 )
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)

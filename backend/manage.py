@@ -10,7 +10,7 @@ env = environ.Env()
 def main():
     """Run administrative tasks."""
 
-    if not env("PRODUCTION", default=False):
+    if not env("VUE_APP_PRODUCTION", default=False):
         environ.Env.read_env("../.env.development")
         environ.Env.read_env("../.env.local", overwrite=True)
         if sys.argv[1] == "runserver":
@@ -18,7 +18,7 @@ def main():
 
     settings_module = (
         "saasboilerplate.production"
-        if env("PRODUCTION", default=False)
+        if env("VUE_APP_PRODUCTION", default=False)
         else "saasboilerplate.settings"
     )
     env.ENVIRON.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
