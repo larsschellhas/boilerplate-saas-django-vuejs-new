@@ -3,11 +3,9 @@ This repository contains a boilerplate setup for a software-as-a-service app, us
 
 ## Features
 ### Backend
-- REST API
-- User management
-    - Register
-    - JWT Authentication
-    - Self-reset of password
+- Django + Django Rest Framework
+- User management via Auth0.com
+- Payment & subscription management via Paddle.com
 
 
 ### Frontend
@@ -18,47 +16,63 @@ This repository contains a boilerplate setup for a software-as-a-service app, us
     - browser language is detected on first visit
     - language selected by user is persisted in vuex store
     - locale messages are lazyloaded
-- Register, Login, Password Reset pages ready to go
 
-
-## Local Setup
-
+## Development setup
 You need to have the following prerequisites installed:
 - Python 3.10
 - Poetry [(Installation Guide)](https://python-poetry.org/docs/master/#installation)
-- pre-commit [(Installation Guide)](https://pre-commit.com/#install)
 - Node.js 16[(Installation Guide)](https://nodejs.dev/learn/how-to-install-nodejs)
 - Yarn [(Installation Guide)](https://yarnpkg.com/getting-started/install#about-global-installs)
-- Visual Studio Code [(Download)](https://code.visualstudio.com/Download)
 - Docker Desktop [(Download)](https://www.docker.com/products/docker-desktop)
+- pre-commit [(Installation Guide)](https://pre-commit.com/#install)
+- Visual Studio Code [(Download)](https://code.visualstudio.com/Download)
 - Workspace Recommended Visual Studio Code Extensions
     - Go to the extensions tab (Ctrl + Shift + X)
     - Type `@recommended` in the search bar
     - Install all shown workspace recommendations
 
+Following the installation of all required toosl, follow these steps to finish the setup of your development environment:
+1. Install all python dependencies in a virtual environment via poetry by running `poetry install` in the `.\backend` directory
+2. Install all JS dependencies via yarn by running `yarn install` in the `.\frontend` directory
+3. Install the pre-commit hooks to profit from automatic recreation of Python's requirements files by running `pre-commit install` in the root project directory.
+    
+4. Create a basic development configuration 
+    1. Copy the file '.env.development.template' and rename the copy to '.env.development'
+    2. Set `DJANGO_SECRET_KEY` to a random string, e.g., by using this [secret key generator (Link)](https://django-secret-key-generator.netlify.app/)
+    3. Set `ADMIN_EMAIL` to your email (or any) and `ADMIN_PASSWORD`to a password of your choice. These credentials can later be used to log into the Django admin dashboard, independently from the authentication provider (Auth0).
+    4. Set all entries starting with `EMAIL_XXX` to configure your e-mail backend. Alternatively, delete any or all of these entries and Django will automaticaly output any sent emails to the console instead of sending actual emails.
 
-### Backend project
-1. Enter the backend project directory (e.g. boilerplate-saas-django-vuejs/backend)
-2. Copy `.env.development.template`, rename it to ".env.development" and enter your credentials for your local development setup
-2. Install all python dependencies in a virtual environment via poetry by running `poetry install`
-3. Activate the virtual Python environment created by poetry with `poetry shell`
-4. Setup/migrate the database server with `python manage.py migrate`
-5. Run the webserver with `python manage.py runserver`
+5. Setup Auth0
+    1. Create an Auth0 account [here (auth0.com)](https://auth0.com/signup?place=header&type=button&text=sign%20up) and choose an 'auth0 domain' suiting the name of your app or business.
+    In your `.env.development`file, add your chosen 'Auth0 domain' to the `VUE_APP_AUTH0_DOMAIN` entry.
+    Your account (or rather the tenant you created) is being setup as development tenant automatically. Splitting your production and development tenant makes sense for external services, too. We will switch to production later, after deploying our SaaS.
+    2. Create an Auth0 API [here](https://manage.auth0.com/#/apis) and add your chosen 'Identifier' (e.g., 'https://django-vuejs-api') to the `VUE_APP_AUTH0_API_IDENTIFIER` entry in your `.env.development`file.
+    For example, you could use this data:
+        - Name: Django Vue.js API
+        - Identifier: https://django-vuejs-api
+        - Signing Algorithm: RS256
+    3. Go to ["Applications"](https://manage.auth0.com/#/applications) to create a new application. 
+        - Click on the button "+ Create Application", give your application a meaningful name and select "Single Page Web Application". Then, click "Create".
+        - You will be forwarded to the details page of your new Auth0 application. Copy the "Client ID" of your application, which you can find directly below the big title/name of your app. In your `.env.development`file, add your copied 'Client ID' to the `VUE_APP_AUTH0_CLIENT_ID` entry.
+
+6. Setup Paddle
+    1. Create a Paddle account on their [development/sandbox server (signup)](https://sandbox-vendors.paddle.com/signup). This will allow you to try out all paddle features without the fear of messing anything up.
+    2. Go to [Developer Tool > Authentication](https://sandbox-vendors.paddle.com/authentication) and copy your 'vendor_id' from the top of the page. In your `.env.development`file, add your copied 'vendor_id' to the `VUE_APP_PADDLE_VENDOR` entry.
+
+7. Build all docker images and run the application with the following command:
+`docker-compose -f docker-compose.development.yml up --build`. 
+This will use the development configuration for docker and allow you to test your application for the first time at [localhost](http://localhost)
+
 
 #### Environmental variables
 Many crucial settings are set through environmental variables to keep them out of the code repository.
-If the environmental variable `WEBSITE_HOSTNAME` is not set, the development configuration is used which is read from `.env.development`. All environmental variables that need to be set are present in the file `.env.default.template`.
+If the environmental variable `VUE_APP_PRODUCTION` is not set to `True`, the development configuration is used which is read from `.env.development`. All environmental variables that need to be set are present in the file `.env.default.template`.
 
 ##### Development setup
 For development purposes, it is enough to copy the template file, rename it to `.env.development`, and change the values of all settings accordingly.
 ##### Production setup
-For your production setup, you should set all of the environmental variables in your server settings and add `WEBSITE_HOSTNAME` (if your cloud provider does not add it automatically)
+For your production setup, you should set all of the environmental variables in your server settings and set `VUE_APP_PRODUCTION` to `True`. Some cloud providers might automatically add `WEBSITE_HOSTNAME` or other environmental variables.
 
-
-### Frontend project
-1. Enter the frontend project directory (e.g. boilerplate-saas-django-vuejs/frontend)
-2. Install all node.js dependencies with `yarn install`
-3. Run the webserver with `yarn serve`
 
 ### Troubleshooting
 
