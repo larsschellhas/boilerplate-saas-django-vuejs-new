@@ -174,6 +174,7 @@ AUTH_USER_MODEL = "usermanagement.MyUser"
 # Default auto field
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
+# BEGIN Auth0 config
 AUTH0_DOMAIN = env(
     "VUE_APP_AUTH0_DOMAIN",
     default="",
@@ -223,6 +224,7 @@ JWT_AUTH = {
     "JWT_ISSUER": JWT_ISSUER,
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
+# END Auth0 config
 
 # Emails are send to the console, if an email server is not defined through environmental variables
 if (
@@ -247,23 +249,3 @@ else:
 ### Settings for customization
 # Enter the name of your site. It will be used, e.g., in emails
 SITE_NAME = "SimplySaaS"
-
-
-### Stripe configuration
-STRIPE_LIVE_SECRET_KEY = env(
-    "STRIPE_LIVE_SECRET_KEY",
-    default="",
-)
-STRIPE_TEST_SECRET_KEY = env(
-    "STRIPE_TEST_SECRET_KEY",
-    default="",
-)
-STRIPE_LIVE_MODE = False
-# Get your webhook secret from the section in the Stripe dashboard
-# where you added the webhook endpoint
-DJSTRIPE_WEBHOOK_SECRET = env(
-    "DJSTRIPE_WEBHOOK_SECRET",
-    default="",
-)
-DJSTRIPE_USE_NATIVE_JSONFIELD = True
-DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
