@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "djmoney",
     "drf_app_generators",
     "rest_framework_jwt",
+    "djpaddle",
 ]
 
 MIDDLEWARE = [
@@ -225,6 +226,12 @@ JWT_AUTH = {
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
 # END Auth0 config
+
+# BEGIN paddle config
+DJPADDLE_VENDOR_ID = env("VUE_APP_PADDLE_VENDOR")
+DJPADDLE_API_KEY = env("PADDLE_API_KEY")
+DJPADDLE_PUBLIC_KEY = env("PADDLE_PUBLIC_KEY")
+# END paddle config
 
 # Emails are send to the console, if an email server is not defined through environmental variables
 if (

@@ -57,16 +57,23 @@ Following the installation of all required toosl, follow these steps to finish t
 
 6. Setup Paddle
     1. Create a Paddle account on their [development/sandbox server (signup)](https://sandbox-vendors.paddle.com/signup). This will allow you to try out all paddle features without the fear of messing anything up.
-    2. Go to [Developer Tool > Authentication](https://sandbox-vendors.paddle.com/authentication) and copy your 'vendor_id' from the top of the page. In your `.env.development`file, add your copied 'vendor_id' to the `VUE_APP_PADDLE_VENDOR` entry.
+    2. Go to [Developer Tools > Authentication](https://sandbox-vendors.paddle.com/authentication)
+        - Copy your 'vendor_id' from the top of the page. In your `.env.development`file, add your copied 'vendor_id' to the `VUE_APP_PADDLE_VENDOR` entry.
+        - Create a new API auth code through the "Generate Auth Code" form on the page. Your new API will appear in the list of "Active Integrations & Auth Codes".
+        - Click on the "Reveal Auth Code" button on the right to your new API and copy the appeared auth code. In your `.env.development`file, add your copied auth code to the `PADDLE_API_KEY` entry.
+    3. Go to [Developer Tools > Public Key](https://sandbox-vendors.paddle.com/public-key) and copy the displayed public key.
+    In your `.env.development`file, add your copied 'vendor_id' to the `PADDLE_PUBLIC_KEY` entry.
 
 7. Build all docker images and run the application with the following command:
 `docker-compose -f docker-compose.development.yml up --build`. 
-This will use the development configuration for docker and allow you to test your application for the first time at [localhost](http://localhost)
+This will use the development configuration for docker and allow you to test your application for the first time at [localhost](http://localhost).
 
 
 #### Environmental variables
 Many crucial settings are set through environmental variables to keep them out of the code repository.
 If the environmental variable `VUE_APP_PRODUCTION` is not set to `True`, the development configuration is used which is read from `.env.development`. All environmental variables that need to be set are present in the file `.env.default.template`.
+
+Some environmental variables are prefixed by `VUE_APP_`. This is required for accessing environmental variables in the frontend Vue.js app. However, some variables are only used for the backend and should never be available in the frontend. These variables **do not have** the `VUE_APP_` prefix and should never have it to avoid potential data leakage on the frontend.
 
 ##### Development setup
 For development purposes, it is enough to copy the template file, rename it to `.env.development`, and change the values of all settings accordingly.

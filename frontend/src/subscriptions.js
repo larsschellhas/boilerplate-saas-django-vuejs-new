@@ -6,8 +6,19 @@ const payments = {
   setup: async () => {
     loadScript('https://cdn.paddle.com/paddle/paddle.js')
       .then(() => {
-        Paddle.Setup({ vendor: parseInt(process.env.VUE_APP_PADDLE_VENDOR) })
-        if (!process.env.VUE_APP_PRODUCTION) {
+        // Initial setup of paddle
+        Paddle.Setup({
+          vendor: parseInt(process.env.VUE_APP_PADDLE_VENDOR),
+          eventCallback: function (data) {
+            if (data.event === 'Checkout.Complete') {
+              console.log(data.eventData)
+            }
+          }
+        })
+
+        // Set environment to sandbox if not set to production
+        if (process.env.VUE_APP_PRODUCTION === 'False') {
+          console.log('Paddle: Sandbox')
           Paddle.Environment.set('sandbox')
         }
         payments.resumeCheckout()
@@ -18,7 +29,8 @@ const payments = {
       if (AuthenticationState.authenticated) {
         Paddle.Checkout.open({
           product: parseInt(productId),
-          email: AuthenticationState.user.email
+          email: AuthenticationState.user.email,
+          disableLogout: true
         })
       } else {
         AuthenticationProperties.loginWithRedirect({ appState: { targetUrl: window.location.href + '?openCheckout=' + productId } })

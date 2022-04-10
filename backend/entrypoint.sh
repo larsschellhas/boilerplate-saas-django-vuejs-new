@@ -13,5 +13,6 @@ fi
 
 python manage.py migrate --no-input
 python manage.py collectstatic --no-input
+python manage.py djpaddle_sync_plans_from_paddle
 
 exec "$@"

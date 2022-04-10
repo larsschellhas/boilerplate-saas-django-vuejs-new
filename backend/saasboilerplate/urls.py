@@ -27,4 +27,5 @@ router.register(r"users", userviews.CurrentUserViewSet, basename="user")
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/admin/", admin.site.urls),
+    path("api/payments/", include("djpaddle.urls", namespace="djpaddle")),
 ]
