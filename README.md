@@ -62,7 +62,7 @@ Following the installation of all required toosl, follow these steps to finish t
         - Create a new API auth code through the "Generate Auth Code" form on the page. Your new API will appear in the list of "Active Integrations & Auth Codes".
         - Click on the "Reveal Auth Code" button on the right to your new API and copy the appeared auth code. In your `.env.development`file, add your copied auth code to the `PADDLE_API_KEY` entry.
     3. Go to [Developer Tools > Public Key](https://sandbox-vendors.paddle.com/public-key) and copy the displayed public key.
-    In your `.env.development`file, add your copied 'vendor_id' to the `PADDLE_PUBLIC_KEY` entry.
+    In your `.env.development`file, add your copied 'vendor_id' to the `PADDLE_PUBLIC_KEY` entry. To be machine readable, the whole public key string has to be in a single line. Please replace the original line breaks with '\n'.
 
 7. Build all docker images and run the application with the following command:
 `docker-compose -f docker-compose.development.yml up --build`. 

@@ -230,7 +230,7 @@ JWT_AUTH = {
 # BEGIN paddle config
 DJPADDLE_VENDOR_ID = env("VUE_APP_PADDLE_VENDOR")
 DJPADDLE_API_KEY = env("PADDLE_API_KEY")
-DJPADDLE_PUBLIC_KEY = env("PADDLE_PUBLIC_KEY")
+DJPADDLE_PUBLIC_KEY = str(env("PADDLE_PUBLIC_KEY")).replace('\\n', '\n')
 # END paddle config
 
 # Emails are send to the console, if an email server is not defined through environmental variables
